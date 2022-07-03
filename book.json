@@ -1,0 +1,176 @@
+{
+  "title": "Docker Docs",
+  "author": "宗勋 - zongxun",
+  "description": "这是一本关于 [Docker](https://www.docker.com/) 的书籍",
+  "language": "zh-hans",
+  "links": {
+     "sharing": {
+         "all": null,
+         "facebook": null,
+         "google": null,
+         "twitter": null,
+         "weibo": null
+     },
+
+     "sidebar": {
+        "Blog": "https://smoothies.com.cn",
+        "Command": "https://smoothies.com.cn/linux-command-docs/",
+        "Gitbook": "https://smoothies.com.cn/gitbook-docs/",
+        "Shell": "https://smoothies.com.cn/shell-docs/",
+        "Python": "https://smoothies.com.cn/python-docs/",
+        "Exam": "https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"
+     }
+  },
+  "plugins": [
+    "3-ba",
+    "accordion",
+    "advanced-emoji",
+    "anchor-navigation-ex",
+    "baidu-tongji",
+    "code",
+    "change_girls",
+    "custom-favicon",
+    "donate",
+    "chapter-fold",
+    "edit-link",
+    "flexible-alerts",
+    "github-buttons",
+    "github",
+    "insert-logo",
+    "musicxml",
+    "prism",
+    "prism-themes",
+    "pageview-count",
+    "-highlight",
+    "-search",
+    "-lunr",
+    "rss",
+    "search-plus",
+    "splitter",
+    "-sharing",
+    "sharing-plus",
+    "sidebar-style",
+    "theme-default",
+    "tags",
+    "tbfed-pagefooter"
+  ],
+  "pluginsConfig": {
+
+    "github": {
+      "url": "https://github.com/Ghostwritten"
+    },
+
+    "github-buttons": {
+      "buttons": [
+        {
+          "user": "Ghostwritten",
+          "repo": "docker-docs", 
+          "type": "star",
+          "count": true,
+          "size": "small"
+        }
+      ]
+    },
+
+    "change_girls" : {
+      "time" : 10,
+      "urls" : [
+          "https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg", "https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg", "https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg", "https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg", "https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg", "https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg", "https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg", "https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg", "https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg", "https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg", "https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg", "https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg", "https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"
+      ]
+    },
+
+    "chapter-fold":{},
+
+    "favicon": "assets/imgs/1_girl.ico",
+
+    "donate": {
+      "button": "打赏",
+      "alipayText": "支付宝打赏",
+      "wechatText": "微信打赏",
+      "alipay": "https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true",
+      "wechat": "https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true"
+    },
+
+    "edit-link": {
+     "base": "https://github.com/Ghostwritten/docker-docs/edit/master/",
+     "label": "Edit"
+    },
+
+    "prism": {
+      "css": [
+        "prism-themes/themes/prism-holi-theme.css"
+      ],
+      "lang": {
+        "shell": "bash"
+      }
+    },
+    "tbfed-pagefooter": {
+      "copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022",
+      "modify_label": "该文件修订时间：",
+      "modify_format": "YYYY-MM-DD HH:mm:ss"
+    },
+    "baidu-tongji": {
+      "token": "55e7dfe47f4dc1c018d4042fdfa62565"
+    },
+    "anchor-navigation-ex": {
+      "showLevel": false
+    },
+
+    "sidebar-style": {
+       "title": "《Docker Docs》",
+       "author": "zongxun"
+    },
+
+    "flexible-alerts": {
+      "note": {
+        "label": "Note"
+      },
+      "tip": {
+        "label": "Tip"
+      },
+      "warning": {
+        "label": "Warning"
+      },
+      "danger": {
+        "label": "Danger"
+      }
+    },
+
+    "3-ba": {
+        "token": "9ffc0dce8d7079aceab6b0bc18eb626b"
+    },
+
+    "insert-logo": {
+      "url": "https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg",
+      "style": "background: none; max-height: 120px; min-height: 120px"
+    },
+
+    "rss": {
+      "title": "Docker Docs",
+      "description": "This is the best book ever.",
+      "author": "Zong Xun",
+      "feed_url": "http://smoothies.com.cn/rss",
+      "site_url": "https://smoothies.com.cn/docker-docs/",
+      "managingEditor": "writer@smoothies.com.cn (Zong Xun)",
+      "webMaster": "webmaster@smoothies.com.cn (Zong Xun)",
+      "categories": [
+        "python"
+      ]
+    },
+
+    "sharing": {
+      "douban": false,
+      "facebook": true,
+      "google": false,
+      "pocket": false,
+      "qq": false,
+      "qzone": false,
+      "twitter": true,
+      "weibo": false,
+      "all": [
+        "facebook", "google", "twitter",
+        "weibo", "instapaper"
+      ]
+   }
+  }
+}
