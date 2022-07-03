@@ -285,7 +285,7 @@ round-trip min/avg/max = 3.6/6.4/7.8 ms
 接下来，我们切换回终端一，在容器终端中，执行下面的 tcpdump 命令，抓取 80 端口的包：
 
 
-```c
+```bash
 root@nginx:/# tcpdump -i eth0 -nn port 80
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes   

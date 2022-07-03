@@ -139,7 +139,7 @@ range 用于遍历结构内返回值的所有数据。支持的类型包括 arra
 ]
 ```
 
-```c
+```bash
 [root@monitor1 ~]#  docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' prometheus
 172.17.0.2
 
@@ -149,7 +149,7 @@ range 用于遍历结构内返回值的所有数据。支持的类型包括 arra
  
 ## 4. index
 如果返回结果是一个 map, slice, array 或 string，则可以使用 index 加索引序号（从零开始计数）来读取属性值。
-```c
+```bash
 [root@monitor1 ~]# docker inspect --format='{{(index (index .NetworkSettings.Ports "9090/tcp") 0).HostPort}}'  prometheus
 9090
 
@@ -228,7 +228,7 @@ docker --format 默认调用 go语言的 print 函数对模板中的字符串进
  - `println`:  功能和 print 类似，但会在结尾添加一个换行符。也可以直接使用 {{println}} 来换行。
  - `printf`:   与 shell 等环境一致，可配合占位符用于格式化输出。
 
-```c
+```bash
 docker inspect --format '{{.State.Pid}}{{.State.ExitCode}}' $INSTANCE_ID
 240390
  

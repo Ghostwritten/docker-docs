@@ -46,7 +46,7 @@ $ losetup -a
 ```
 现在，我们为这个设备建一个 `Thin Provisioning` 的 Pool，用 `dmsetup` 命令：
 
-```c
+```bash
 $ dmsetup create hchen-thin-pool \
   --table "0 20971522 thin-pool /dev/loop2016 /dev/loop2015 \
   128 65536 1 skip_block_zeroing"
@@ -192,7 +192,7 @@ hello world, I am a base
 
 ## 2. Docker  devicemapper
 
-```swift
+```bash
 $ losetup -a
 
 /dev/loop0: [64768]:38050288 (/var/lib/docker/devicemapper/devicemapper/data)
@@ -201,7 +201,7 @@ $ losetup -a
 
 其中 data 100GB，metadata 2.0GB
 
-```swift
+```bash
 $ ls -alsh /var/lib/docker/devicemapper/devicemapper
 
 506M -rw-------. 1 root root 100G Sep 10 20:15 data
@@ -210,7 +210,7 @@ $ ls -alsh /var/lib/docker/devicemapper/devicemapper
 
 下面是相关的 thin-pool。其中，有个当一大串 hash 串的 device 是正在启动的容器：
 
-```c
+```bash
 $ ll /dev/mapper/dock*
 
 lrwxrwxrwx. 1 root root 7 Aug 25 07:57 /dev/mapper/docker-253:0-104108535-pool -> ../dm-2

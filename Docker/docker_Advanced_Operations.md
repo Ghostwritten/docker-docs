@@ -580,7 +580,7 @@ sha256:73b25a6703da535db5cbc43073c2920b60f5f8a76db17de093e851f1a2d5f69c
 ```
 现在可以将其作为容器启动。
 
-```c
+```bash
 $ docker run busybox cat /release
 KatacodaPrivateBuild
 ```

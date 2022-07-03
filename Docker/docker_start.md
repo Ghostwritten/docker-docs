@@ -514,7 +514,7 @@ Successfully tagged no-large-file-context:latest
 要创建数据容器，我们首先要创建一个具有知名名称的容器以供将来参考。我们使用busybox作为基础，因为它体积小，重量轻，以防我们想要探索和移动容器到另一个主机。
 在创建容器时，我们还提供了一个-v选项来定义其他容器读取/保存数据的位置。
 
-```c
+```bash
 $ docker create -v /config --name dataContainer busybox
 
 ```

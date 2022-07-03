@@ -38,7 +38,7 @@ Docker充当registry客户端来负责维护推送和拉取的任务，以及客
 
 ## 3. registry部署
 ### 3.1 拉取镜像
-```csharp
+```bash
 docker pull registry
 ```
 
@@ -46,7 +46,7 @@ docker pull registry
 
 修改docker配置,使用国内镜像 daocloud镜像加速器
 
-```csharp
+```bash
 $ vim /etc/docker/daemon.json
 {"registry-mirrors": ["http://d1d9aef0.m.daocloud.io"]}
 
@@ -55,14 +55,14 @@ $ docker pull registry
 ```
 ### 3.2 运行容器创建registry仓库
 
-```csharp
+```bash
 $ docker run -d --restart=always --name registry -p 5000:5000 -v /storage/registry:/var/lib/registry registry：2.3.0
 $ docker ps
 ```
 
 ### 3.3 将镜像推入仓库
 
-```csharp
+```bash
 $ docker pull centos
 $ docker tag  centos:latest 192.168.211.15:5000/centos:latest
 $ docker push 192.168.211.15:5000/centos:latest
@@ -72,7 +72,7 @@ Get https://192.168.211.15:5000/v1/_ping: http: server gave HTTP response to HTT
 
 在推送镜像中出现错误，因为client与Registry交互默认将采用https访问，但我们在install Registry时并未配置指定任何tls相关的key和crt文件，https将无法访问。因此， 我们需要配置客户端的Insecure Registry选项（另一种解决方案需要配置Registry的证书）。
 
-```csharp
+```bash
 $ vim /etc/sysconfig/docker
 OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false --insecure-registry 192.168.211.15:5000'
 $ docker stop registry
@@ -86,7 +86,7 @@ $ $ curl  https://192.168.211.15:5000/v2/_catalog
 ### 3.4 配置Docker Registry签名证书
 在Docker Registry主机中生成OpenSSL的自签名证书：
 
-```csharp
+```bash
 cat << EOF > ssl.conf
 [ req ]
 prompt             = no
@@ -108,7 +108,7 @@ IP.1  = 192.168.211.15
 EOF
 ```
 
-```csharp
+```bash
 $ openssl req -config ssl.conf -new -x509 -nodes -sha256 -days 365 -newkey rsa:4096 -keyout /certs/server-key.pem -out /certs/server-crt.pem
 ```
 
@@ -117,7 +117,7 @@ $ openssl req -config ssl.conf -new -x509 -nodes -sha256 -days 365 -newkey rsa:4
 Docker Registry所在本机操作：
 证书生成好了，客户端现在就不需要 `--insecure-registry` 了 
 
-```csharp
+```bash
 $ vim /etc/sysconfig/docker
 OPTIONS='--selinux-enabled --log-driver=journald --signature-verification=false'
 $ mkdir -p  /etc/docker/certs.d/192.168.211.15:5000/
@@ -127,7 +127,7 @@ $ systemctl restart docker
 
 客户端操作：
 
-```csharp
+```bash
 $ mkdir -p  /etc/docker/certs.d/192.168.211.15:5000/
 $ scp /certs/server-crt.pem root@192.168.211.16:/etc/docker/certs.d/192.168.211.15:5000/
 $ systemctl restart docker
@@ -135,14 +135,14 @@ $ systemctl restart docker
 ### 3.6 配置Docker Registry用户认证
 为了相对安全，可以给仓库加上基本的身份认证。使用 [htpasswd](https://httpd.apache.org/docs/current/programs/htpasswd.html) 创建用户：
 
-```csharp
+```bash
 $ htpasswd -Bbn testuser testpassword > /auth/htpasswd
 $ cat /auth/htpasswd
 testuser:$2y$05$MO4iv425uurfqY2Y/X71TuNTUPu4Vrn.oNE4NxRTjsPTTU6QywiwG
 ```
 或者借用镜像命令创建用户
 
-```csharp
+```bash
 $ sudo sh -c "docker run --entrypoint htpasswd registry:2.3.0 -Bbn testuser testpassword > /auth/htpasswd"
 or
 $ docker run --entrypoint htpasswd registry:2.3.0 -Bbn testuser testpassword > auth/htpasswd
@@ -151,7 +151,7 @@ $ docker run --entrypoint htpasswd registry:2.3.0 -Bbn testuser testpassword > a
 
 ### 3.7 部署带有证书与用户认证的registry仓库
 
-```csharp
+```bash
 docker run -d \
     -p 5000:5000 \
     --name registry \
@@ -169,13 +169,13 @@ docker run -d \
 
 ### 3.8 登录测试
 
-```csharp
+```bash
 $ docker login -u testuser -p testpassword 192.168.211.15:5000
 Login Succeeded
 ```
 命令行访问仓库：
 
-```csharp
+```bash
 $ curl  -k -u "testuser:testpassword" https://192.168.211.15:5000/v2/_catalog
 {"repositories":[]}
 $ docker push 192.168.211.15:5000/centos:latest

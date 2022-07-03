@@ -172,7 +172,7 @@ docker run -d -P --name prometheus prom/prometheus:latest  #后台模式启动�
 ```
 限制内存使用上限
 
-```go
+```bash
 $ docker run -it -m 300M --memory-swap -1 --name con1 u-stress /bin/bash
 ```
 
@@ -185,19 +185,19 @@ $ docker run -it -m 300M --memory-swap -1 --name con1 u-stress /bin/bash
 
 限制可用的 CPU 个数
 
-```go
+```bash
 $ docker run -it --rm --cpus=2 u-stress:latest /bin/bash
 ```
 
 指定固定的 CPU
 
-```go
+```bash
 $ docker run -it --rm --cpuset-cpus="1" u-stress:latest /bin/bash
 ```
 
 设置使用 CPU 的权重
 
-```go
+```bash
 $ docker run -it --rm --cpuset-cpus="0" --cpu-shares=512 u-stress:latest /bin/bash
 $ docker run -it --rm --cpuset-cpus="0" --cpu-shares=1024 u-stress:latest /bin/bash
 ```
