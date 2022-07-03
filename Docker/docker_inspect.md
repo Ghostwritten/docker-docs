@@ -9,7 +9,7 @@ Docker --format 参数提供了基于 Go模板 的日志格式化输出辅助功
 
 
 ## 2. Go模板常用语法
-格式： "{{/*注释内容*/}}"
+格式： '{{/*注释内容*/}}'
 ```bash
 docker network inspect --format='{{/*查看容器的默认网关*/}}{{range .IPAM.Config}}{{.Gateway}}{{end}}' $INSTANCE_ID
 ```
