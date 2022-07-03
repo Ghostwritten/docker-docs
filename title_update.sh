@@ -55,6 +55,7 @@ dirs=`grep -E '\- ' SUMMARY-GitBook-auto-summary.md  | awk '{print $2}' |  sed '
 
 for dir in $dirs
 do
+  dir= echo $dir | sed 's/ /\_/g'
   dir_README=`grep -E "\[${dir}\]" SUMMARY.md | sed 's/^[ \t]*//g'`
   dir_README=${dir_README//\//\\\/}
   dir_README=${dir_README//\[/\\[}
