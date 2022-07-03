@@ -13,7 +13,7 @@ Docker --format 参数提供了基于 Go模板 的日志格式化输出辅助功
 docker network inspect --format='{{/*查看容器的默认网关*/}}{{range .IPAM.Config}}{{.Gateway}}{{end}}' $INSTANCE_ID
 ```
 ## 3. 变量
-### 3.1 系统变量 {{.}}
+### 3.1 系统变量 \{\{.\}\}
 点号表示当前对象及上下文，和 Java、C++ 中的 this 类似。可以直接通过{{.}}获取当前对象。
 另外，如果返回结果也是一个 Struct 对象（Json 中以花括号/大括号包含），则可以直接通过点号级联调用，获取子对象的指定属性值。
 
