@@ -51,12 +51,12 @@ done
 }
 
 add_README() {
-dirs=`grep -E '\- ' SUMMARY-GitBook-auto-summary.md  | awk '{print $2}' |  sed 's/\_/ /g'`
+dirs=`grep -E '\- ' SUMMARY-GitBook-auto-summary.md  | awk '{print $2}' `
 
 for dir in $dirs
 do
-  dir= echo $dir | sed 's/ /\_/g'
-  dir_README=`grep -E "\[${dir}\]" SUMMARY.md | sed 's/^[ \t]*//g'`
+  dir_sm=`echo $dir | sed 's/\_/ /g'`
+  dir_README=`grep -E "\[${dir_sm}\]" SUMMARY.md | sed 's/^[ \t]*//g'`
   dir_README=${dir_README//\//\\\/}
   dir_README=${dir_README//\[/\\[}
   dir_README=${dir_README//\]/\\]}
