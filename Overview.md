@@ -2,9 +2,8 @@
 
 * [summary](./Overview.md)
 * [序言](./README.md)
-
+- Docker_Swarm
   * [docker swarm 快速入门](Docker_Swarm/docker_swarm_start.md)
-  * [docker swarm 介绍](Docker_Swarm/README.md)
 - [Docker](Docker/README.md)
   * [docker  storage 驱动 devicemapper 配置](Docker/docker_storage_drive_devicemapper_config.md)
   * [docker 快速入门](Docker/docker_start.md)
@@ -23,5 +22,4 @@
   * [docker 配置 dns](Docker/docker_config_DNS.md)
   * [docker 部署 registry ui](Docker/docker_deploy_registry_UI.md)
   * [docker 安装](Docker/docker_install.md)
-  * [docker overview](Docker/README.md)
   * [docker 原理](Docker/docker_principle.md)

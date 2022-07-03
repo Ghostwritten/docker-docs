@@ -51,7 +51,7 @@ done
 }
 
 add_README() {
-dirs=`grep -E '\- ' SUMMARY-GitBook-auto-summary.md  | awk '{print $2}'`
+dirs=`grep -E '\- ' SUMMARY-GitBook-auto-summary.md  | awk '{print $2}' |  sed 's/\_/ /g'`
 
 for dir in $dirs
 do
@@ -93,7 +93,7 @@ git push --force --quiet "https://${TOKEN}@${repo}" master:gh-pages
 
 }
 
-#delete_README
+delete_README
 add_README
 push_master
 push_gh-pages
