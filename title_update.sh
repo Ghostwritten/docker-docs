@@ -93,7 +93,7 @@ git push --force --quiet "https://${TOKEN}@${repo}" master:gh-pages
 
 }
 
-delete_README
+#delete_README
 add_README
 push_master
 push_gh-pages
