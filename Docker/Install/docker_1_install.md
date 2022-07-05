@@ -1,4 +1,4 @@
-# 2. docker 安装
+#  docker 安装
 
 
 ## 1. centos 安装 docker

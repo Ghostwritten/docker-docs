@@ -1,9 +1,5 @@
 #  docker-compose 安装
 
-@[toc]
-
----
-
 ## 1. 安装
 Linux
 Linux 上我们可以从 Github 上下载它的二进制包来使用，最新发行的版本地址：[https://github.com/docker/compose/releases](https://github.com/docker/compose/releases/)。

@@ -1,4 +1,4 @@
-#  1. Docker 快速入门
+# Docker 入门
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/566192a1cfc84a339f1f31ff0d84a177.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAZ2hvc3R3cml0dGVu,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
 
@@ -7,14 +7,6 @@
 
 
 
------
-
-@[toc]
-
-
-
-
----
 ## 1. 运行redis容器
 第一个任务是识别配置为运行Redis的Docker映像的名称。使用Docker，所有容器都是基于Docker映像启动的。这些图像包含启动流程所需的所有内容;主机不需要任何配置或依赖项。
 
