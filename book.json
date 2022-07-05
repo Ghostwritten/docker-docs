@@ -31,7 +31,7 @@
     "change_girls",
     "custom-favicon",
     "donate",
-    "chapter-fold",
+    "expandable-chapters-small",
     "edit-link",
     "flexible-alerts",
     "github-buttons",
@@ -79,7 +79,7 @@
       ]
     },
 
-    "chapter-fold":{},
+    "expandable-chapters-small":{},
 
     "favicon": "assets/imgs/1_girl.ico",
 
