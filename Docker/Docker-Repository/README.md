@@ -110,3 +110,6 @@ docker run -d -p 5001:5000 -v config.yml:/etc/docker/registry/config.yml \
 
 如需进一步阅读，请参阅 Docker 文档： [部署仓库服务器](https://docs.docker.com/registry/deploying/) ›和 [配置仓库](https://docs.docker.com/registry/configuration/) ›
 
+todo:
+* [ ] [How To Set Up a Private Docker Registry on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-private-docker-registry-on-ubuntu-18-04)
+
