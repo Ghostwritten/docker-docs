@@ -15,6 +15,7 @@
   * [docker swarm 维护模式](Docker-Swarm/docker_swarm_10_maintenance_mode.md)
 - [Podman](Podman/README.md)
   * [podman 快速入门](Podman/podman_start.md)
+  * [podman 部署私有镜像仓库](Podman/podman_deploy_private_registry.md)
 - [Docker](Docker/README.md)
   - [Monitor](Docker/Monitor/README.md)
   - [Security](Docker/Security/README.md)
