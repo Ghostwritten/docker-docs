@@ -1,0 +1,1625 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>如何将镜像体积缩减 90 · Docker Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="docker_image_1_library.html" />
+    
+    
+    <link rel="prev" href="docker_Build_multi-platform_image.html" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Docker Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/docker-docs/Overview.html" target="_blank" class="custom-link">Docker</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/Overview.html" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/Overview.html" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/Overview.html" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/Overview.html" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/Overview.html" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/Overview.html" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/Overview.html" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../Overview.html">
+            
+                <a href="../../Overview.html">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../Docker-Compose/">
+            
+                <a href="../../Docker-Compose/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Docker-Compose/docker-compose_1_install.html">
+            
+                <a href="../../Docker-Compose/docker-compose_1_install.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    docker compose 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                <a href="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    docker compose 安装 elasticsearch 集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../Docker-Swarm/">
+            
+                <a href="../../Docker-Swarm/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Docker Swarm
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    docker swarm 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    docker swarm 网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    docker swam 集群实现负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    docker swarm 创建加密覆盖网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    docker swarm 管理 secrets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    docker swarm 健康检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    dcoker swarm 更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    docker swarm 部署界面 ui portainer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    docker swarm 通过 docker compose 部署应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    docker swarm 维护模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../CICD/">
+            
+                <a href="../CICD/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    CICD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                <a href="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    docker   makefile  ci pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                <a href="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    github action 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                <a href="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    自托管构建 如何使用 harbor 搭建企业级镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../CICD/docker_Tekton_builds_image.html">
+            
+                <a href="../CICD/docker_Tekton_builds_image.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    自托管构建 如何使用 tekton 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                <a href="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    如何使用 gitlab ci 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Command/">
+            
+                <a href="../Command/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../Command/docker_command_inspect.html">
+            
+                <a href="../Command/docker_command_inspect.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    docker inspect   format
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Dockerfile/">
+            
+                <a href="../Dockerfile/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Image
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="build_images_with_buildah.html">
+            
+                <a href="build_images_with_buildah.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    构建镜像开源工具 buildah
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="docker_Build_multi-platform_image.html">
+            
+                <a href="docker_Build_multi-platform_image.html">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    如何为不同语言快速构建多平台镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4.3" data-path="docker_Image_volume_reduced.html">
+            
+                <a href="docker_Image_volume_reduced.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    如何将镜像体积缩减 90
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="docker_image_1_library.html">
+            
+                <a href="docker_image_1_library.html">
+            
+                    
+                        <b>1.5.4.4.</b>
+                    
+                    docker 镜像源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="docker_image_2_manage.html">
+            
+                <a href="docker_image_2_manage.html">
+            
+                    
+                        <b>1.5.4.5.</b>
+                    
+                    docker 镜像管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Install/">
+            
+                <a href="../Install/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../Install/docker_1_install.html">
+            
+                <a href="../Install/docker_1_install.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    docker 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Issue/">
+            
+                <a href="../Issue/">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    Issue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Logging/">
+            
+                <a href="../Logging/">
+            
+                    
+                        <b>1.5.7.</b>
+                    
+                    Logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Manage/">
+            
+                <a href="../Manage/">
+            
+                    
+                        <b>1.5.8.</b>
+                    
+                    Manage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.8.1" data-path="../Manage/docker_clean.html">
+            
+                <a href="../Manage/docker_clean.html">
+            
+                    
+                        <b>1.5.8.1.</b>
+                    
+                    docker 资源清理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.2" data-path="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                <a href="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                    
+                        <b>1.5.8.2.</b>
+                    
+                    docker 容器隔离与限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Monitor/">
+            
+                <a href="../Monitor/">
+            
+                    
+                        <b>1.5.9.</b>
+                    
+                    Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../Network/">
+            
+                <a href="../Network/">
+            
+                    
+                        <b>1.5.10.</b>
+                    
+                    Network
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.10.1" data-path="../Network/docker_analyze_the_packet_loss.html">
+            
+                <a href="../Network/docker_analyze_the_packet_loss.html">
+            
+                    
+                        <b>1.5.10.1.</b>
+                    
+                    docker 容器应用总是丢包如何分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.2" data-path="../Network/docker_config_DNS.html">
+            
+                <a href="../Network/docker_config_DNS.html">
+            
+                    
+                        <b>1.5.10.2.</b>
+                    
+                    docker 配置 dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../Registry/">
+            
+                <a href="../Registry/">
+            
+                    
+                        <b>1.5.11.</b>
+                    
+                    Registry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.11.1" data-path="../Registry/harbor_get_started_guide.html">
+            
+                <a href="../Registry/harbor_get_started_guide.html">
+            
+                    
+                        <b>1.5.11.1.</b>
+                    
+                    harbor部署入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.2" data-path="../Registry/podman_deploy_private_registry.html">
+            
+                <a href="../Registry/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.5.11.2.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.3" data-path="../Registry/docker_registry_1_deploy.html">
+            
+                <a href="../Registry/docker_registry_1_deploy.html">
+            
+                    
+                        <b>1.5.11.3.</b>
+                    
+                    docker registry 仓库搭建并配置证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.4" data-path="../Registry/docker_registry_2_deploy_UI.html">
+            
+                <a href="../Registry/docker_registry_2_deploy_UI.html">
+            
+                    
+                        <b>1.5.11.4.</b>
+                    
+                    docker 部署 registry ui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.5" data-path="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                <a href="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                    
+                        <b>1.5.11.5.</b>
+                    
+                    centos 7 9 harbor 部署镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../Security/">
+            
+                <a href="../Security/">
+            
+                    
+                        <b>1.5.12.</b>
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../Storage/">
+            
+                <a href="../Storage/">
+            
+                    
+                        <b>1.5.13.</b>
+                    
+                    Storage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.13.1" data-path="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                <a href="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                    
+                        <b>1.5.13.1.</b>
+                    
+                    docker device mapper 简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.2" data-path="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                <a href="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                    
+                        <b>1.5.13.2.</b>
+                    
+                    docker  storage 驱动 devicemapper 配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.3" data-path="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                <a href="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                    
+                        <b>1.5.13.3.</b>
+                    
+                    docker thin provisioning 实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.4" data-path="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                <a href="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                    
+                        <b>1.5.13.4.</b>
+                    
+                    docker devicemapper 扩容
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="../Storage/docker_storage_5_nfs_volume.html">
+            
+                <a href="../Storage/docker_storage_5_nfs_volume.html">
+            
+                    
+                        <b>1.5.13.5.</b>
+                    
+                    docker nfs volume 创建与使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../原理/">
+            
+                <a href="../原理/">
+            
+                    
+                        <b>1.5.14.</b>
+                    
+                    原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.14.1" data-path="../原理/docker_Container_technology_overview.html">
+            
+                <a href="../原理/docker_Container_technology_overview.html">
+            
+                    
+                        <b>1.5.14.1.</b>
+                    
+                    容器技术概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14.2" data-path="../原理/Container_architecture_overview.html">
+            
+                <a href="../原理/Container_architecture_overview.html">
+            
+                    
+                        <b>1.5.14.2.</b>
+                    
+                    容器架构概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../docker_1_start.html">
+            
+                <a href="../docker_1_start.html">
+            
+                    
+                        <b>1.5.15.</b>
+                    
+                    入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../Podman/">
+            
+                <a href="../../Podman/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Podman
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Podman/podman_deploy_private_registry.html">
+            
+                <a href="../../Podman/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../Podman/podman_start.html">
+            
+                <a href="../../Podman/podman_start.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    podman 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >如何将镜像体积缩减 90</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF;-90&#xFF1F;"><b></b>&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF; 90%&#xFF1F;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x80CC;&#x666F;"><b></b>1. &#x80CC;&#x666F;</a></li><li><span class="title-icon "></span><a href="#2-&#x65B0;&#x624B;&#x6784;&#x5EFA;-golang-&#x955C;&#x50CF;"><b></b>2. &#x65B0;&#x624B;&#x6784;&#x5EFA; Golang &#x955C;&#x50CF;</a></li><li><span class="title-icon "></span><a href="#3-&#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;"><b></b>3. &#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;</a></li><li><span class="title-icon "></span><a href="#4-&#x91CD;&#x65B0;&#x601D;&#x8003;-dockerfile"><b></b>4. &#x91CD;&#x65B0;&#x601D;&#x8003; Dockerfile</a></li><li><span class="title-icon "></span><a href="#5-&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;"><b></b>5. &#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;</a></li><li><span class="title-icon "></span><a href="#6-&#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;"><b></b>6. &#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;</a></li><li><span class="title-icon "></span><a href="#7-&#x6781;&#x9650;&#x538B;&#x7F29;"><b></b>7. &#x6781;&#x9650;&#x538B;&#x7F29;</a></li><li><span class="title-icon "></span><a href="#8-&#x5982;&#x4F55;&#x590D;&#x7528;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF1F;"><b></b>8. &#x5982;&#x4F55;&#x590D;&#x7528;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF1F;</a></li><li><span class="title-icon "></span><a href="#9-&#x603B;&#x7ED3;"><b></b>9. &#x603B;&#x7ED3;</a></li></ul></ul></div><a href="#&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF;-90&#xFF1F;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF;-90&#xFF1F;"><a name="&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF;-90&#xFF1F;" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF;-90&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x5C06;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7F29;&#x51CF; 90%&#xFF1F;</h1>
+<p><img src="https://img-blog.csdnimg.cn/37090bd7c1ad4d68bacbea7fdb41eca6.png" alt=""></p>
+<h2 id="1-&#x80CC;&#x666F;"><a name="1-&#x80CC;&#x666F;" class="anchor-navigation-ex-anchor" href="#1-&#x80CC;&#x666F;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x80CC;&#x666F;</h2>
+<p>&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x6162;&#x3001;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x8FC7;&#x5927;&#x7B49;&#x95EE;&#x9898;&#xFF0C;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x63A8;&#x9001;&#x955C;&#x50CF;&#x53D8;&#x5F97;&#x7F13;&#x6162;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x4F1A;&#x5BFC;&#x81F4;&#x5728; Kubernetes &#x66F4;&#x65B0;&#x5E94;&#x7528;&#x955C;&#x50CF;&#x7248;&#x672C;&#x65F6;&#x62C9;&#x53D6;&#x955C;&#x50CF;&#x7684;&#x8FC7;&#x7A0B;&#x4E5F;&#x53D8;&#x5F97;&#x7F13;&#x6162;&#xFF0C;&#x4ECE;&#x800C;&#x5F71;&#x54CD;&#x6574;&#x4F53;&#x5E94;&#x7528;&#x53D1;&#x5E03;&#x6548;&#x7387;</p>
+<p>&#x51C6;&#x5907;&#x597D;&#x7684;&#x793A;&#x4F8B;&#x5E94;&#x7528;&#x4ED3;&#x5E93;&#x514B;&#x9686;&#x5230;&#x672C;&#x5730;&#xFF1A;<a href="https://github.com/lyzhang1999/gitops.git" target="_blank">https://github.com/lyzhang1999/gitops.git</a>&#x3002;</p>
+<h2 id="2-&#x65B0;&#x624B;&#x6784;&#x5EFA;-golang-&#x955C;&#x50CF;"><a name="2-&#x65B0;&#x624B;&#x6784;&#x5EFA;-golang-&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#2-&#x65B0;&#x624B;&#x6784;&#x5EFA;-golang-&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>2. &#x65B0;&#x624B;&#x6784;&#x5EFA; Golang &#x955C;&#x50CF;</h2>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">cd</span> gitops/docker/13/golang
+</code></pre>
+<p>&#x5927;&#x90E8;&#x5206;&#x4EBA;&#x5728;&#x6700;&#x5F00;&#x59CB;&#x7F16;&#x5199;&#x7684; Dockerfile &#x7684;&#x65F6;&#x5019;&#x90FD;&#x4EE5;&#x201C;&#x80FD;&#x7528;&#x201D;&#x4F5C;&#x4E3A;&#x9996;&#x8981;&#x76EE;&#x6807;&#xFF0C;&#x5185;&#x5BB9;&#x548C; Golang &#x5E94;&#x7528;&#x4E2D;&#x7684; Dockerfile-1 &#x6587;&#x4EF6;&#x7C7B;&#x4F3C;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
+FROM golang:1.17
+WORKDIR /opt/app
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN go build -o example
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x8FD9;&#x4E2A; Dockerfile &#x63CF;&#x8FF0;&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x6211;&#x4EEC;&#x9996;&#x9009; <code>Golang:1.17</code> &#x7248;&#x672C;&#x7684;&#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x7F16;&#x8BD1;&#x73AF;&#x5883;&#xFF0C;&#x5C06;&#x6E90;&#x7801;&#x62F7;&#x8D1D;&#x5230;&#x955C;&#x50CF;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x8FD0;&#x884C; <code>go build</code> &#x7F16;&#x8BD1;&#x6E90;&#x7801;&#x751F;&#x6210;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x6700;&#x540E;&#x914D;&#x7F6E;&#x542F;&#x52A8;&#x547D;&#x4EE4;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <code>Dockerfile-1</code> &#x6587;&#x4EF6;&#x6765;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker</span> build -t golang:1 -f Dockerfile-1 <span class="token builtin class-name">.</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> images
+REPOSITORY                      TAG               IMAGE ID       CREATED         SIZE
+golang                          <span class="token number">1</span>                 751ee3477c3d   <span class="token number">5</span> minutes ago   903MB
+</code></pre>
+<p>&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x6765;&#x770B;&#xFF0C;&#x8FD9;&#x4E2A; Dockerfile &#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x975E;&#x5E38;&#x60CA;&#x4EBA;&#xFF0C;Golang &#x793A;&#x4F8B;&#x7A0B;&#x5E8F;&#x4F7F;&#x7528; <code>go build</code> &#x547D;&#x4EE4;&#x7F16;&#x8BD1;&#x540E;&#xFF0C;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x5927;&#x7EA6; 6M &#x5DE6;&#x53F3;&#xFF0C;&#x4F46;&#x5BB9;&#x5668;&#x5316;&#x4E4B;&#x540E;&#xFF0C;&#x955C;&#x50CF;&#x8FBE;&#x5230; <code>900M</code>&#xFF0C;&#x663E;&#x7136;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8FDB;&#x4E00;&#x6B65;&#x4F18;&#x5316;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x3002;</p>
+<h2 id="3-&#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;"><a name="3-&#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#3-&#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>3. &#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;</h2>
+<p>&#x600E;&#x4E48;&#x505A;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x6784;&#x5EFA;&#x7684; Golang &#x955C;&#x50CF;&#x7684;&#x5927;&#x5C0F;&#x5F88;&#x5927;&#x7A0B;&#x5EA6;&#x662F;&#x7531;&#x5F15;&#x5165;&#x7684;&#x57FA;&#x7840;&#x955C;&#x50CF;&#x7684;&#x5927;&#x5C0F;&#x51B3;&#x5B9A;&#x7684;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x66FF;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;&#x662F;&#x4E00;&#x4E2A;&#x5FEB;&#x901F;&#x5E76;&#x4E14;&#x975E;&#x5E38;&#x6709;&#x6548;&#x7684;&#x529E;&#x6CD5;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5C06; Golang:1.17 &#x57FA;&#x7840;&#x955C;&#x50CF;&#x66FF;&#x6362;&#x4E3A; <code>golang:1.17-alpine</code> &#x7248;&#x672C;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
+FROM golang:1.17-alpine
+WORKDIR /opt/app
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN go build -o example
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;Alpine &#x7248;&#x672C;&#x7684;&#x955C;&#x50CF;&#x76F8;&#x6BD4;&#x8F83;&#x666E;&#x901A;&#x955C;&#x50CF;&#x6765;&#x8BF4;&#x5220;&#x9664;&#x4E86;&#x4E00;&#x4E9B;&#x975E;&#x5FC5;&#x9700;&#x7684;&#x7CFB;&#x7EDF;&#x5E94;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x66F4;&#x5C0F;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <code>Dockerfile-2</code> &#x6587;&#x4EF6;&#x6765;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> build -t golang:2 -f Dockerfile-2 <span class="token builtin class-name">.</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> images
+REPOSITORY                      TAG               IMAGE ID       CREATED              SIZE
+golang                          <span class="token number">2</span>                 bbaa9e935080   <span class="token number">4</span> minutes ago        408MB
+golang                          <span class="token number">1</span>                 751ee3477c3d   <span class="token number">5</span> minutes ago        903MB
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x5BF9;&#x6BD4;&#x53D1;&#x73B0;&#xFF0C;&#x65B0;&#x7684; <code>Dockerfile-2</code> &#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x6BD4; <code>Dockerfile-1</code> &#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x5728;&#x5927;&#x5C0F;&#x4E0A;&#x7F29;&#x51CF;&#x4E86; 50%&#xFF0C;&#x53EA;&#x6709; <code>408M</code> &#x4E86;&#x3002;</p>
+<h2 id="4-&#x91CD;&#x65B0;&#x601D;&#x8003;-dockerfile"><a name="4-&#x91CD;&#x65B0;&#x601D;&#x8003;-dockerfile" class="anchor-navigation-ex-anchor" href="#4-&#x91CD;&#x65B0;&#x601D;&#x8003;-dockerfile"><i class="fa fa-link" aria-hidden="true"></i></a>4. &#x91CD;&#x65B0;&#x601D;&#x8003; Dockerfile</h2>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x8FDB;&#x4E00;&#x6B65;&#x5206;&#x6790;&#x4E00;&#x4E0B; Dockerfile-2 &#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
+FROM golang:1.17-alpine
+WORKDIR /opt/app
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN go build -o example
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x8FD9;&#x6BB5; Dockerfile &#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x5BB9;&#x5668;&#x5185;&#x8FD0;&#x884C;&#x4E86; go build -o example&#xFF0C;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x5C06;&#x4F1A;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x4E8C;&#x8FDB;&#x5236;&#x7684;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x7531;&#x4E8E;&#x7F16;&#x8BD1;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x9700;&#x8981; Golang &#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x8981;&#x4F7F;&#x7528; Golang &#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x57FA;&#x7840;&#x955C;&#x50CF;&#xFF0C;&#x8FD9;&#x662F;&#x5BFC;&#x81F4;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x8FC7;&#x5927;&#x7684;&#x76F4;&#x63A5;&#x539F;&#x56E0;&#x3002;&#x65E2;&#x7136;&#x5982;&#x6B64;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x80FD;&#x4E0D;&#x80FD;&#x4E0D;&#x5728;&#x955C;&#x50CF;&#x91CC;&#x7F16;&#x8BD1;&#x5462;&#xFF1F;&#x8FD9;&#x6837;&#x4E0D;&#x4F9D;&#x8D56;&#x955C;&#x50CF;&#x7684;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#xFF0C;&#x518D;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x4F53;&#x79EF;&#x66F4;&#x5C0F;&#x7684;&#x955C;&#x50CF;&#x6765;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x6784;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x955C;&#x50CF;&#x81EA;&#x7136;&#x5C31;&#x4F1A;&#x53D8;&#x5C0F;&#x4E86;&#x3002;&#x601D;&#x8DEF;&#x5B8C;&#x5168;&#x6CA1;&#x9519;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x8981;&#x600E;&#x4E48;&#x505A;&#x5462;&#xFF1F;&#x6700;&#x7B80;&#x5355;&#x7684;&#x529E;&#x6CD5;&#x5C31;&#x662F;&#x5728;&#x672C;&#x5730;&#x5148;&#x7F16;&#x8BD1;&#x51FA;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x518D;&#x5C06;&#x5B83;&#x590D;&#x5236;&#x5230;&#x4E00;&#x4E2A;&#x66F4;&#x5C0F;&#x4F53;&#x79EF;&#x7684; ubuntu &#x955C;&#x50CF;&#x5185;&#x3002;&#x5177;&#x4F53;&#x505A;&#x6CD5;&#x662F;&#xFF0C;&#x9996;&#x5148;&#x5728;&#x672C;&#x5730;&#x4F7F;&#x7528;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x751F;&#x6210; Linux &#x5E73;&#x53F0;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">GOOS</span><span class="token operator">=</span>linux <span class="token assign-left variable">GOARCH</span><span class="token operator">=</span>amd64 go build -o example <span class="token builtin class-name">.</span>
+$ <span class="token function">ls</span> -lh
+-rwxr-xr-x  <span class="token number">1</span> wangwei  staff   <span class="token number">6</span>.4M <span class="token number">10</span> <span class="token number">10</span> <span class="token number">16</span>:58 example
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+</code></pre>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x4F7F;&#x7528; <code>Dockerfile-3</code> &#x6587;&#x4EF6;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
+FROM ubuntu:latest
+WORKDIR /opt/app
+COPY example ./
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x5728;&#x5BB9;&#x5668;&#x91CC;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x5F15;&#x5165;&#x4E86;&#x4E0D;&#x5305;&#x542B; Golang &#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x7684; ubuntu &#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x57FA;&#x7840;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x4F7F;&#x7528; <code>docker build</code> &#x547D;&#x4EE4;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> build -t golang:3 -f Dockerfile-3 <span class="token builtin class-name">.</span>
+</code></pre>
+<p>&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x4F7F;&#x7528; <code>docker images</code> &#x6765;&#x67E5;&#x770B;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> images
+REPOSITORY                      TAG               IMAGE ID       CREATED             SIZE
+golang                          <span class="token number">3</span>                 b53404869778   <span class="token number">3</span> minutes ago        <span class="token number">75</span>.9MB
+golang                          <span class="token number">2</span>                 bbaa9e935080   <span class="token number">4</span> minutes ago        408MB
+golang                          <span class="token number">1</span>                 751ee3477c3d   <span class="token number">5</span> minutes ago        903MB
+</code></pre>
+<p>&#x4ECE;&#x8FD4;&#x56DE;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x8FD9;&#x79CD;&#x6784;&#x5EFA;&#x65B9;&#x5F0F;&#x751F;&#x6210;&#x7684;&#x955C;&#x50CF;&#x53EA;&#x6709; 76M&#xFF0C;&#x5728;&#x4F53;&#x79EF;&#x4E0A;&#x6BD4;&#x6700;&#x521D;&#x7684; 917M &#x7F29;&#x5C0F;&#x4E86;&#x51E0;&#x4E4E; 90% &#x3002;&#x955C;&#x50CF;&#x7684;&#x6700;&#x7EC8;&#x5927;&#x5C0F;&#x5C31;&#x76F8;&#x5F53;&#x4E8E; ubuntu:latest &#x7684;&#x5927;&#x5C0F;&#x52A0;&#x4E0A; Golang &#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5C06;&#x5E94;&#x7528;&#x7684;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x62C6;&#x5206;&#x5230;&#x4E86;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;&#x8FD9;&#x4F1A;&#x8BA9; Dockerfile &#x5931;&#x53BB;&#x63CF;&#x8FF0;&#x5E94;&#x7528;&#x7F16;&#x8BD1;&#x548C;&#x6253;&#x5305;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x5B9E;&#x8DF5;&#x3002;</p>
+<p>&#x5176;&#x5B9E;&#xFF0C;&#x6211;&#x4EEC;&#x4ED4;&#x7EC6;&#x5206;&#x6790;&#x4E0A;&#x9762;&#x7684;&#x6784;&#x5EFA;&#x65B9;&#x6CD5;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x7684;&#x672C;&#x8D28;&#x662F;&#x628A;&#x6784;&#x5EFA;&#x548C;&#x8FD0;&#x884C;&#x62C6;&#x5206;&#x4E3A;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#xFF0C;&#x6784;&#x5EFA;&#x7531;&#x672C;&#x5730;&#x73AF;&#x5883;&#x7684;&#x7F16;&#x8BD1;&#x5DE5;&#x5177;&#x63D0;&#x4F9B;&#x652F;&#x6301;&#xFF0C;&#x8FD0;&#x884C;&#x7531; ubuntu &#x955C;&#x50CF;&#x63D0;&#x4F9B;&#x652F;&#x6301;&#x3002;&#x90A3;&#x4E48;&#xFF0C;&#x80FD;&#x4E0D;&#x80FD;&#x5C06;&#x8FD9;&#x4E2A;&#x601D;&#x60F3;&#x8FC1;&#x79FB;&#x5230; Dockerfile &#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x4E2D;&#x5462;&#xFF1F;&#x8BF4;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x76F8;&#x4FE1;&#x4F60;&#x5DF2;&#x7ECF;&#x80FD;&#x8054;&#x60F3;&#x5230;&#x6211;&#x4EEC;&#x4E0A;&#x8282;&#x8BFE;&#x63D0;&#x5230;&#x7684;&#x201C;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x201D;&#x4E86;&#xFF0C;&#x601D;&#x8DEF;&#x662F;&#x4E0D;&#x662F;&#x975E;&#x5E38;&#x4E00;&#x81F4;&#xFF1F;</p>
+<h2 id="5-&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;"><a name="5-&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;" class="anchor-navigation-ex-anchor" href="#5-&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;"><i class="fa fa-link" aria-hidden="true"></i></a>5. &#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;</h2>
+<p>&#x5728;&#x6211;&#x4EEC;&#x4E0A;&#x8282;&#x8BFE;&#x7684;&#x955C;&#x50CF;&#x6784;&#x5EFA;&#x6848;&#x4F8B;&#x4E2D;&#xFF0C;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x7684;&#x672C;&#x8D28;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5C06;&#x955C;&#x50CF;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x62C6;&#x5206;&#x6210;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x548C;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x9636;&#x6BB5;&#x5BF9;&#x5E94;&#x7F16;&#x8BD1;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x8D1F;&#x8D23;&#x751F;&#x6210;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF1B;&#x7B2C;&#x4E8C;&#x4E2A;&#x9636;&#x6BB5;&#x5BF9;&#x5E94;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x62F7;&#x8D1D;&#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x4E3A;&#x7A0B;&#x5E8F;&#x63D0;&#x4F9B;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#xFF0C;&#x6700;&#x7EC8;&#x955C;&#x50CF;&#x4E5F;&#x5C31;&#x662F;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x751F;&#x6210;&#x7684;&#x955C;&#x50CF;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;
+<img src="https://img-blog.csdnimg.cn/7e29a6639afb4a5c9c91484e067db93f.png" alt="">
+&#x901A;&#x8FC7;&#x8FD9;&#x5F20;&#x539F;&#x7406;&#x56FE;&#xFF0C;&#x6211;&#x76F8;&#x4FE1;&#x4F60;&#x5DF2;&#x7ECF;&#x53D1;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x5F88;&#x6709;&#x610F;&#x601D;&#x7684;&#x7ED3;&#x8BBA;&#x3002;&#x4EE5; Golang &#x793A;&#x4F8B;&#x5E94;&#x7528;&#x4E3A;&#x4F8B;&#xFF0C;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5C06; Dockerfile-1 &#x548C; Dockerfile-3 &#x7684;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x5408;&#x5E76;&#x91CD;&#x7EC4;&#xFF0C;&#x6700;&#x7EC8;&#x5B8C;&#x6574;&#x7684;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x7684; Dockerfile-4 &#x5185;&#x5BB9;&#x5982;&#x4E0B;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
+
+<span class="token comment"># Step 1: build golang binary</span>
+FROM golang:1.17 as builder
+WORKDIR /opt/app
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN go build -o example
+
+<span class="token comment"># Step 2: copy binary from step1</span>
+FROM ubuntu:latest
+WORKDIR /opt/app
+COPY --from<span class="token operator">=</span>builder /opt/app/example ./example
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x8FD9;&#x6BB5;&#x5185;&#x5BB9;&#x91CC;&#x6709;&#x4E24;&#x4E2A; FROM &#x8BED;&#x53E5;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x3002;</p>
+<ul>
+<li>&#x7B2C;&#x4E00;&#x4E2A;&#x9636;&#x6BB5;&#x662F;&#x4ECE;&#x7B2C; 4 &#x884C;&#x81F3;&#x7B2C; 7 &#x884C;&#xFF0C;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x5C31;&#x50CF;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x5728;&#x672C;&#x5730;&#x6267;&#x884C;&#x7684;&#x7F16;&#x8BD1;&#x64CD;&#x4F5C;&#x4E00;&#x6837;&#x3002;</li>
+<li>&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x5728;&#x7B2C; 10 &#x884C;&#x5230; 13 &#x884C;&#xFF0C;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x5C06;&#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#x751F;&#x6210;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230;&#x5F53;&#x524D;&#x9636;&#x6BB5;&#xFF0C;&#x628A; ubuntu:latest &#x4F5C;&#x4E3A;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E; CMD &#x542F;&#x52A8;&#x547D;&#x4EE4;&#x3002;</li>
+</ul>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; docker build &#x6784;&#x5EFA;&#x955C;&#x50CF;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x547D;&#x540D;&#x4E3A; <code>golang:4</code>&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker</span> build -t golang:4 -f Dockerfile-4 <span class="token builtin class-name">.</span>
+</code></pre>
+<p>&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x4F7F;&#x7528; docker images &#x67E5;&#x770B;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> images
+REPOSITORY                      TAG               IMAGE ID       CREATED             SIZE
+golang                          <span class="token number">4</span>                 8d40b16bb409   <span class="token number">2</span> minutes ago        <span class="token number">75</span>.8MB
+golang                          <span class="token number">3</span>                 b53404869778   <span class="token number">3</span> minutes ago        <span class="token number">75</span>.9MB
+golang                          <span class="token number">2</span>                 bbaa9e935080   <span class="token number">4</span> minutes ago        408MB
+golang                          <span class="token number">1</span>                 751ee3477c3d   <span class="token number">5</span> minutes ago        903MB
+</code></pre>
+<p>&#x4ECE;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;<code>golang:4</code> &#x955C;&#x50CF;&#x5927;&#x5C0F;&#x548C; <code>golang:3</code> &#x955C;&#x50CF;&#x5927;&#x5C0F;&#x51E0;&#x4E4E;&#x4E00;&#x81F4;&#xFF0C;&#x5927;&#x7EA6;&#x4E3A; 76M&#x3002;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x5BF9;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x7684;&#x4F18;&#x5316;&#x5DF2;&#x7ECF;&#x57FA;&#x672C;&#x4E0A;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x4E5F;&#x5728;&#x53EF;&#x63A5;&#x53D7;&#x7684;&#x8303;&#x56F4;&#x5185;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x7684;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x6211;&#x4E5F;&#x63A8;&#x8350;&#x4F60;&#x4F7F;&#x7528; <code>ubuntu:latest</code> &#x4F5C;&#x4E3A;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x7684;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x955C;&#x50CF;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x4E3A;&#x4E86;&#x8BA9;&#x4F60;&#x6DF1;&#x5165;&#x7406;&#x89E3;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;&#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x3002;</p>
+<h2 id="6-&#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;"><a name="6-&#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;" class="anchor-navigation-ex-anchor" href="#6-&#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;"><i class="fa fa-link" aria-hidden="true"></i></a>6. &#x8FDB;&#x4E00;&#x6B65;&#x538B;&#x7F29;</h2>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x65F6;&#xFF0C;&#x6700;&#x7EC8;&#x751F;&#x6210;&#x7684;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x5176;&#x5B9E;&#x53D6;&#x51B3;&#x4E8E;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x5F15;&#x7528;&#x7684;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#xFF0C;&#x5B83;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x662F; ubuntu:latest &#x955C;&#x50CF;&#x5927;&#x5C0F;&#x3002;&#x8981;&#x8FDB;&#x4E00;&#x6B65;&#x7F29;&#x5C0F;&#x4F53;&#x79EF;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x66F4;&#x5C0F;&#x7684;&#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x7684;&#x8FD0;&#x884C;&#x955C;&#x50CF;&#xFF0C;&#x8FD9;&#x5C31;&#x8981;&#x8BF4;&#x5230; Alpine &#x4E86;&#x3002;Alpine &#x955C;&#x50CF;&#x662F;&#x4E13;&#x95E8;&#x4E3A;&#x5BB9;&#x5668;&#x5316;&#x5B9A;&#x5236;&#x7684; Linux &#x53D1;&#x884C;&#x7248;&#xFF0C;&#x5B83;&#x7684;&#x6700;&#x5927;&#x7279;&#x70B9;&#x662F;&#x4F53;&#x79EF;&#x975E;&#x5E38;&#x5C0F;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x5C06;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x66FF;&#x6362;&#x4E3A; Alpine &#x955C;&#x50CF;&#xFF0C;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x6587;&#x4EF6;&#x547D;&#x540D;&#x4E3A; Dockerfile-5&#xFF0C;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
+
+<span class="token comment"># Step 1: build golang binary</span>
+FROM golang:1.17 as builder
+WORKDIR /opt/app
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN <span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> go build -o example
+
+<span class="token comment"># Step 2: copy binary from step1</span>
+FROM alpine
+WORKDIR /opt/app
+COPY --from<span class="token operator">=</span>builder /opt/app/example ./example
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x7531;&#x4E8E; Alpine &#x955C;&#x50CF;&#x5E76;&#x6CA1;&#x6709; <code>glibc</code>&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728;&#x7F16;&#x8BD1;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x65F6;&#x6307;&#x5B9A;&#x4E86; <code>CGO_ENABLED=0</code>&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6211;&#x4EEC;&#x7981;&#x7528;&#x4E86; <code>CGO</code>&#xFF0C;&#x8FD9;&#x6837;&#x7A0B;&#x5E8F;&#x624D;&#x80FD;&#x5728; Alpine &#x955C;&#x50CF;&#x4E2D;&#x8FD0;&#x884C;&#x3002;&#x63A5;&#x7740;&#x6211;&#x4EEC;&#x4F7F;&#x7528; Dockerfile-5 &#x6784;&#x5EFA;&#x955C;&#x50CF;&#xFF0C;&#x5E76;&#x5C06;&#x955C;&#x50CF;&#x547D;&#x540D;&#x4E3A; <code>golang:5</code>&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker</span> build -t golang:5 -f Dockerfile-5 <span class="token builtin class-name">.</span>
+</code></pre>
+<p>&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x4F7F;&#x7528; docker images &#x67E5;&#x770B;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ &#x276F; <span class="token function">docker</span> images
+REPOSITORY                      TAG               IMAGE ID       CREATED             SIZE
+golang                          <span class="token number">5</span>                 7b2de55bf367   About a minute ago   <span class="token number">11</span>.9MB
+golang                          <span class="token number">4</span>                 8d40b16bb409   <span class="token number">2</span> minutes ago        <span class="token number">75</span>.8MB
+golang                          <span class="token number">3</span>                 b53404869778   <span class="token number">3</span> minutes ago        <span class="token number">75</span>.9MB
+golang                          <span class="token number">2</span>                 bbaa9e935080   <span class="token number">4</span> minutes ago        408MB
+golang                          <span class="token number">1</span>                 751ee3477c3d   <span class="token number">5</span> minutes ago        903MB
+</code></pre>
+<p>&#x4ECE;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x6211;&#x4EEC;&#x5F97;&#x77E5;&#xFF0C;&#x4F7F;&#x7528; Alpine &#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x7684;&#x8FD0;&#x884C;&#x955C;&#x50CF;&#x540E;&#xFF0C;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x4ECE; 76M &#x964D;&#x4F4E;&#x81F3;&#x4E86; 12M&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x7531;&#x4E8E; Alpine &#x955C;&#x50CF;&#x548C;&#x5E38;&#x89C4; Linux &#x53D1;&#x884C;&#x7248;&#x5B58;&#x5728;&#x4E00;&#x4E9B;&#x5DEE;&#x5F02;&#xFF0C;&#x4F5C;&#x4E3A;&#x521D;&#x5B66;&#x8005;&#xFF0C;&#x6211;&#x5E76;&#x4E0D;&#x63A8;&#x8350;&#x4F60;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0B;&#x628A; Alpine &#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x4E1A;&#x52A1;&#x7684;&#x8FD0;&#x884C;&#x955C;&#x50CF;&#x3002;</p>
+<h2 id="7-&#x6781;&#x9650;&#x538B;&#x7F29;"><a name="7-&#x6781;&#x9650;&#x538B;&#x7F29;" class="anchor-navigation-ex-anchor" href="#7-&#x6781;&#x9650;&#x538B;&#x7F29;"><i class="fa fa-link" aria-hidden="true"></i></a>7. &#x6781;&#x9650;&#x538B;&#x7F29;</h2>
+<p>&#x4ECE;&#x524D;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x5982;&#x679C;&#x628A; Alpine &#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x7684;&#x955C;&#x50CF;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x955C;&#x50CF;&#x5DF2;&#x7ECF;&#x8DB3;&#x591F;&#x5C0F;&#x4E86;&#xFF0C;&#x76F8;&#x6BD4;&#x8F83; 7M &#x7684;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#xFF0C;&#x955C;&#x50CF;&#x53EA;&#x589E;&#x52A0;&#x4E86; 5M &#x5927;&#x5C0F;&#x3002;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x6709;&#x6CA1;&#x6709;&#x53EF;&#x80FD;&#x518D;&#x6781;&#x7AEF;&#x4E00;&#x70B9;&#xFF0C;&#x8BA9;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x548C;&#x4E8C;&#x8FDB;&#x5236;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x5462;&#xFF1F;</p>
+<p>&#x7B54;&#x6848;&#x662F;&#x80AF;&#x5B9A;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x628A;&#x7B2C;&#x4E8C;&#x4E2A;&#x9636;&#x6BB5;&#x7684;&#x955C;&#x50CF;&#x66FF;&#x6362;&#x4E3A;&#x4E00;&#x4E2A;&#x201C;&#x7A7A;&#x955C;&#x50CF;&#x201D;&#xFF0C;&#x8FD9;&#x4E2A;&#x7A7A;&#x955C;&#x50CF;&#x79F0;&#x4E3A; <code>scratch</code> &#x955C;&#x50CF;&#xFF0C;&#x6211;&#x4EEC;&#x5C06; Dockerfile-4 &#x7B2C;&#x4E8C;&#x9636;&#x6BB5;&#x7684;&#x6784;&#x5EFA;&#x66FF;&#x6362;&#x4E3A; scratch &#x955C;&#x50CF;&#xFF0C;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x6587;&#x4EF6;&#x547D;&#x540D;&#x4E3A; <code>Dockerfile-6</code>&#xFF0C;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"> <span class="token comment"># syntax=docker/dockerfile:1</span>
+
+<span class="token comment"># Step 1: build golang binary</span>
+FROM golang:1.17 as builder
+WORKDIR /opt/app
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN <span class="token assign-left variable">CGO_ENABLED</span><span class="token operator">=</span><span class="token number">0</span> go build -o example
+
+<span class="token comment"># Step 2: copy binary from step1</span>
+FROM scratch
+WORKDIR /opt/app
+COPY --from<span class="token operator">=</span>builder /opt/app/example ./example
+CMD <span class="token punctuation">[</span><span class="token string">&quot;/opt/app/example&quot;</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x7531;&#x4E8E; scratch &#x955C;&#x50CF;&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x5728;&#x7F16;&#x8BD1; Golang &#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x7981;&#x7528;&#x4E86; CGO&#xFF0C;&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x8BA9;&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x5728; scratch &#x955C;&#x50CF;&#x4E2D;&#x8FD0;&#x884C;&#x3002;&#x63A5;&#x7740;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; docker build &#x6784;&#x5EFA;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#xFF0C;&#x5C06;&#x5176;&#x547D;&#x540D;&#x4E3A; <code>golang:5</code>&#xFF0C;&#x7136;&#x540E;&#x518D;&#x67E5;&#x770B;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x955C;&#x50CF;&#x548C; Golang &#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x4E00;&#x81F4;&#x7684;&#xFF0C;&#x53EA;&#x6709; 6.6M&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> build -t golang:6 -f Dockerfile-6 <span class="token builtin class-name">.</span>
+$ <span class="token function">docker</span> images
+REPOSITORY                      TAG               IMAGE ID       CREATED             SIZE
+golang                          <span class="token number">6</span>                 aa61f2cff23d   <span class="token number">35</span> seconds ago       <span class="token number">6</span>.63MB
+golang                          <span class="token number">5</span>                 7b2de55bf367   About a minute ago   <span class="token number">11</span>.9MB
+golang                          <span class="token number">4</span>                 8d40b16bb409   <span class="token number">2</span> minutes ago        <span class="token number">75</span>.8MB
+golang                          <span class="token number">3</span>                 b53404869778   <span class="token number">3</span> minutes ago        <span class="token number">75</span>.9MB
+golang                          <span class="token number">2</span>                 bbaa9e935080   <span class="token number">4</span> minutes ago        408MB
+golang                          <span class="token number">1</span>                 751ee3477c3d   <span class="token number">5</span> minutes ago        903MB
+</code></pre>
+<p>scratch &#x955C;&#x50CF;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x767D;&#x955C;&#x50CF;&#xFF0C;&#x751A;&#x81F3;&#x8FDE; shell &#x90FD;&#x6CA1;&#x6709;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x4E5F;&#x65E0;&#x6CD5;&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x6216;&#x8FDB;&#x884C;&#x8C03;&#x8BD5;&#x3002;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x5B89;&#x5168;&#x6709;&#x6781;&#x9AD8;&#x7684;&#x8981;&#x6C42;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x628A; scratch &#x4F5C;&#x4E3A;&#x7A0B;&#x5E8F;&#x7684;&#x8FD0;&#x884C;&#x955C;&#x50CF;&#x3002;</p>
+<h2 id="8-&#x5982;&#x4F55;&#x590D;&#x7528;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF1F;"><a name="8-&#x5982;&#x4F55;&#x590D;&#x7528;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF1F;" class="anchor-navigation-ex-anchor" href="#8-&#x5982;&#x4F55;&#x590D;&#x7528;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>8. &#x5982;&#x4F55;&#x590D;&#x7528;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF1F;</h2>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x76F8;&#x4FE1;&#x4F60;&#x5DF2;&#x7ECF;&#x7406;&#x89E3;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x7684;&#x5B9E;&#x9645;&#x610F;&#x4E49;&#x4E86;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0A;&#x9762;&#x7684; Dockerfile &#x8FD8;&#x53EF;&#x4EE5;&#x505A;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x4F18;&#x5316;&#xFF0C;&#x6211;&#x8FD8;&#x60F3;&#x518D;&#x63D2;&#x64AD;&#x4E00;&#x4E2A;&#x77E5;&#x8BC6;&#x70B9;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x5728;&#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x662F;&#x7528; COPY . .  &#x7684;&#x65B9;&#x5F0F;&#x62F7;&#x8D1D;&#x4E86;&#x6E90;&#x7801;&#xFF0C;&#x53C8;&#x8FDB;&#x884C;&#x4E86;&#x7F16;&#x8BD1;&#xFF0C;&#x8FD9;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x7F3A;&#x70B9;&#xFF0C;&#x90A3;&#x5C31;&#x662F;&#x5982;&#x679C;&#x53EA;&#x662F;&#x6E90;&#x7801;&#x53D8;&#x4E86;&#xFF0C;&#x4F46;&#x4F9D;&#x8D56;&#x5E76;&#x6CA1;&#x6709;&#x53D8;&#xFF0C;Docker &#x5C06;&#x65E0;&#x6CD5;&#x590D;&#x7528;&#x4F9D;&#x8D56;&#x7684;&#x955C;&#x50CF;&#x5C42;&#x7F13;&#x5B58;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0; Docker &#x6BCF;&#x6B21;&#x90FD;&#x4F1A;&#x91CD;&#x65B0;&#x4E0B;&#x8F7D; Golang &#x4F9D;&#x8D56;&#x3002;</p>
+<p>&#x8FD9;&#x5C31;&#x5F15;&#x51FA;&#x4E86;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x7684;&#x5C0F;&#x6280;&#x5DE7;&#xFF1A;<strong>&#x5C3D;&#x91CF;&#x4F7F;&#x7528; Docker &#x6784;&#x5EFA;&#x7F13;&#x5B58;</strong>&#x3002;</p>
+<p>&#x8981;&#x4F7F;&#x7528; Golang &#x4F9D;&#x8D56;&#x7684;&#x7F13;&#x5B58;&#xFF0C;&#x6700;&#x7B80;&#x5355;&#x7684;&#x529E;&#x6CD5;&#x662F;&#xFF1A;&#x5148;&#x590D;&#x5236;&#x4F9D;&#x8D56;&#x6587;&#x4EF6;&#xFF0C;&#x518D;&#x4E0B;&#x8F7D;&#x4F9D;&#x8D56;&#xFF0C;&#x6700;&#x540E;&#x518D;&#x590D;&#x5236;&#x6E90;&#x7801;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#x3002;&#x57FA;&#x4E8E;&#x8FD9;&#x79CD;&#x601D;&#x8DEF;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x7B2C;&#x4E00;&#x9636;&#x6BB5;&#x7684;&#x6784;&#x5EFA;&#x4FEE;&#x6539;&#x5982;&#x4E0B;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment"># Step 1: build golang binary</span>
+FROM golang:1.17 as builder
+WORKDIR /opt/app
+COPY go.* ./
+RUN go mod download
+COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+RUN go build -o example
+</code></pre>
+<p>&#x8FD9;&#x6837;&#xFF0C;&#x5728;&#x6BCF;&#x6B21;&#x4EE3;&#x7801;&#x53D8;&#x66F4;&#x800C;&#x4F9D;&#x8D56;&#x4E0D;&#x53D8;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Docker &#x90FD;&#x4F1A;&#x590D;&#x7528;&#x7B2C; 4 &#x884C;&#x548C;&#x7B2C; 5 &#x884C;&#x4EA7;&#x751F;&#x7684;&#x6784;&#x5EFA;&#x7F13;&#x5B58;&#xFF0C;&#x8FD9;&#x53EF;&#x4EE5;&#x52A0;&#x901F;&#x955C;&#x50CF;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x3002;</p>
+<h2 id="9-&#x603B;&#x7ED3;"><a name="9-&#x603B;&#x7ED3;" class="anchor-navigation-ex-anchor" href="#9-&#x603B;&#x7ED3;"><i class="fa fa-link" aria-hidden="true"></i></a>9. &#x603B;&#x7ED3;</h2>
+<p>&#x4EE5;&#x6784;&#x5EFA; Golang &#x955C;&#x50CF;&#x4E3A;&#x4F8B;&#x5B50;&#xFF0C;&#x5411;&#x4F60;&#x5C55;&#x793A;&#x4E86;&#x51CF;&#x5C0F;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x7684;&#x5177;&#x4F53;&#x65B9;&#x6CD5;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x66F4;&#x6362;&#x57FA;&#x7840;&#x955C;&#x50CF;&#xFF0C;&#x8FD8;&#x662F;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x5730;&#x51CF;&#x5C0F;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x3002;&#x4F46;&#x662F;&#x4E0D;&#x540C;&#x6784;&#x5EFA;&#x65B9;&#x6CD5;&#x5BF9;&#x5E94;&#x7684;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x4ECD;&#x7136;&#x6709;&#x5F88;&#x5927;&#x5DEE;&#x5F02;&#x3002;
+<img src="https://img-blog.csdnimg.cn/ae2eecf12463422288c8350abde99706.png" alt="">
+&#x591A;&#x9636;&#x6BB5;&#x955C;&#x50CF;&#x6784;&#x5EFA;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x5DE7;&#x5999;&#x5730;&#x5C06;&#x6784;&#x5EFA;&#x548C;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x62C6;&#x5206;&#x5F00;&#x6765;&#xFF0C;&#x5927;&#x5927;&#x7F29;&#x5C0F;&#x4E86;&#x6700;&#x7EC8;&#x751F;&#x6210;&#x7684;&#x955C;&#x50CF;&#x4F53;&#x79EF;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x5DE5;&#x4F5C;&#x4E2D;&#xFF0C;&#x6211;&#x5F3A;&#x70C8;&#x63A8;&#x8350;&#x4F60;&#x4F7F;&#x7528;&#x5B83;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x8FD8;&#x5728;&#x591A;&#x9636;&#x6BB5;&#x6784;&#x5EFA;&#x4ECB;&#x7ECD;&#x4E86;&#x4E00;&#x79CD;&#x5C3D;&#x91CF;&#x5229;&#x7528; Docker &#x7F13;&#x5B58;&#x7684;&#x6784;&#x5EFA;&#x6280;&#x5DE7;&#xFF0C;&#x867D;&#x7136;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x5BF9;&#x4E8E;&#x7F29;&#x5C0F;&#x955C;&#x50CF;&#x6CA1;&#x6709;&#x5E2E;&#x52A9;&#xFF0C;&#x4F46;&#x5B83;&#x80FD;&#x591F;&#x52A0;&#x5FEB;&#x955C;&#x50CF;&#x6784;&#x5EFA;&#x7684;&#x901F;&#x5EA6;&#x3002;&#x4E0D;&#x8FC7;&#x8981;&#x5F3A;&#x8C03;&#x7684;&#x662F;&#xFF0C;&#x955C;&#x50CF;&#x5E76;&#x4E0D;&#x662F;&#x8D8A;&#x5C0F;&#x8D8A;&#x597D;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x540C;&#x65F6;&#x517C;&#x987E;&#x955C;&#x50CF;&#x7684;&#x53EF;&#x8C03;&#x8BD5;&#x3001;&#x5B89;&#x5168;&#x3001;&#x53EF;&#x7EF4;&#x62A4;&#x6027;&#x7B49;&#x89D2;&#x5EA6;&#x6765;&#x9009;&#x62E9;&#x57FA;&#x7840;&#x955C;&#x50CF;&#xFF0C;&#x5E76;&#x5C06;&#x955C;&#x50CF;&#x5927;&#x5C0F;&#x63A7;&#x5236;&#x5728;&#x5408;&#x7406;&#x7684;&#x8303;&#x56F4;&#x5185;&#x3002;</p>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2023-02-22 13:47:42
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="docker_Build_multi-platform_image.html" class="navigation navigation-prev " aria-label="Previous page: 如何为不同语言快速构建多平台镜像">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="docker_image_1_library.html" class="navigation navigation-next " aria-label="Next page: docker 镜像源">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"如何将镜像体积缩减 90","level":"1.5.4.3","depth":3,"next":{"title":"docker 镜像源","level":"1.5.4.4","depth":3,"path":"Docker/Image/docker_image_1_library.md","ref":"Docker/Image/docker_image_1_library.md","articles":[]},"previous":{"title":"如何为不同语言快速构建多平台镜像","level":"1.5.4.2","depth":3,"path":"Docker/Image/docker_Build_multi-platform_image.md","ref":"Docker/Image/docker_Build_multi-platform_image.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Docker Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["python"],"title":"Docker Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/docker-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/docker-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Docker Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Docker":"https://smoothies.com.cn/docker-docs/Overview.html","Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/Overview.html","Go":"https://smoothies.com.cn/go-docs/Overview.html","Prometheus":"https://smoothies.com.cn/prometheus-docs/Overview.html","Command":"https://smoothies.com.cn/linux-command-docs/Overview.html","Shell":"https://smoothies.com.cn/shell-docs/Overview.html","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/Overview.html","Python":"https://smoothies.com.cn/python-docs/Overview.html","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Docker](https://www.docker.com/) 的书籍"},"file":{"path":"Docker/Image/docker_Image_volume_reduced.md","mtime":"2023-02-22T05:47:42.876Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-22T09:17:25.614Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

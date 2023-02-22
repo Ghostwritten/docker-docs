@@ -1,0 +1,1794 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>docker  storage 驱动 devicemapper 配置 · Docker Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="docker_storage_3_docker_thin_provisioning.html" />
+    
+    
+    <link rel="prev" href="docker_storage_1_docker_Device_Mapper_introduce.html" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Docker Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/docker-docs/Overview.html" target="_blank" class="custom-link">Docker</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/Overview.html" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/Overview.html" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/Overview.html" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/Overview.html" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/Overview.html" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/Overview.html" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/Overview.html" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../Overview.html">
+            
+                <a href="../../Overview.html">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../Docker-Compose/">
+            
+                <a href="../../Docker-Compose/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Docker-Compose/docker-compose_1_install.html">
+            
+                <a href="../../Docker-Compose/docker-compose_1_install.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    docker compose 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                <a href="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    docker compose 安装 elasticsearch 集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../Docker-Swarm/">
+            
+                <a href="../../Docker-Swarm/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Docker Swarm
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    docker swarm 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    docker swarm 网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    docker swam 集群实现负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    docker swarm 创建加密覆盖网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    docker swarm 管理 secrets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    docker swarm 健康检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    dcoker swarm 更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    docker swarm 部署界面 ui portainer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    docker swarm 通过 docker compose 部署应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    docker swarm 维护模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../CICD/">
+            
+                <a href="../CICD/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    CICD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                <a href="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    docker   makefile  ci pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                <a href="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    github action 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                <a href="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    自托管构建 如何使用 harbor 搭建企业级镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../CICD/docker_Tekton_builds_image.html">
+            
+                <a href="../CICD/docker_Tekton_builds_image.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    自托管构建 如何使用 tekton 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                <a href="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    如何使用 gitlab ci 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Command/">
+            
+                <a href="../Command/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../Command/docker_command_inspect.html">
+            
+                <a href="../Command/docker_command_inspect.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    docker inspect   format
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Dockerfile/">
+            
+                <a href="../Dockerfile/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Image/">
+            
+                <a href="../Image/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Image
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../Image/build_images_with_buildah.html">
+            
+                <a href="../Image/build_images_with_buildah.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    构建镜像开源工具 buildah
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../Image/docker_Build_multi-platform_image.html">
+            
+                <a href="../Image/docker_Build_multi-platform_image.html">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    如何为不同语言快速构建多平台镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../Image/docker_Image_volume_reduced.html">
+            
+                <a href="../Image/docker_Image_volume_reduced.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    如何将镜像体积缩减 90
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="../Image/docker_image_1_library.html">
+            
+                <a href="../Image/docker_image_1_library.html">
+            
+                    
+                        <b>1.5.4.4.</b>
+                    
+                    docker 镜像源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="../Image/docker_image_2_manage.html">
+            
+                <a href="../Image/docker_image_2_manage.html">
+            
+                    
+                        <b>1.5.4.5.</b>
+                    
+                    docker 镜像管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Install/">
+            
+                <a href="../Install/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../Install/docker_1_install.html">
+            
+                <a href="../Install/docker_1_install.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    docker 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Issue/">
+            
+                <a href="../Issue/">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    Issue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Logging/">
+            
+                <a href="../Logging/">
+            
+                    
+                        <b>1.5.7.</b>
+                    
+                    Logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Manage/">
+            
+                <a href="../Manage/">
+            
+                    
+                        <b>1.5.8.</b>
+                    
+                    Manage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.8.1" data-path="../Manage/docker_clean.html">
+            
+                <a href="../Manage/docker_clean.html">
+            
+                    
+                        <b>1.5.8.1.</b>
+                    
+                    docker 资源清理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.2" data-path="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                <a href="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                    
+                        <b>1.5.8.2.</b>
+                    
+                    docker 容器隔离与限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Monitor/">
+            
+                <a href="../Monitor/">
+            
+                    
+                        <b>1.5.9.</b>
+                    
+                    Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../Network/">
+            
+                <a href="../Network/">
+            
+                    
+                        <b>1.5.10.</b>
+                    
+                    Network
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.10.1" data-path="../Network/docker_analyze_the_packet_loss.html">
+            
+                <a href="../Network/docker_analyze_the_packet_loss.html">
+            
+                    
+                        <b>1.5.10.1.</b>
+                    
+                    docker 容器应用总是丢包如何分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.2" data-path="../Network/docker_config_DNS.html">
+            
+                <a href="../Network/docker_config_DNS.html">
+            
+                    
+                        <b>1.5.10.2.</b>
+                    
+                    docker 配置 dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../Registry/">
+            
+                <a href="../Registry/">
+            
+                    
+                        <b>1.5.11.</b>
+                    
+                    Registry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.11.1" data-path="../Registry/harbor_get_started_guide.html">
+            
+                <a href="../Registry/harbor_get_started_guide.html">
+            
+                    
+                        <b>1.5.11.1.</b>
+                    
+                    harbor部署入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.2" data-path="../Registry/podman_deploy_private_registry.html">
+            
+                <a href="../Registry/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.5.11.2.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.3" data-path="../Registry/docker_registry_1_deploy.html">
+            
+                <a href="../Registry/docker_registry_1_deploy.html">
+            
+                    
+                        <b>1.5.11.3.</b>
+                    
+                    docker registry 仓库搭建并配置证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.4" data-path="../Registry/docker_registry_2_deploy_UI.html">
+            
+                <a href="../Registry/docker_registry_2_deploy_UI.html">
+            
+                    
+                        <b>1.5.11.4.</b>
+                    
+                    docker 部署 registry ui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.5" data-path="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                <a href="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                    
+                        <b>1.5.11.5.</b>
+                    
+                    centos 7 9 harbor 部署镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../Security/">
+            
+                <a href="../Security/">
+            
+                    
+                        <b>1.5.12.</b>
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.13.</b>
+                    
+                    Storage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.13.1" data-path="docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                <a href="docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                    
+                        <b>1.5.13.1.</b>
+                    
+                    docker device mapper 简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.13.2" data-path="docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                <a href="docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                    
+                        <b>1.5.13.2.</b>
+                    
+                    docker  storage 驱动 devicemapper 配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.3" data-path="docker_storage_3_docker_thin_provisioning.html">
+            
+                <a href="docker_storage_3_docker_thin_provisioning.html">
+            
+                    
+                        <b>1.5.13.3.</b>
+                    
+                    docker thin provisioning 实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.4" data-path="docker_storage_4_docker_devicemapper_scale.html">
+            
+                <a href="docker_storage_4_docker_devicemapper_scale.html">
+            
+                    
+                        <b>1.5.13.4.</b>
+                    
+                    docker devicemapper 扩容
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="docker_storage_5_nfs_volume.html">
+            
+                <a href="docker_storage_5_nfs_volume.html">
+            
+                    
+                        <b>1.5.13.5.</b>
+                    
+                    docker nfs volume 创建与使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../原理/">
+            
+                <a href="../原理/">
+            
+                    
+                        <b>1.5.14.</b>
+                    
+                    原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.14.1" data-path="../原理/docker_Container_technology_overview.html">
+            
+                <a href="../原理/docker_Container_technology_overview.html">
+            
+                    
+                        <b>1.5.14.1.</b>
+                    
+                    容器技术概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14.2" data-path="../原理/Container_architecture_overview.html">
+            
+                <a href="../原理/Container_architecture_overview.html">
+            
+                    
+                        <b>1.5.14.2.</b>
+                    
+                    容器架构概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../docker_1_start.html">
+            
+                <a href="../docker_1_start.html">
+            
+                    
+                        <b>1.5.15.</b>
+                    
+                    入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../Podman/">
+            
+                <a href="../../Podman/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Podman
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Podman/podman_deploy_private_registry.html">
+            
+                <a href="../../Podman/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../Podman/podman_start.html">
+            
+                <a href="../../Podman/podman_start.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    podman 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >docker  storage 驱动 devicemapper 配置</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#docker--storage-&#x9A71;&#x52A8;-devicemapper-&#x914D;&#x7F6E;"><b></b>Docker  storage &#x9A71;&#x52A8; devicemapper &#x914D;&#x7F6E;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x51C6;&#x5907;&#x6761;&#x4EF6;"><b></b>1. &#x51C6;&#x5907;&#x6761;&#x4EF6;</a></li><li><span class="title-icon "></span><a href="#2-&#x914D;&#x7F6E;docker&#x4F7F;&#x7528;devicemapper"><b></b>2. &#x914D;&#x7F6E;Docker&#x4F7F;&#x7528;devicemapper</a></li><ul><li><span class="title-icon "></span><a href="#21-&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;direct-lvm&#x6A21;&#x5F0F;"><b></b>2.1 &#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;direct-lvm&#x6A21;&#x5F0F;</a></li></ul><li><span class="title-icon "></span><a href="#3-&#x7BA1;&#x7406;-devicemapper"><b></b>3. &#x7BA1;&#x7406; devicemapper</a></li><ul><li><span class="title-icon "></span><a href="#31-&#x76D1;&#x63A7;-thin-pool"><b></b>3.1 &#x76D1;&#x63A7; thin pool</a></li><li><span class="title-icon "></span><a href="#32-&#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5BB9;&#x91CF;"><b></b>3.2 &#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5BB9;&#x91CF;</a></li></ul><li><span class="title-icon "></span><a href="#4-devicemapper-&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;"><b></b>4. devicemapper &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;</a></li><ul><li><span class="title-icon "></span><a href="#41-&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;"><b></b>4.1 &#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;</a></li><li><span class="title-icon "></span><a href="#42-&#x955C;&#x50CF;&#x5206;&#x5C42;&#x4E0E;&#x5171;&#x4EAB;"><b></b>4.2 &#x955C;&#x50CF;&#x5206;&#x5C42;&#x4E0E;&#x5171;&#x4EAB;</a></li></ul><li><span class="title-icon "></span><a href="#5-devicemapper-&#x8BFB;&#x5199;&#x6570;&#x636E;&#x7684;&#x8FC7;&#x7A0B;"><b></b>5. devicemapper &#x8BFB;&#x5199;&#x6570;&#x636E;&#x7684;&#x8FC7;&#x7A0B;</a></li><ul><li><span class="title-icon "></span><a href="#51-&#x8BFB;&#x6570;&#x636E;"><b></b>5.1 &#x8BFB;&#x6570;&#x636E;</a></li><li><span class="title-icon "></span><a href="#52-&#x5199;&#x6570;&#x636E;"><b></b>5.2 &#x5199;&#x6570;&#x636E;</a></li></ul><li><span class="title-icon "></span><a href="#6-device-mapper-&#x5BF9;-docker-&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><b></b>6. Device Mapper &#x5BF9; Docker &#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;</a></li><ul><li><span class="title-icon "></span><a href="#61-&#x6309;&#x9700;&#x5206;&#x914D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><b></b>6.1 &#x6309;&#x9700;&#x5206;&#x914D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;</a></li><li><span class="title-icon "></span><a href="#62-&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><b></b>6.2 &#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;</a></li><li><span class="title-icon "></span><a href="#63-&#x5176;&#x4ED6;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"><b></b>6.3 &#x5176;&#x4ED6;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</a></li></ul></ul></ul></div><a href="#docker--storage-&#x9A71;&#x52A8;-devicemapper-&#x914D;&#x7F6E;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="docker--storage-&#x9A71;&#x52A8;-devicemapper-&#x914D;&#x7F6E;"><a name="docker--storage-&#x9A71;&#x52A8;-devicemapper-&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#docker--storage-&#x9A71;&#x52A8;-devicemapper-&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>Docker  storage &#x9A71;&#x52A8; devicemapper &#x914D;&#x7F6E;</h1>
+<h2 id="1-&#x51C6;&#x5907;&#x6761;&#x4EF6;"><a name="1-&#x51C6;&#x5907;&#x6761;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#1-&#x51C6;&#x5907;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x51C6;&#x5907;&#x6761;&#x4EF6;</h2>
+<p><code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x662F; <code>RHEL</code>, <code>CentOS</code> &#x548C; <code>Oracle Linux</code> &#x7CFB;&#x7EDF;&#x4E0A;&#x552F;&#x4E00;&#x4E00;&#x4E2A;&#x652F;&#x6301; <code>Docker EE</code> &#x548C; <code>Commercially Supported Docker Engine (CS-Engine)</code> &#x7684;&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#xFF0C;&#x5177;&#x4F53;&#x53C2;&#x8003; <a href="https://www.docker.com/" target="_blank">Product compatibility matrix</a>.</p>
+<p><code>devicemapper</code> &#x5728; <code>CentOS</code>, <code>Fedora</code>, <code>Ubuntu</code> &#x548C; <code>Debian</code> &#x4E0A;&#x4E5F;&#x652F;&#x6301; <code>Docker CE</code>&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x66F4;&#x6539;&#x4E86; Docker &#x7684;&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x4E4B;&#x524D;&#x5728;&#x672C;&#x5730;&#x521B;&#x5EFA;&#x7684;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x90FD;&#x5C06;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#x3002;</p>
+<h2 id="2-&#x914D;&#x7F6E;docker&#x4F7F;&#x7528;devicemapper"><a name="2-&#x914D;&#x7F6E;docker&#x4F7F;&#x7528;devicemapper" class="anchor-navigation-ex-anchor" href="#2-&#x914D;&#x7F6E;docker&#x4F7F;&#x7528;devicemapper"><i class="fa fa-link" aria-hidden="true"></i></a>2. &#x914D;&#x7F6E;Docker&#x4F7F;&#x7528;devicemapper</h2>
+<p>Docker &#x4E3B;&#x673A;&#x8FD0;&#x884C; <code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x914D;&#x7F6E;&#x6A21;&#x5F0F;&#x4E3A; <code>loop-lvm</code>&#x3002;&#x6B64;&#x6A21;&#x5F0F;&#x4F7F;&#x7528;&#x7A7A;&#x95F2;&#x7684;&#x6587;&#x4EF6;&#x6765;&#x6784;&#x5EFA;&#x7528;&#x4E8E;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x7684;&#x7CBE;&#x7B80;&#x5B58;&#x50A8;&#x6C60;&#x3002;&#x8BE5;&#x6A21;&#x5F0F;&#x8BBE;&#x8BA1;&#x4E3A;&#x65E0;&#x9700;&#x989D;&#x5916;&#x914D;&#x7F6E;&#x5F00;&#x7BB1;&#x5373;&#x7528;(out-of-the-box)&#x3002;&#x4E0D;&#x8FC7;&#x751F;&#x4EA7;&#x90E8;&#x7F72;&#x4E0D;&#x5E94;&#x8BE5;&#x4EE5; loop-lvm &#x6A21;&#x5F0F;&#x8FD0;&#x884C;&#x3002;</p>
+<h3 id="21-&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;direct-lvm&#x6A21;&#x5F0F;"><a name="21-&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;direct-lvm&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#21-&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;direct-lvm&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1 &#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;direct-lvm&#x6A21;&#x5F0F;</h3>
+<p><code>CentOS7</code> &#x4ECE; <code>Docker 17.06</code> &#x5F00;&#x59CB;&#x652F;&#x6301;&#x901A;&#x8FC7; Docker &#x81EA;&#x52A8;&#x914D;&#x7F6E; <code>direct-lvm</code>&#xFF0C;&#x6240;&#x4EE5;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x8BE5;&#x5DE5;&#x5177;&#x914D;&#x7F6E;&#x3002;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x624B;&#x52A8;&#x914D;&#x7F6E; lvm&#xFF0C;&#x6DFB;&#x52A0;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x9009;&#x9879;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FC7;&#x7A0B;&#x8F83;&#x4E3A;&#x7E41;&#x7410;&#x4E00;&#x70B9;&#x3002;</p>
+<h4 id="211--&#x81EA;&#x52A8;&#x914D;&#x7F6E;-direct-lvm-&#x6A21;&#x5F0F;"><a name="211--&#x81EA;&#x52A8;&#x914D;&#x7F6E;-direct-lvm-&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#211--&#x81EA;&#x52A8;&#x914D;&#x7F6E;-direct-lvm-&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.1  &#x81EA;&#x52A8;&#x914D;&#x7F6E; direct-lvm &#x6A21;&#x5F0F;</h4>
+<p>&#x8BE5;&#x65B9;&#x6CD5;&#x53EA;&#x9002;&#x7528;&#x4E8E;&#x4E00;&#x4E2A;&#x5757;&#x8BBE;&#x5907;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x591A;&#x4E2A;&#x5757;&#x8BBE;&#x5907;&#xFF0C;&#x8BF7;&#x901A;&#x8FC7;&#x624B;&#x52A8;&#x914D;&#x7F6E; <code>direct-lvm</code> &#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x793A;&#x4F8B;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4F4D;&#x7F6E; <code>/usr/lib/docker-storage-setup/docker-storage-setup</code>&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x5176;&#x4E2D;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x7684;&#x8BE6;&#x7EC6;&#x8BF4;&#x660E;&#xFF0C;&#x6216;&#x8005;&#x901A;&#x8FC7; <code>man docker-storage-setup</code> &#x83B7;&#x53D6;&#x5E2E;&#x52A9;&#xFF0C;&#x4EE5;&#x4E0B;&#x4ECB;&#x7ECD;&#x51E0;&#x4E2A;&#x5173;&#x952E;&#x7684;&#x9009;&#x9879;&#xFF1A;
+| &#x53C2;&#x6570;                            | &#x89E3;&#x91CA;                                                                  | &#x662F;&#x5426;&#x5FC5;&#x987B; | &#x9ED8;&#x8BA4;&#x503C;   | &#x793A;&#x4F8B;                               |
+|-------------------------------|---------------------------------------------------------------------|------|-------|----------------------------------|
+| dm.directlvm_device           | &#x51C6;&#x5907;&#x914D;&#x7F6E; direct-lvm &#x7684;&#x5757;&#x8BBE;&#x5907;&#x7684;&#x8DEF;&#x5F84;                                             | &#x662F;    |       | dm.directlvm_device=&quot;/dev/xvdf&quot;  |
+| dm.thinp_percent              | &#x5B9A;&#x4E49;&#x521B;&#x5EFA; data thin pool &#x7684;&#x5927;&#x5C0F;                                             | &#x5426;    | 95    | dm.thinp_percent=95              |
+| dm.thinp_metapercent          | &#x5B9A;&#x4E49;&#x521B;&#x5EFA; metadata thin pool &#x7684;&#x5927;&#x5C0F;                                         | &#x5426;    | 1     | dm.thinp_metapercent=1           |
+| dm.thinp_autoextend_threshold | &#x5B9A;&#x4E49;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#x7684;&#x767E;&#x5206;&#x6BD4;&#xFF0C;100 &#x8868;&#x793A; disable&#xFF0C;&#x6700;&#x5C0F;&#x4E3A; 50&#xFF0C;&#x53C2;&#x8003; lvmthin &#x2014; LVM thin provisioning | &#x5426;    | 80    | dm.thinp_autoextend_threshold=80 |
+| dm.thinp_autoextend_percent   | &#x5B9A;&#x4E49;&#x6BCF;&#x6B21;&#x6269;&#x5BB9;&#x7684;&#x5927;&#x5C0F;&#xFF0C;100 &#x8868;&#x793A; disable                                            | &#x5426;    | 20    | dm.thinp_autoextend_percent=20   |
+| dm.directlvm_device_force     | &#x5F53;&#x5757;&#x8BBE;&#x5907;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x683C;&#x5F0F;&#x5316;&#x5757;&#x8BBE;&#x5907;                                              | &#x5426;    | false | dm.directlvm_device_force=true   |</p>
+<p>&#x7F16;&#x8F91; <code>/etc/docker/daemon.json</code>&#xFF0C;&#x8BBE;&#x7F6E;&#x597D;&#x53C2;&#x6570;&#x540E;&#x91CD;&#x65B0;&#x542F;&#x52A8; Docker &#x4F7F;&#x66F4;&#x6539;&#x751F;&#x6548;&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash"><span class="token punctuation">{</span>
+  <span class="token string">&quot;storage-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;devicemapper&quot;</span>,
+  <span class="token string">&quot;storage-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;dm.directlvm_device=/dev/xdf&quot;</span>,
+    <span class="token string">&quot;dm.thinp_percent=95&quot;</span>,
+    <span class="token string">&quot;dm.thinp_metapercent=1&quot;</span>,
+    <span class="token string">&quot;dm.thinp_autoextend_threshold=80&quot;</span>,
+    <span class="token string">&quot;dm.thinp_autoextend_percent=20&quot;</span>,
+    <span class="token string">&quot;dm.directlvm_device_force=false&quot;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5173;&#x4E8E;&#x5B58;&#x50A8;&#x7684;&#x66F4;&#x591A;&#x53C2;&#x6570;&#x8BF7;&#x53C2;&#x8003;&#xFF1A;</p>
+<p><a href="https://docs.docker.com/engine/reference/commandline/dockerd/#storage-driver-options" target="_blank">Stable</a></p>
+<p>Edge</p>
+<h4 id="212-&#x624B;&#x52A8;&#x914D;&#x7F6E;-direct-lvm-&#x6A21;&#x5F0F;"><a name="212-&#x624B;&#x52A8;&#x914D;&#x7F6E;-direct-lvm-&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#212-&#x624B;&#x52A8;&#x914D;&#x7F6E;-direct-lvm-&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>2.1.2 &#x624B;&#x52A8;&#x914D;&#x7F6E; direct-lvm &#x6A21;&#x5F0F;</h4>
+<p>&#x4E0B;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5377;&#xFF0C;&#x914D;&#x7F6E;&#x7528;&#x4F5C;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x540E;&#x7AEF;&#x3002;&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x4F60;&#x6709;&#x5728; <code>/dev/xvdf</code> &#x7684;&#x5145;&#x8DB3;&#x7A7A;&#x95F2;&#x7A7A;&#x95F4;&#x7684;&#x5757;&#x8BBE;&#x5907;&#x3002;&#x4E5F;&#x5047;&#x8BBE;&#x4F60;&#x7684; Docker daemon &#x5DF2;&#x505C;&#x6B62;&#x3002;</p>
+<ul>
+<li>1.&#x767B;&#x5F55;&#x4F60;&#x8981;&#x914D;&#x7F6E;&#x7684; Docker &#x4E3B;&#x673A;&#x5E76;&#x505C;&#x6B62; Docker daemon&#x3002;</li>
+<li>2.&#x5B89;&#x88C5;LVM2&#x8F6F;&#x4EF6;&#x5305;&#x3002;LVM2&#x8F6F;&#x4EF6;&#x5305;&#x542B;&#x7BA1;&#x7406;Linux&#x4E0A;&#x903B;&#x8F91;&#x5377;&#x7684;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x5DE5;&#x5177;&#x96C6;&#x3002;</li>
+</ul>
+<p><code>RHEL / CentOS: device-mapper-persistent-data, lvm2</code> &#x4EE5;&#x53CA;&#x76F8;&#x5173;&#x4F9D;&#x8D56;
+<code>Ubuntu / Debian: thin-provisioning-tools, lvm2</code> &#x4EE5;&#x53CA;&#x76F8;&#x5173;&#x4F9D;&#x8D56;</p>
+<ul>
+<li>3.&#x521B;&#x5EFA;&#x7269;&#x7406;&#x5377;&#x3002;</li>
+</ul>
+<pre class="language-"><code class="lang-bash">$ pvcreate /dev/xvdf
+
+Physical volume <span class="token string">&quot;/dev/xvdf&quot;</span> successfully created.
+</code></pre>
+<p>4.&#x521B;&#x5EFA;&#x4E00;&#x4E2A; &#x201C;docker&#x201D; &#x5377;&#x7EC4;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ vgcreate <span class="token function">docker</span> /dev/xvdf
+
+Volume group <span class="token string">&quot;docker&quot;</span> successfully created
+</code></pre>
+<p>5.&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;thinpool&#x7684;&#x5B58;&#x50A8;&#x6C60;&#x3002;</p>
+<p>&#x5728;&#x6B64;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x8BBE;&#x7F6E;&#x6C60;&#x5927;&#x5C0F;&#x4E3A; &#x201C;docker&#x201D; &#x5377;&#x7EC4;&#x5927;&#x5C0F;&#x7684; 95&#xFF05;&#x3002; &#x5176;&#x4F59;&#x7684;&#x7A7A;&#x95F2;&#x7A7A;&#x95F4;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x6570;&#x636E;&#x6216;&#x5143;&#x6570;&#x636E;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lvcreate --wipesignatures y -n thinpool <span class="token function">docker</span> -l <span class="token number">95</span>%VG
+
+Logical volume <span class="token string">&quot;thinpool&quot;</span> created.
+
+$ lvcreate --wipesignatures y -n thinpoolmeta <span class="token function">docker</span> -l <span class="token number">1</span>%VG
+
+Logical volume <span class="token string">&quot;thinpoolmeta&quot;</span> created.
+</code></pre>
+<p>6.&#x5C06;&#x5B58;&#x50A8;&#x6C60;&#x8F6C;&#x6362;&#x4E3A; thinpool &#x683C;&#x5F0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lvconvert -y <span class="token punctuation">\</span>
+--zero n <span class="token punctuation">\</span>
+-c 512K <span class="token punctuation">\</span>
+--thinpool docker/thinpool <span class="token punctuation">\</span>
+--poolmetadata docker/thinpoolmeta
+
+WARNING: Converting logical volume docker/thinpool and docker/thinpoolmeta to
+thin pool&apos;s data and metadata volumes with metadata wiping.
+THIS WILL DESTROY CONTENT OF LOGICAL VOLUME <span class="token punctuation">(</span>filesystem etc.<span class="token punctuation">)</span>
+Converted docker/thinpool to thin pool.
+</code></pre>
+<p>7.&#x901A;&#x8FC7; lvm profile &#x914D;&#x7F6E;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">vi</span> /etc/lvm/profile/docker-thinpool.profile
+</code></pre>
+<p>8.&#x8BBE;&#x7F6E;&#x53C2;&#x6570; thin_pool_autoextend_threshold &#x548C; thin_pool_autoextend_percent &#x7684;&#x503C;&#x3002;
+&#x8BBE;&#x7F6E; thin_pool_autoextend_threshold &#x503C;&#x3002;&#x8FD9;&#x4E2A;&#x503C;&#x5E94;&#x8BE5;&#x662F;&#x4E4B;&#x524D;&#x8BBE;&#x7F6E;&#x5B58;&#x50A8;&#x6C60;&#x4F59;&#x4E0B;&#x7A7A;&#x95F4;&#x7684;&#x767E;&#x5206;&#x6BD4;(100 = disabled)&#x3002;</p>
+<pre class="language-"><code class="lang-bash">thin_pool_autoextend_threshold <span class="token operator">=</span> <span class="token number">80</span>
+</code></pre>
+<p>&#x8BBE;&#x7F6E;&#x5F53;&#x5B58;&#x50A8;&#x6C60;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#x65F6;&#xFF0C;&#x589E;&#x52A0;&#x5B58;&#x50A8;&#x6C60;&#x7684;&#x7A7A;&#x95F4;&#x767E;&#x5206;&#x6BD4;&#xFF08;100 =&#x7981;&#x7528;&#xFF09;</p>
+<pre class="language-"><code class="lang-bash">thin_pool_autoextend_percent <span class="token operator">=</span> <span class="token number">20</span>
+</code></pre>
+<p>&#x68C0;&#x67E5;&#x4F60;&#x7684; <code>docker-thinpool.profile</code> &#x7684;&#x8BBE;&#x7F6E;&#x3002;&#x4E00;&#x4E2A;&#x793A;&#x4F8B; <code>/etc/lvm/profile/docker-thinpool.profile</code> &#x5E94;&#x8BE5;&#x7C7B;&#x4F3C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">activation <span class="token punctuation">{</span>
+  <span class="token assign-left variable">thin_pool_autoextend_threshold</span><span class="token operator">=</span><span class="token number">80</span>
+  <span class="token assign-left variable">thin_pool_autoextend_percent</span><span class="token operator">=</span><span class="token number">20</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>9.&#x5E94;&#x7528;&#x65B0;&#x7684; lvm &#x914D;&#x7F6E;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lvchange --metadataprofile docker-thinpool docker/thinpool
+
+Logical volume docker/thinpool changed.
+</code></pre>
+<p>10.&#x67E5;&#x770B;&#x5377;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x9A8C;&#x8BC1; lv &#x662F;&#x5426;&#x53D7;&#x76D1;&#x63A7;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lvs -o+seg_monitor
+
+LV       VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert Monitor
+thinpool <span class="token function">docker</span> twi-a-t--- <span class="token number">95</span>.00g             <span class="token number">0.00</span>   <span class="token number">0.01</span>                             monitored
+</code></pre>
+<p>11.&#x5907;&#x4EFD; Docker &#x5B58;&#x50A8;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">mkdir</span> /var/lib/docker.bk
+$ <span class="token function">mv</span> /var/lib/docker/* /var/lib/docker.bk
+</code></pre>
+<p>12.&#x914D;&#x7F6E;&#x4E00;&#x4E9B;&#x7279;&#x5B9A;&#x7684; devicemapper &#x9009;&#x9879;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;storage-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;devicemapper&quot;</span>,
+    <span class="token string">&quot;storage-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;dm.thinpooldev=/dev/mapper/docker-thinpool&quot;</span>,
+    <span class="token string">&quot;dm.use_deferred_removal=true&quot;</span>,
+    <span class="token string">&quot;dm.use_deferred_deletion=true&quot;</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>Note: Always set both dm.use_deferred_removal=true and dm.use_deferred_deletion=true to prevent unintentionally leaking mount points.
+ &#x542F;&#x7528;&#x4E0A;&#x8FF0;2&#x4E2A;&#x53C2;&#x6570;&#x6765;&#x963B;&#x6B62;&#x53EF;&#x80FD;&#x610F;&#x5916;&#x4EA7;&#x751F;&#x7684;&#x6302;&#x8F7D;&#x70B9;&#x6CC4;&#x6F0F;&#x95EE;&#x9898;</p>
+</blockquote>
+<p>&#x68C0;&#x67E5;&#x4E3B;&#x673A;&#x4E0A;&#x7684; <code>devicemapper</code> &#x7ED3;&#x6784;
+&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; lsblk &#x547D;&#x4EE4;&#x6765;&#x67E5;&#x770B;&#x4EE5;&#x4E0A;&#x521B;&#x5EFA;&#x7684;&#x8BBE;&#x5907;&#x6587;&#x4EF6;&#x548C;&#x5B58;&#x50A8;&#x6C60;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lsblk
+NAME               MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+xvda               <span class="token number">202</span>:0    <span class="token number">0</span>    8G  <span class="token number">0</span> disk
+&#x2514;&#x2500;xvda1            <span class="token number">202</span>:1    <span class="token number">0</span>    8G  <span class="token number">0</span> part /
+xvdf               <span class="token number">202</span>:80   <span class="token number">0</span>   10G  <span class="token number">0</span> disk
+&#x251C;&#x2500;vg--docker-data          <span class="token number">253</span>:0    <span class="token number">0</span>   90G  <span class="token number">0</span> lvm
+&#x2502; &#x2514;&#x2500;docker-202:1-1032-pool <span class="token number">253</span>:2    <span class="token number">0</span>   10G  <span class="token number">0</span> dm
+&#x2514;&#x2500;vg--docker-metadata      <span class="token number">253</span>:1    <span class="token number">0</span>    4G  <span class="token number">0</span> lvm
+  &#x2514;&#x2500;docker-202:1-1032-pool <span class="token number">253</span>:2    <span class="token number">0</span>   10G  <span class="token number">0</span> dm
+&#x4E0B;&#x56FE;&#x663E;&#x793A;&#x7531; lsblk &#x547D;&#x4EE4;&#x8F93;&#x51FA;&#x7684;&#x4E4B;&#x524D;&#x955C;&#x50CF;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#x3002;
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20210419101531367.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;">
+&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x540D;&#x4E3A; <code>Docker-202:1-1032-pool</code> &#x7684; pool &#x6A2A;&#x8DE8;&#x5728; data &#x548C; metadata &#x8BBE;&#x5907;&#x4E4B;&#x4E0A;&#x3002;pool &#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;&#x4E3A;&#xFF1A;</p>
+<p><strong>Docker-&#x4E3B;&#x8BBE;&#x5907;&#x53F7;:&#x4E8C;&#x7EA7;&#x8BBE;&#x5907;&#x53F7;-inode&#x53F7;-pool</strong></p>
+<h2 id="3-&#x7BA1;&#x7406;-devicemapper"><a name="3-&#x7BA1;&#x7406;-devicemapper" class="anchor-navigation-ex-anchor" href="#3-&#x7BA1;&#x7406;-devicemapper"><i class="fa fa-link" aria-hidden="true"></i></a>3. &#x7BA1;&#x7406; devicemapper</h2>
+<h3 id="31-&#x76D1;&#x63A7;-thin-pool"><a name="31-&#x76D1;&#x63A7;-thin-pool" class="anchor-navigation-ex-anchor" href="#31-&#x76D1;&#x63A7;-thin-pool"><i class="fa fa-link" aria-hidden="true"></i></a>3.1 &#x76D1;&#x63A7; thin pool</h3>
+<p>&#x4E0D;&#x8981;&#x8FC7;&#x4E8E;&#x4F9D;&#x8D56; lvm &#x7684;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#xFF0C;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B; Volume Group &#x4F1A;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#xFF0C;&#x4F46;&#x6709;&#x65F6;&#x5019; volume &#x8FD8;&#x662F;&#x4F1A;&#x88AB;&#x585E;&#x6EE1;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x547D;&#x4EE4; lvs &#x6216; lvs -a &#x6765;&#x76D1;&#x63A7; volume &#x5269;&#x4F59;&#x7684;&#x7A7A;&#x95F4;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528; nagios &#x7B49;&#x76D1;&#x63A7;&#x5DE5;&#x5177;&#x6765;&#x8FDB;&#x884C;&#x76D1;&#x63A7;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x67E5;&#x770B; lvm &#x65E5;&#x5FD7;&#xFF0C;&#x4E86;&#x89E3; thin pool &#x5728;&#x81EA;&#x52A8;&#x6269;&#x5BB9;&#x89E6;&#x53CA;&#x9608;&#x503C;&#x65F6;&#x7684;&#x72B6;&#x6001;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ journalctl -fu dm-event.service
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x5728;&#x4F7F;&#x7528;&#x7CBE;&#x7B80;&#x6C60;&#xFF08;<code>thin pool</code>&#xFF09;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x9891;&#x7E41;&#x9047;&#x5230;&#x95EE;&#x9898;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728; <code>/etc/docker.daemon.json</code> &#x4E2D;&#x8BBE;&#x7F6E;&#x53C2;&#x6570; <code>dm.min_free_space</code> &#x7684;&#x503C;&#xFF08;&#x8868;&#x793A;&#x767E;&#x5206;&#x6BD4;&#xFF09;&#x3002;&#x4F8B;&#x5982;&#x5C06;&#x5176;&#x8BBE;&#x7F6E;&#x4E3A; 10&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x5F53;&#x53EF;&#x7528;&#x7A7A;&#x95F4;&#x8FBE;&#x5230;&#x6216;&#x63A5;&#x8FD1; 10&#xFF05; &#x65F6;&#x64CD;&#x4F5C;&#x5931;&#x8D25;&#xFF0C;&#x5E76;&#x53D1;&#x51FA;&#x8B66;&#x544A;&#x3002;&#x53C2;&#x8003; <code>storage driver options in the Engine daemon reference.</code></p>
+<h3 id="32-&#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5BB9;&#x91CF;"><a name="32-&#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5BB9;&#x91CF;" class="anchor-navigation-ex-anchor" href="#32-&#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5BB9;&#x91CF;"><i class="fa fa-link" aria-hidden="true"></i></a>3.2 &#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5BB9;&#x91CF;</h3>
+<p>&#x5982;&#x679C; lv &#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x5DF2;&#x6EE1;&#xFF0C;&#x5E76;&#x4E14; vg &#x5904;&#x4E8E;&#x6EE1;&#x8D1F;&#x8377;&#x72B6;&#x6001;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4E3A;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684; <code>thin-pool</code> &#x8BBE;&#x5907;&#x589E;&#x52A0;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x5177;&#x4F53;&#x8FC7;&#x7A0B;&#x53D6;&#x51B3;&#x4E8E;&#x60A8;&#x662F;&#x4F7F;&#x7528; loop-lvm &#x7CBE;&#x7B80;&#x6C60;&#x8FD8;&#x662F;&#x4F7F;&#x7528; direct-lvm &#x7CBE;&#x7B80;&#x6C60;&#x3002;</p>
+<h4 id="321-&#x8C03;&#x6574;-loop-lvm-&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;"><a name="321-&#x8C03;&#x6574;-loop-lvm-&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;" class="anchor-navigation-ex-anchor" href="#321-&#x8C03;&#x6574;-loop-lvm-&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;"><i class="fa fa-link" aria-hidden="true"></i></a>3.2.1 &#x8C03;&#x6574; <code>loop-lvm</code> &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;</h4>
+<p>&#x8C03;&#x6574; <code>loop-lvm</code> &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x6700;&#x7B80;&#x5355;&#x65B9;&#x6CD5;&#x662F;&#x4F7F;&#x7528; <code>device_tool</code> &#x5DE5;&#x5177;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x7684;&#x5DE5;&#x5177;&#x3002;</p>
+<p>a. &#x4F7F;&#x7528; <code>device_tool</code> &#x5DE5;&#x5177;
+&#x5728; docker &#x5B98;&#x65B9; github &#x4ED3;&#x5E93;&#x7684; <code>contrib/</code> &#x76EE;&#x5F55;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x793E;&#x533A;&#x8D21;&#x732E;&#x7684;&#x811A;&#x672C; <code>device_tool.go</code>&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6B64;&#x5DE5;&#x5177;&#x514D;&#x53BB;&#x7E41;&#x7410;&#x7684;&#x6B65;&#x9AA4;&#x6765;&#x8C03;&#x6574; <code>loop-lvm</code> &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x8FD9;&#x4E2A;&#x5DE5;&#x5177;&#x4E0D;&#x80FD;&#x4FDD;&#x8BC1; 100% &#x6709;&#x6548;&#xFF0C;&#x6700;&#x597D;&#x4E0D;&#x8981;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#x4F7F;&#x7528; <code>loop-lvm</code> &#x6A21;&#x5F0F;&#x3002;</p>
+<p>clone &#x6574;&#x4E2A;&#x4ED3;&#x5E93; <code>docker-ce</code>&#xFF0C;&#x5207;&#x6362;&#x5230;&#x76EE;&#x5F55; <code>contrib/docker-device-tool</code> &#xFF0C;&#x6309;&#x7167; README.md &#x4E2D;&#x7684;&#x8BF4;&#x660E;&#x7F16;&#x8BD1;&#x8BE5;&#x5DE5;&#x5177;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x8BE5;&#x5DE5;&#x5177;&#x3002;&#x4F8B;&#x5982;&#x8C03;&#x6574; thin pool &#x7684;&#x5927;&#x5C0F;&#x4E3A; 200GB&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ ./device_tool resize 200GB
+</code></pre>
+<p>b. &#x4F7F;&#x7528;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5DE5;&#x5177;
+&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x60F3;&#x4F7F;&#x7528; <code>device_tool</code> &#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5DE5;&#x5177;&#x624B;&#x52A8;&#x8C03;&#x6574; <code>loop-lvm</code> &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;&#x3002;</p>
+<p>&#x5728; loop-lvm &#x6A21;&#x5F0F;&#x4E2D;&#xFF0C;Docker &#x4F7F;&#x7528;&#x7684; <code>Device Mapper</code> &#x8BBE;&#x5907;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528; <code>loopback</code> &#x8BBE;&#x5907;&#xFF0C;&#x540E;&#x7AEF;&#x4E3A;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;&#x7A00;&#x758F;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x4E0B;:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> -lsh /var/lib/docker/devicemapper/devicemapper/
+&#x603B;&#x7528;&#x91CF; 510M
+508M -rw-------. <span class="token number">1</span> root root 100G <span class="token number">10</span>&#x6708; <span class="token number">30</span> 00:00 data
+<span class="token number">1</span>.9M -rw-------. <span class="token number">1</span> root root <span class="token number">2</span>.0G <span class="token number">10</span>&#x6708; <span class="token number">30</span> 00:00 metadata
+</code></pre>
+<p>data [&#x5B58;&#x653E;&#x6570;&#x636E;] &#x548C; metadata [&#x5B58;&#x653E;&#x5143;&#x6570;&#x636E;] &#x7684;&#x5927;&#x5C0F;&#x4ECE;&#x8F93;&#x51FA;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x521D;&#x59CB;&#x5316;&#x9ED8;&#x8BA4;&#x4E3A; 100G &#x548C; 2G &#x5927;&#x5C0F;&#xFF0C;&#x90FD;&#x662F;&#x7A00;&#x758F;&#x6587;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528;&#x591A;&#x5C11;&#x5360;&#x7528;&#x591A;&#x5C11;&#x3002;</p>
+<p>Docker &#x5728;&#x521D;&#x59CB;&#x5316;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x521B;&#x5EFA; data &#x548C; metadata &#x8FD9;&#x4E24;&#x4E2A;&#x7A00;&#x758F;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5206;&#x522B;&#x9644;&#x52A0;&#x5230;&#x56DE;&#x73AF;&#x8BBE;&#x5907; <code>/dev/loop0</code> &#x548C; <code>/dev/loop1</code> &#x4E0A;&#xFF0C;&#x7136;&#x540E;&#x57FA;&#x4E8E;&#x56DE;&#x73AF;&#x8BBE;&#x5907;&#x521B;&#x5EFA; <code>thin pool</code>&#x3002; &#x9ED8;&#x8BA4;&#x4E00;&#x4E2A; container &#x6700;&#x5927;&#x5B58;&#x653E;&#x6570;&#x636E;&#x4E0D;&#x8D85;&#x8FC7; 10G&#x3002;</p>
+<p>&#x67E5;&#x770B; data &#x548C; metadata &#x7684;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> info <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">&apos;loop file&apos;</span>
+
+ Data loop file: /var/lib/docker/devicemapper/data
+ Metadata loop file: /var/lib/docker/devicemapper/metadata
+</code></pre>
+<p>&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x6765;&#x589E;&#x52A0;&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;thin-pool &#x539F;&#x6765;&#x7684;&#x5BB9;&#x91CF;&#x4E3A; 100GB&#xFF0C;&#x589E;&#x52A0;&#x5230;200GB&#x3002;</p>
+<p>&#x67E5;&#x770B; data &#x548C; metadata &#x7684;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> -lh /var/lib/docker/devicemapper/
+
+total <span class="token number">1175492</span>
+-rw------- <span class="token number">1</span> root root 100G Mar <span class="token number">30</span> 05:22 data
+-rw------- <span class="token number">1</span> root root <span class="token number">2</span>.0G Mar <span class="token number">31</span> <span class="token number">11</span>:17 metadata
+</code></pre>
+<p>&#x4F7F;&#x7528; <code>truncate</code> &#x547D;&#x4EE4;&#x5C06;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x589E;&#x52A0;&#x5230; 200G&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ truncate -s 200G /var/lib/docker/devicemapper/data
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x51CF;&#x5C0F;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x6709;&#x53EF;&#x80FD;&#x4F1A;&#x5BF9;&#x6570;&#x636E;&#x9020;&#x6210;&#x7834;&#x574F;&#xFF0C;&#x8BF7;&#x614E;&#x91CD;&#x8003;&#x8651;&#x3002;</p>
+<p>&#x9A8C;&#x8BC1;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> -lh /var/lib/docker/devicemapper/
+
+total <span class="token number">1</span>.2G
+-rw------- <span class="token number">1</span> root root 200G Apr <span class="token number">14</span> 08:47 data
+-rw------- <span class="token number">1</span> root root <span class="token number">2</span>.0G Apr <span class="token number">19</span> <span class="token number">13</span>:27 metadata
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230; loopback &#x6587;&#x4EF6;&#x7684;&#x5927;&#x5C0F;&#x5DF2;&#x7ECF;&#x6539;&#x53D8;&#xFF0C;&#x4F46;&#x8FD8;&#x6CA1;&#x6709;&#x4FDD;&#x5B58;&#x5230;&#x5185;&#x5B58;&#x4E2D;&#x3002;</p>
+<p>&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x5217;&#x51FA;&#x73AF;&#x56DE;&#x8BBE;&#x5907;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x8BE5;&#x8BBE;&#x5907;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x6B21;&#x5217;&#x51FA;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token builtin class-name">echo</span> $<span class="token punctuation">[</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">sudo</span> blockdev --getsize64 /dev/loop0<span class="token variable">)</span></span> / <span class="token number">1024</span> / <span class="token number">1024</span> / <span class="token number">1024</span> <span class="token punctuation">]</span>
+
+<span class="token number">100</span>
+
+$ losetup -c /dev/loop0
+
+$ <span class="token builtin class-name">echo</span> $<span class="token punctuation">[</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">sudo</span> blockdev --getsize64 /dev/loop0<span class="token variable">)</span></span> / <span class="token number">1024</span> / <span class="token number">1024</span> / <span class="token number">1024</span> <span class="token punctuation">]</span>
+
+<span class="token number">200</span>
+</code></pre>
+<p>&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x4E4B;&#x540E;&#xFF0C;loopback &#x8BBE;&#x5907;&#x7684;&#x5927;&#x5C0F;&#x53D8;&#x4E3A; 200GB&#x3002;</p>
+<p>&#x91CD;&#x65B0;&#x52A0;&#x8F7D; devicemapper thin pool&#x3002;</p>
+<p>&#x67E5;&#x770B; thin pool &#x7684;&#x540D;&#x79F0;</p>
+<pre class="language-"><code class="lang-bash">$ dmsetup status <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos; thin-pool &apos;</span> <span class="token operator">|</span> <span class="token function">awk</span> -F <span class="token string">&apos;: &apos;</span> <span class="token punctuation">{</span><span class="token string">&apos;print $1&apos;</span><span class="token punctuation">}</span>
+</code></pre>
+<p>&#x67E5;&#x770B;&#x5F53;&#x524D;&#x5377;&#x7684;&#x4FE1;&#x606F;&#x8868;</p>
+<pre class="language-"><code class="lang-bash">$ dmsetup table docker-8:1-123141-pool
+
+<span class="token number">0</span> <span class="token number">209715200</span> thin-pool <span class="token number">7</span>:1 <span class="token number">7</span>:0 <span class="token number">128</span> <span class="token number">32768</span> <span class="token number">1</span> skip_block_zeroing
+</code></pre>
+<ul>
+<li>&#x7B2C;&#x4E8C;&#x4E2A;&#x6570;&#x5B57;&#x662F;&#x8BBE;&#x5907;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x8868;&#x793A;&#x6709;&#x591A;&#x5C11;&#x4E2A; 512&#xFF0D;bytes &#x7684;&#x6247;&#x533A;&#x3002;</li>
+<li>128 &#x662F;&#x6700;&#x5C0F;&#x7684;&#x53EF;&#x5206;&#x914D;&#x7684; sector &#x6570;&#x3002;</li>
+<li>32768 &#x662F;&#x6700;&#x5C11;&#x53EF;&#x7528; sector &#x7684; <code>water mark</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E00;&#x4E2A; <code>threshold</code>&#x3002;</li>
+<li>1 &#x4EE3;&#x8868;&#x6709;&#x4E00;&#x4E2A;&#x9644;&#x52A0;&#x53C2;&#x6570;&#x3002;</li>
+<li><code>skip_block_zeroing</code>&#x662F;&#x4E2A;&#x9644;&#x52A0;&#x53C2;&#x6570;&#xFF0C;&#x8868;&#x793A;&#x7565;&#x8FC7;&#x7528;0&#x586B;&#x5145;&#x7684;&#x5757;&#x3002;</li>
+</ul>
+<p>&#x4F7F;&#x7528;&#x8F93;&#x51FA;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x5B57;&#x6BB5;&#x8BA1;&#x7B97;&#x6269;&#x5C55;&#x540E;&#x7684; <code>thin pool</code> &#x603B;&#x5927;&#x5C0F;&#xFF0C;&#x8BE5;&#x5B57;&#x6BB5;&#x8868;&#x793A;&#x6709;&#x591A;&#x5C11;&#x4E2A;&#x6247;&#x533A;&#x3002;100G &#x7684;&#x6587;&#x4EF6;&#x542B;&#x6709; <code>209715200</code> &#x4E2A;&#x6247;&#x533A;&#xFF0C;&#x6269;&#x5C55;&#x5230; 200G &#x540E;&#xFF0C;&#x6247;&#x533A;&#x6570;&#x4E3A; <code>419430400</code>&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x6247;&#x533A;&#x6570;&#x91CD;&#x65B0;&#x52A0;&#x8F7D; thin pool&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ dmsetup <span class="token function">suspend</span> docker-8:1-123141-pool
+
+$ dmsetup reload docker-8:1-123141-pool --table <span class="token string">&apos;0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing&apos;</span>
+
+$ dmsetup resume docker-8:1-123141-pool
+</code></pre>
+<h4 id="322-&#x8C03;&#x6574;-direct-lvm-&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;"><a name="322-&#x8C03;&#x6574;-direct-lvm-&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;" class="anchor-navigation-ex-anchor" href="#322-&#x8C03;&#x6574;-direct-lvm-&#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;"><i class="fa fa-link" aria-hidden="true"></i></a>3.2.2 &#x8C03;&#x6574; direct-lvm &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;</h4>
+<p>&#x8981;&#x8C03;&#x6574; <code>direct-lvm</code> &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x4E00;&#x5757;&#x65B0;&#x7684;&#x5757;&#x8BBE;&#x5907;&#x5230; Docker &#x7684;&#x5BBF;&#x4E3B;&#x673A;&#x3002;&#x5E76;&#x8BB0;&#x4E0B;&#x5185;&#x6838;&#x5206;&#x914D;&#x7ED9;&#x5B83;&#x7684;&#x8BBE;&#x5907;&#x540D;&#x79F0;&#x3002;&#x4F8B;&#x5982;&#x65B0;&#x7684;&#x5757;&#x8BBE;&#x5907;&#x540D;&#x79F0;&#x4E3A; <code>/dev/xvdg</code>&#x3002;</p>
+<p>&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x6765;&#x589E;&#x52A0; <code>direct-lvm</code> &#x7CBE;&#x7B80;&#x6C60;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x8BF7;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x66FF;&#x6362;&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#x53C2;&#x6570;&#x3002;</p>
+<p>&#x67E5;&#x770B;&#x5377;&#x7EC4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x4F7F;&#x7528; pvdisplay &#x547D;&#x4EE4;&#x67E5;&#x770B;&#x7CBE;&#x7B80;&#x6C60;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x7269;&#x7406;&#x5757;&#x8BBE;&#x5907;&#x4EE5;&#x53CA;&#x5377;&#x7EC4;&#x7684;&#x540D;&#x79F0;</p>
+<pre class="language-"><code class="lang-bash">$ pvdisplay <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">&apos;VG Name&apos;</span>
+
+PV Name               /dev/xvdf
+VG Name               <span class="token function">docker</span>
+</code></pre>
+<p>&#x6269;&#x5C55;&#x5377;&#x7EC4;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ vgextend <span class="token function">docker</span> /dev/xvdg
+
+Physical volume <span class="token string">&quot;/dev/xvdg&quot;</span> successfully created.
+Volume group <span class="token string">&quot;docker&quot;</span> successfully extended
+</code></pre>
+<p>&#x6269;&#x5C55;&#x903B;&#x8F91;&#x5377; docker/thinpool&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lvextend -l+100%FREE -n docker/thinpool
+
+ Size of logical volume docker/thinpool_tdata changed from <span class="token number">95.00</span> GiB <span class="token punctuation">(</span><span class="token number">24319</span> extents<span class="token punctuation">)</span> to <span class="token number">198.00</span> GiB <span class="token punctuation">(</span><span class="token number">50688</span> extents<span class="token punctuation">)</span>.
+Logical volume docker/thinpool_tdata successfully resized.
+</code></pre>
+<p>&#x8BE5;&#x547D;&#x4EE4;&#x4F7F;&#x7528;&#x4E86;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x5168;&#x90E8;&#x7A7A;&#x95F4;&#xFF0C;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x3002;&#x5982;&#x679C;&#x8981;&#x6269;&#x5C55; <code>metadata</code> &#x7CBE;&#x7B80;&#x6C60;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528; <code>docker/thinpool_tmeta</code> &#x66FF;&#x6362; <code>docker/thinpool</code>&#x3002;</p>
+<p>&#x9A8C;&#x8BC1;&#x65B0;&#x7684; thin pool &#x7684;&#x5927;&#x5C0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> info
+
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+Storage Driver: devicemapper
+ Pool Name: docker-thinpool
+ Pool Blocksize: <span class="token number">524.3</span> kB
+ Base Device Size: <span class="token number">10.74</span> GB
+ Backing Filesystem: xfs
+ Data file:
+ Metadata file:
+ Data Space Used: <span class="token number">212.3</span> MB
+ Data Space Total: <span class="token number">212.6</span> GB
+ Data Space Available: <span class="token number">212.4</span> GB
+ Metadata Space Used: <span class="token number">286.7</span> kB
+ Metadata Space Total: <span class="token number">1.07</span> GB
+ Metadata Space Available: <span class="token number">1.069</span> GB
+<span class="token operator">&lt;</span>output truncated<span class="token operator">&gt;</span>
+</code></pre>
+<p>&#x901A;&#x8FC7; <code>Data Space Available</code> &#x5B57;&#x6BB5;&#x7684;&#x503C;&#x67E5;&#x770B; <code>thin pool</code> &#x7684;&#x5927;&#x5C0F;&#x3002;</p>
+<p>&#x91CD;&#x542F;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x540E;&#x91CD;&#x65B0;&#x6FC0;&#x6D3B; devicemapper
+&#x5982;&#x679C;&#x91CD;&#x542F;&#x7CFB;&#x7EDF;&#x540E;&#x53D1;&#x73B0; docker &#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x50CF; &#x201C;Non existing device&#x201D; &#x8FD9;&#x6837;&#x7684;&#x62A5;&#x9519;&#x4FE1;&#x606F;&#x3002;&#x8FD9;&#x65F6;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x6FC0;&#x6D3B;&#x903B;&#x8F91;&#x5377;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ lvchange -ay docker/thinpool
+</code></pre>
+<h2 id="4-devicemapper-&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;"><a name="4-devicemapper-&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;" class="anchor-navigation-ex-anchor" href="#4-devicemapper-&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>4. devicemapper &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;</h2>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x4E0D;&#x8981;&#x76F4;&#x63A5;&#x64CD;&#x4F5C; /var/lib/docker/ &#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#x7531; docker &#x81EA;&#x52A8;&#x7BA1;&#x7406;&#x3002;</p>
+<p>&#x67E5;&#x770B;&#x8BBE;&#x5907;&#x548C;&#x5B58;&#x50A8;&#x6C60;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ lsblk
+
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+xvda                    <span class="token number">202</span>:0    <span class="token number">0</span>    8G  <span class="token number">0</span> disk
+&#x2514;&#x2500;xvda1                 <span class="token number">202</span>:1    <span class="token number">0</span>    8G  <span class="token number">0</span> part /
+xvdf                    <span class="token number">202</span>:80   <span class="token number">0</span>  100G  <span class="token number">0</span> disk
+&#x251C;&#x2500;docker-thinpool_tmeta <span class="token number">253</span>:0    <span class="token number">0</span> 1020M  <span class="token number">0</span> lvm
+&#x2502; &#x2514;&#x2500;docker-thinpool     <span class="token number">253</span>:2    <span class="token number">0</span>   95G  <span class="token number">0</span> lvm
+&#x2514;&#x2500;docker-thinpool_tdata <span class="token number">253</span>:1    <span class="token number">0</span>   95G  <span class="token number">0</span> lvm
+  &#x2514;&#x2500;docker-thinpool     <span class="token number">253</span>:2    <span class="token number">0</span>   95G  <span class="token number">0</span> lvm
+</code></pre>
+<p>&#x67E5;&#x770B; docker &#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x6302;&#x8F7D;&#x70B9;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">mount</span> <span class="token operator">|</span><span class="token function">grep</span> devicemapper
+/dev/xvda1 on /var/lib/docker/devicemapper <span class="token builtin class-name">type</span> xfs <span class="token punctuation">(</span>rw,relatime,seclabel,attr2,inode64,noquota<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x4F7F;&#x7528; <code>devicemapper</code> &#x540E;&#xFF0C;Docker &#x5C06;&#x955C;&#x50CF;&#x548C;&#x5C42;&#x7EA7;&#x5185;&#x5BB9;&#x5B58;&#x50A8;&#x5728; thin pool &#x4E2D;&#xFF0C;&#x5E76;&#x5C06;&#x5B83;&#x4EEC;&#x6302;&#x8F7D;&#x5230; <code>/var/lib/docker/devicemapper/</code> &#x76EE;&#x5F55;&#x4E2D;&#x66B4;&#x9732;&#x7ED9;&#x5BB9;&#x5668;&#x4F7F;&#x7528;&#x3002;</p>
+<h3 id="41-&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;"><a name="41-&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;" class="anchor-navigation-ex-anchor" href="#41-&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;"><i class="fa fa-link" aria-hidden="true"></i></a>4.1 &#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;</h3>
+<p><code>/var/lib/docker/devicemapper/metadata/</code> &#x76EE;&#x5F55;&#x4E2D;&#x5305;&#x542B;&#x4E86;&#x6709;&#x5173; <code>devicemapper</code> &#x914D;&#x7F6E;&#x672C;&#x8EAB;&#x7684;&#x5143;&#x6570;&#x636E;&#xFF0C;&#x4EE5;&#x53CA;&#x5377;&#x3001;&#x5FEB;&#x7167;&#x548C;&#x6BCF;&#x4E2A;&#x5377;&#x7684;&#x5757;&#x6216;&#x8005;&#x5FEB;&#x7167;&#x540C;&#x5B58;&#x50A8;&#x6C60;&#x4E2D;&#x5757;&#x7684;&#x6620;&#x5C04;&#x4FE1;&#x606F;&#x3002;devicemapper &#x4F7F;&#x7528;&#x4E86;&#x5FEB;&#x7167;&#x6280;&#x672F;&#xFF0C;&#x5143;&#x6570;&#x636E;&#x4E2D;&#x4E5F;&#x5305;&#x542B;&#x4E86;&#x8FD9;&#x4E9B;&#x5FEB;&#x7167;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4EE5; json &#x683C;&#x5F0F;&#x4FDD;&#x5B58;&#x5728;&#x6587;&#x672C;&#x4E2D;&#x3002;</p>
+<p><code>/var/lib/devicemapper/mnt/</code> &#x76EE;&#x5F55;&#x5305;&#x542B;&#x4E86;&#x6240;&#x6709;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5C42;&#x7684;&#x6302;&#x8F7D;&#x70B9;&#x3002;&#x955C;&#x50CF;&#x5C42;&#x7684;&#x6302;&#x8F7D;&#x70B9;&#x8868;&#x73B0;&#x4E3A;&#x7A7A;&#x76EE;&#x5F55;&#xFF0C;&#x5BB9;&#x5668;&#x5C42;&#x7684;&#x6302;&#x8F7D;&#x70B9;&#x663E;&#x793A;&#x7684;&#x662F;&#x5BB9;&#x5668;&#x5185;&#x90E8;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002;</p>
+<h3 id="42-&#x955C;&#x50CF;&#x5206;&#x5C42;&#x4E0E;&#x5171;&#x4EAB;"><a name="42-&#x955C;&#x50CF;&#x5206;&#x5C42;&#x4E0E;&#x5171;&#x4EAB;" class="anchor-navigation-ex-anchor" href="#42-&#x955C;&#x50CF;&#x5206;&#x5C42;&#x4E0E;&#x5171;&#x4EAB;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2 &#x955C;&#x50CF;&#x5206;&#x5C42;&#x4E0E;&#x5171;&#x4EAB;</h3>
+<p><code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x4F7F;&#x7528;&#x4E13;&#x7528;&#x5757;&#x8BBE;&#x5907;&#x800C;&#x4E0D;&#x662F;&#x683C;&#x5F0F;&#x5316;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x901A;&#x8FC7;&#x5728;&#x5757;&#x7EA7;&#x522B;&#x4E0A;&#x5BF9;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x80FD;&#x591F;&#x5728;&#x5199;&#x65F6;&#x590D;&#x5236;&#xFF08;CoW&#xFF09;&#x671F;&#x95F4;&#x5B9E;&#x73B0;&#x6700;&#x4F73;&#x6027;&#x80FD;&#x3002;</p>
+<p><code>devicemapper</code> &#x9A71;&#x52A8;&#x5C06;&#x6240;&#x6709;&#x7684;&#x955C;&#x50CF;&#x548C;&#x5BB9;&#x5668;&#x5B58;&#x50A8;&#x5230; <code>/var/lib/docker/devicemapper/</code> &#x76EE;&#x5F55;&#xFF0C;&#x8BE5;&#x76EE;&#x5F55;&#x7531;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x5757;&#x7EA7;&#x8BBE;&#x5907;&#x3001;&#x73AF;&#x56DE;&#x8BBE;&#x5907;&#xFF08;&#x4EC5;&#x6D4B;&#x8BD5;&#xFF09;&#x6216;&#x7269;&#x7406;&#x786C;&#x76D8;&#x7EC4;&#x6210;&#x3002;</p>
+<p>&#x4F7F;&#x7528; <code>devicemapper</code> &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x955C;&#x50CF;&#x7684;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7CBE;&#x7B80;&#x6C60;(thin pool)&#x3002;&#x8FD9;&#x4E2A;&#x6C60;&#x662F;&#x4ECE;&#x5757;&#x8BBE;&#x5907;&#x6216;&#x5FAA;&#x73AF;&#x6302;&#x8F7D;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x4E0B;&#x4E00;&#x6B65;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; base &#x8BBE;&#x5907;&#x3002;&#x4E00;&#x4E2A; base &#x8BBE;&#x5907;&#x662F;&#x5177;&#x6709;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x7CBE;&#x7B80;&#x8BBE;&#x5907;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8FD0;&#x884C; <code>docker info</code> &#x547D;&#x4EE4;&#x68C0;&#x67E5; <code>Backing filesystem</code> &#x6765;&#x67E5;&#x770B;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x54EA;&#x4E2A;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>&#x6BCF;&#x4E00;&#x4E2A;&#x65B0;&#x955C;&#x50CF;(&#x548C;&#x955C;&#x50CF;&#x6570;&#x636E;&#x5C42;)&#x662F;&#x8FD9;&#x4E2A; base &#x8BBE;&#x5907;&#x7684;&#x4E00;&#x4E2A;&#x5FEB;&#x7167;&#x3002;&#x8FD9;&#x4E9B;&#x662F;&#x7CBE;&#x7B80;&#x7F6E;&#x5907;&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5FEB;&#x7167;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B83;&#x4EEC;&#x521D;&#x59CB;&#x4E3A;&#x7A7A;&#xFF0C;&#x53EA;&#x5728;&#x5F80;&#x5B83;&#x4EEC;&#x5199;&#x5165;&#x6570;&#x636E;&#x65F6;&#x624D;&#x6D88;&#x8017;&#x6C60;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x3002;</p>
+<p>&#x4F7F;&#x7528; <code>devicemapper</code> &#x9A71;&#x52A8;&#x65F6;&#xFF0C;&#x5BB9;&#x5668;&#x6570;&#x636E;&#x5C42;&#x662F;&#x4ECE;&#x5176;&#x521B;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x7684;&#x5FEB;&#x7167;&#x3002;&#x4E0E;&#x955C;&#x50CF;&#x4E00;&#x6837;&#xFF0C;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x662F;&#x7CBE;&#x7B80;&#x7F6E;&#x5907;&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5FEB;&#x7167;&#x3002;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x5B58;&#x50A8;&#x7740;&#x5BB9;&#x5668;&#x7684;&#x6240;&#x6709;&#x66F4;&#x6539;&#x3002;&#x5F53;&#x6570;&#x636E;&#x5199;&#x5165;&#x5BB9;&#x5668;&#x65F6;&#xFF0C;devicemapper &#x4ECE;&#x5B58;&#x50A8;&#x6C60;&#x6309;&#x9700;&#x5206;&#x914D;&#x7A7A;&#x95F4;&#x3002;</p>
+<p>&#x4E0B;&#x56FE;&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x5177;&#x6709;&#x4E00;&#x4E2A;base&#x8BBE;&#x5907;&#x548C;&#x4E24;&#x4E2A;&#x955C;&#x50CF;&#x7684;&#x7CBE;&#x7B80;&#x6C60;&#x3002;
+<img src="https://img-blog.csdnimg.cn/20210420134735260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpeGloYWhhbGVsZWhlaGU=,size_16,color_FFFFFF,t_70" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;">
+&#x5982;&#x679C;&#x4F60;&#x4ED4;&#x7EC6;&#x67E5;&#x770B;&#x56FE;&#x8868;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x5FEB;&#x7167;&#x4E00;&#x4E2A;&#x8FDE;&#x7740;&#x4E00;&#x4E2A;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x955C;&#x50CF;&#x6570;&#x636E;&#x5C42;&#x662F;&#x5B83;&#x4E0B;&#x9762;&#x6570;&#x636E;&#x5C42;&#x7684;&#x4E00;&#x4E2A;&#x5FEB;&#x7167;&#x3002;&#x6BCF;&#x4E2A;&#x955C;&#x50CF;&#x7684;&#x6700;&#x5E95;&#x7AEF;&#x6570;&#x636E;&#x5C42;&#x662F;&#x5B58;&#x50A8;&#x6C60;&#x4E2D; base &#x8BBE;&#x5907;&#x7684;&#x5FEB;&#x7167;&#x3002;&#x6B64; base &#x8BBE;&#x5907;&#x662F; Device Mapper &#x7684;&#x5DE5;&#x4EF6;&#xFF0C;&#x800C;&#x4E0D;&#x662F; Docker &#x955C;&#x50CF;&#x6570;&#x636E;&#x5C42;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x662F;&#x4ECE;&#x5176;&#x521B;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x7684;&#x4E00;&#x4E2A;&#x5FEB;&#x7167;&#x3002;&#x4E0B;&#x56FE;&#x663E;&#x793A;&#x4E24;&#x4E2A;&#x5BB9;&#x5668;&#xFF1A; &#x4E00;&#x4E2A;&#x57FA;&#x4E8E; <code>Ubuntu</code> &#x955C;&#x50CF;&#x548C;&#x53E6;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; <code>Busybox</code> &#x955C;&#x50CF;&#x3002;
+<img src="https://img-blog.csdnimg.cn/20210420134826234.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h2 id="5-devicemapper-&#x8BFB;&#x5199;&#x6570;&#x636E;&#x7684;&#x8FC7;&#x7A0B;"><a name="5-devicemapper-&#x8BFB;&#x5199;&#x6570;&#x636E;&#x7684;&#x8FC7;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#5-devicemapper-&#x8BFB;&#x5199;&#x6570;&#x636E;&#x7684;&#x8FC7;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>5. devicemapper &#x8BFB;&#x5199;&#x6570;&#x636E;&#x7684;&#x8FC7;&#x7A0B;</h2>
+<h3 id="51-&#x8BFB;&#x6570;&#x636E;"><a name="51-&#x8BFB;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#51-&#x8BFB;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>5.1 &#x8BFB;&#x6570;&#x636E;</h3>
+<p>&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E0B;&#x4F7F;&#x7528; <code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x5982;&#x4F55;&#x8FDB;&#x884C;&#x8BFB;&#x6587;&#x4EF6;&#x3002;&#x4E0B;&#x56FE;&#x663E;&#x793A;&#x5728;&#x793A;&#x4F8B;&#x5BB9;&#x5668;&#x4E2D;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x5757; [0x44f] &#x7684;&#x8FC7;&#x7A0B;&#x3002;
+<img src="https://img-blog.csdnimg.cn/20210420135114145.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<p>&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8BF7;&#x6C42;&#x8BFB;&#x53D6;&#x5BB9;&#x5668;&#x4E2D; 0x44f &#x6570;&#x636E;&#x5757;&#x3002;&#x7531;&#x4E8E;&#x5BB9;&#x5668;&#x662F;&#x4E00;&#x4E2A;&#x955C;&#x50CF;&#x7684;&#x4E00;&#x4E2A;&#x7CBE;&#x7B80;&#x5FEB;&#x7167;&#xFF0C;&#x5B83;&#x6CA1;&#x6709;&#x90A3;&#x4E2A;&#x6570;&#x636E;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x955C;&#x50CF;&#x5B58;&#x50A8;&#x7684;&#x5730;&#x65B9;&#x7684;&#x6307;&#x9488;&#x3002;</p>
+<p>&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x6839;&#x636E;&#x6307;&#x9488;&#xFF0C;&#x5230;&#x955C;&#x50CF;&#x5FEB;&#x7167;&#x7684; a005e &#x955C;&#x50CF;&#x5C42;&#x5BFB;&#x627E; 0xf33 &#x5757;&#x533A;&#x3002;</p>
+<p><code>devicemapper</code> &#x4ECE;&#x955C;&#x50CF;&#x5FEB;&#x7167;&#x590D;&#x5236;&#x6570;&#x636E;&#x5757; 0xf33 &#x7684;&#x5185;&#x5BB9;&#x5230;&#x5BB9;&#x5668;&#x5185;&#x5B58;&#x4E2D;&#x3002;</p>
+<p>&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x6700;&#x540E;&#x5C06;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#x7ED9;&#x8BF7;&#x6C42;&#x7684;&#x5E94;&#x7528;&#x3002;</p>
+<h3 id="52-&#x5199;&#x6570;&#x636E;"><a name="52-&#x5199;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#52-&#x5199;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>5.2 &#x5199;&#x6570;&#x636E;</h3>
+<p>&#x5199;&#x5165;&#x65B0;&#x6570;&#x636E; : &#x4F7F;&#x7528; <code>devicemapper</code> &#x9A71;&#x52A8;&#xFF0C;&#x901A;&#x8FC7;&#x6309;&#x9700;&#x5206;&#x914D;&#xFF08;<code>allocate-on-demand</code>&#xFF09;&#x64CD;&#x4F5C;&#x6765;&#x5B9E;&#x73B0;&#x5199;&#x5165;&#x65B0;&#x6570;&#x636E;&#x5230;&#x5BB9;&#x5668;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x65B0;&#x6570;&#x636E;&#x90FD;&#x88AB;&#x5199;&#x5165;&#x5BB9;&#x5668;&#x7684;&#x53EF;&#x5199;&#x5C42;&#x4E2D;&#x3002;</p>
+<blockquote>
+<p>&#x4F8B;&#x5982;&#x8981;&#x5199;&#x5165; 56KB &#x7684;&#x65B0;&#x6570;&#x636E;&#x5230;&#x5BB9;&#x5668;&#xFF1A;</p>
+<p>&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8BF7;&#x6C42;&#x5199;&#x5165;56KB&#x7684;&#x65B0;&#x6570;&#x636E;&#x5230;&#x5BB9;&#x5668;&#x3002;
+&#x6309;&#x9700;&#x5206;&#x914D;&#x64CD;&#x4F5C;&#x7ED9;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x65B0;&#x7684;64KB&#x6570;&#x636E;&#x5757;&#x3002;&#x5982;&#x679C;&#x5199;&#x64CD;&#x4F5C;&#x5927;&#x4E8E;64KB&#xFF0C;&#x5C31;&#x5206;&#x914D;&#x591A;&#x4E2A;&#x65B0;&#x6570;&#x636E;&#x5757;&#x7ED9;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x3002; &#x65B0;&#x7684;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x65B0;&#x5206;&#x914D;&#x7684;&#x6570;&#x636E;&#x5757;&#x3002;</p>
+</blockquote>
+<p>&#x8986;&#x76D6;&#x5B58;&#x5728;&#x7684;&#x6570;&#x636E; : &#x66F4;&#x65B0;&#x5B58;&#x5728;&#x7684;&#x6570;&#x636E;&#x4F7F;&#x7528;&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#xFF08;copy-on-write&#xFF09;&#x64CD;&#x4F5C;&#xFF0C;&#x5148;&#x4ECE;&#x6700;&#x8FD1;&#x7684;&#x955C;&#x50CF;&#x5C42;&#x4E2D;&#x8BFB;&#x53D6;&#x4E0E;&#x8BE5;&#x6587;&#x4EF6;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#x5757;&#xFF1B;&#x7136;&#x540E;&#x5206;&#x914D;&#x65B0;&#x7684;&#x7A7A;&#x767D;&#x6570;&#x636E;&#x5757;&#x7ED9;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x5E76;&#x590D;&#x5236;&#x6570;&#x636E;&#x5230;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x5757;&#xFF1B;&#x6700;&#x540E;&#x66F4;&#x65B0;&#x597D;&#x7684;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x65B0;&#x5206;&#x914D;&#x7684;&#x6570;&#x636E;&#x5757;&#x3002;</p>
+<p>&#x5220;&#x9664;&#x6570;&#x636E; : &#x5F53;&#x4ECE;&#x5BB9;&#x5668;&#x7684;&#x53EF;&#x5199;&#x5C42;&#x4E2D;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x65F6;&#xFF0C;&#x6216;&#x8005;&#x4ECE;&#x955C;&#x50CF;&#x5C42;&#x4E2D;&#x5220;&#x9664;&#x5176;&#x7236;&#x5C42;&#x955C;&#x50CF;&#x4E2D;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;devicemapper &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x4F1A;&#x622A;&#x83B7;&#x5BF9;&#x8BE5;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x8FDB;&#x4E00;&#x6B65;&#x8BFB;&#x53D6;&#x5C1D;&#x8BD5;&#xFF0C;&#x5E76;&#x54CD;&#x5E94;&#x8BE5;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x4E0D;&#x5B58;&#x5728;&#x3002;</p>
+<p>&#x5199;&#x5165;&#x65B0;&#x6570;&#x636E;&#x5E76;&#x5220;&#x9664;&#x65E7;&#x6570;&#x636E; : &#x5F53;&#x4F60;&#x5411;&#x5BB9;&#x5668;&#x4E2D;&#x5199;&#x5165;&#x65B0;&#x6570;&#x636E;&#x5E76;&#x5220;&#x9664;&#x65E7;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#x90FD;&#x53D1;&#x751F;&#x5728;&#x5BB9;&#x5668;&#x7684;&#x53EF;&#x5199;&#x5C42;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x7684;&#x662F; <code>direct-lvm</code> &#x6A21;&#x5F0F;&#xFF0C;&#x5220;&#x9664;&#x7684;&#x6570;&#x636E;&#x5757;&#x5C06;&#x4F1A;&#x88AB;&#x91CA;&#x653E;&#xFF1B;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x7684;&#x662F; loop-lvm &#x6A21;&#x5F0F;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x5757;&#x5C31;&#x4E0D;&#x4F1A;&#x88AB;&#x91CA;&#x653E;&#x3002;&#x56E0;&#x6B64;&#x4E0D;&#x5EFA;&#x8BAE;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#x4F7F;&#x7528; <code>loop-lvm</code> &#x6A21;&#x5F0F;&#x3002;</p>
+<h2 id="6-device-mapper-&#x5BF9;-docker-&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><a name="6-device-mapper-&#x5BF9;-docker-&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;" class="anchor-navigation-ex-anchor" href="#6-device-mapper-&#x5BF9;-docker-&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><i class="fa fa-link" aria-hidden="true"></i></a>6. Device Mapper &#x5BF9; Docker &#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;</h2>
+<p>&#x4E86;&#x89E3;&#x6309;&#x9700;&#x5206;&#x914D;&#x548C;&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x64CD;&#x4F5C;&#x5BF9;&#x6574;&#x4F53;&#x5BB9;&#x5668;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;&#x5F88;&#x91CD;&#x8981;&#x3002;</p>
+<h3 id="61-&#x6309;&#x9700;&#x5206;&#x914D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><a name="61-&#x6309;&#x9700;&#x5206;&#x914D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;" class="anchor-navigation-ex-anchor" href="#61-&#x6309;&#x9700;&#x5206;&#x914D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><i class="fa fa-link" aria-hidden="true"></i></a>6.1 &#x6309;&#x9700;&#x5206;&#x914D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;</h3>
+<p><code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x901A;&#x8FC7;&#x6309;&#x9700;&#x5206;&#x914D;&#x64CD;&#x4F5C;&#x7ED9;&#x5BB9;&#x5668;&#x5206;&#x914D;&#x65B0;&#x7684;&#x6570;&#x636E;&#x5757;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6BCF;&#x6B21;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5199;&#x5165;&#x5BB9;&#x5668;&#x5185;&#x7684;&#x67D0;&#x5904;&#x65F6;&#xFF0C;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7A7A;&#x6570;&#x636E;&#x5757;&#x4ECE;&#x5B58;&#x50A8;&#x6C60;&#x4E2D;&#x5206;&#x914D;&#x5E76;&#x6620;&#x5C04;&#x5230;&#x5BB9;&#x5668;&#x4E2D;&#x3002;</p>
+<p>&#x6240;&#x6709;&#x6570;&#x636E;&#x5757;&#x4E3A; 64KB&#x3002; &#x5199;&#x5C0F;&#x4E8E; 64KB &#x7684;&#x6570;&#x636E;&#x4ECD;&#x7136;&#x5206;&#x914D;&#x4E00;&#x4E2A; 64KB &#x6570;&#x636E;&#x5757;&#x3002;&#x5199;&#x5165;&#x8D85;&#x8FC7; 64KB &#x7684;&#x6570;&#x636E;&#x5206;&#x914D;&#x591A;&#x4E2A; 64KB &#x6570;&#x636E;&#x5757;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5F53;&#x53D1;&#x751F;&#x5F88;&#x591A;&#x5C0F;&#x7684;&#x5199;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x6BD4;&#x8F83;&#x5F71;&#x54CD;&#x5BB9;&#x5668;&#x7684;&#x6027;&#x80FD;&#x3002;&#x4E0D;&#x8FC7;&#x4E00;&#x65E6;&#x6570;&#x636E;&#x5757;&#x5206;&#x914D;&#x7ED9;&#x5BB9;&#x5668;&#xFF0C;&#x540E;&#x7EED;&#x7684;&#x8BFB;&#x548C;&#x5199;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728;&#x8BE5;&#x6570;&#x636E;&#x5757;&#x4E0A;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="62-&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><a name="62-&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;" class="anchor-navigation-ex-anchor" href="#62-&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;"><i class="fa fa-link" aria-hidden="true"></i></a>6.2 &#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;</h3>
+<p>&#x6BCF;&#x5F53;&#x5BB9;&#x5668;&#x9996;&#x6B21;&#x66F4;&#x65B0;&#x73B0;&#x6709;&#x6570;&#x636E;&#x65F6;&#xFF0C;devicemapper &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x5FC5;&#x987B;&#x6267;&#x884C;&#x5199;&#x65F6;&#x62F7;&#x8D1D;&#x64CD;&#x4F5C;&#x3002;&#x8FD9;&#x4F1A;&#x4ECE;&#x955C;&#x50CF;&#x5FEB;&#x7167;&#x590D;&#x5236;&#x6570;&#x636E;&#x5230;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x3002;&#x6B64;&#x8FC7;&#x7A0B;&#x5BF9;&#x5BB9;&#x5668;&#x6027;&#x80FD;&#x4EA7;&#x751F;&#x663E;&#x7740;&#x5F71;&#x54CD;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x66F4;&#x65B0;&#x4E00;&#x4E2A; 1GB &#x6587;&#x4EF6;&#x7684; 32KB &#x6570;&#x636E;&#x53EA;&#x590D;&#x5236;&#x4E00;&#x4E2A; 64KB &#x6570;&#x636E;&#x5757;&#x5230;&#x5BB9;&#x5668;&#x5FEB;&#x7167;&#x3002;&#x8FD9;&#x6BD4;&#x5728;&#x6587;&#x4EF6;&#x7EA7;&#x522B;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x590D;&#x5236;&#x6574;&#x4E2A; 1GB &#x6587;&#x4EF6;&#x5230;&#x5BB9;&#x5668;&#x6570;&#x636E;&#x5C42;&#x6709;&#x660E;&#x663E;&#x7684;&#x6027;&#x80FD;&#x4F18;&#x52BF;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#xFF0C;&#x5F53;&#x5BB9;&#x5668;&#x6267;&#x884C;&#x5F88;&#x591A;&#x5C0F;&#x4E8E; 64KB &#x7684;&#x5199;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;<code>devicemapper</code> &#x7684;&#x6027;&#x80FD;&#x4F1A;&#x6BD4; AUFS &#x8981;&#x5DEE;&#x3002;</p>
+<h3 id="63-&#x5176;&#x4ED6;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"><a name="63-&#x5176;&#x4ED6;&#x6CE8;&#x610F;&#x4E8B;&#x9879;" class="anchor-navigation-ex-anchor" href="#63-&#x5176;&#x4ED6;&#x6CE8;&#x610F;&#x4E8B;&#x9879;"><i class="fa fa-link" aria-hidden="true"></i></a>6.3 &#x5176;&#x4ED6;&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h3>
+<p>&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x5F71;&#x54CD; devicemapper &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x6027;&#x80FD;&#x7684;&#x56E0;&#x7D20;&#x3002;</p>
+<ul>
+<li>&#x6A21;&#x5F0F;
+Docker &#x4F7F;&#x7528;&#x7684; <code>devicemapper</code> &#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x7684;&#x9ED8;&#x8BA4;&#x6A21;&#x5F0F;&#x662F; <code>loop-lvm</code>&#x3002;&#x8FD9;&#x4E2A;&#x6A21;&#x5F0F;&#x4F7F;&#x7528;&#x7A7A;&#x95F2;&#x6587;&#x4EF6;&#x6765;&#x6784;&#x5EFA;&#x5B58;&#x50A8;&#x6C60;&#xFF0C;&#x6027;&#x80FD;&#x975E;&#x5E38;&#x4F4E;&#x3002;&#x4E0D;&#x5EFA;&#x8BAE;&#x7528;&#x5230;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x3002;&#x63A8;&#x8350;&#x7528;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7684;&#x6A21;&#x5F0F;&#x662F; direct-lvm&#x3002;</li>
+<li>&#x5B58;&#x53D6;&#x901F;&#x5EA6;
+&#x5982;&#x679C;&#x5E0C;&#x671B;&#x83B7;&#x5F97;&#x66F4;&#x4F73;&#x7684;&#x6027;&#x80FD;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x548C;&#x5143;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x653E;&#x5728; SSD &#x8FD9;&#x6837;&#x7684;&#x9AD8;&#x901F;&#x5B58;&#x50A8;&#x4E0A;&#x3002;</li>
+<li>&#x5185;&#x5B58;&#x4F7F;&#x7528;
+devicemapper &#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x7684;&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x8FD0;&#x884C; n &#x4E2A;&#x65F6;&#xFF0C;&#x5B83;&#x7684;&#x6587;&#x4EF6;&#x4E5F;&#x4F1A;&#x88AB;&#x62F7;&#x8D1D; n &#x4EFD;&#x5230;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x8FD9;&#x5BF9; docker &#x5BBF;&#x4E3B;&#x673A;&#x7684;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x4F1A;&#x9020;&#x6210;&#x660E;&#x663E;&#x5F71;&#x54CD;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4E0D;&#x5EFA;&#x8BAE;&#x5728; PaaS &#x6216;&#x8005;&#x8D44;&#x6E90;&#x5BC6;&#x96C6;&#x573A;&#x5408;&#x4F7F;&#x7528;&#x3002;</li>
+</ul>
+<p>&#x5BF9;&#x4E8E;&#x5199;&#x64CD;&#x4F5C;&#x8F83;&#x5927;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x6302;&#x8F7D; <code>data volumes</code>&#x3002;&#x4F7F;&#x7528; data volumes &#x53EF;&#x4EE5;&#x7ED5;&#x8FC7;&#x5B58;&#x50A8;&#x9A71;&#x52A8;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D; <code>thin provisioning</code> &#x548C; <code>copy-on-write</code> &#x5F15;&#x5165;&#x7684;&#x989D;&#x5916;&#x5F00;&#x9500;&#x3002;</p>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li><a href="https://fuckcloudnative.io/posts/use-devicemapper/" target="_blank">Device Mapper&#x57FA;&#x7840;&#x6559;&#x7A0B;&#xFF1A;Docker &#x4E2D;&#x4F7F;&#x7528; devicemapper &#x5B58;&#x50A8;&#x9A71;&#x52A8;</a></li>
+<li><a href="https://www.jianshu.com/p/4fb3e3103762" target="_blank">Docker&#x5B58;&#x50A8;&#x9A71;&#x52A8;devicemapper&#x914D;&#x7F6E;</a></li>
+<li><a href="https://www.cnblogs.com/cxbhakim/p/8710368.html" target="_blank">docker &#x914D;&#x7F6E; direct-lvm</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-23 16:26:48
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="docker_storage_1_docker_Device_Mapper_introduce.html" class="navigation navigation-prev " aria-label="Previous page: docker device mapper 简介">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="docker_storage_3_docker_thin_provisioning.html" class="navigation navigation-next " aria-label="Next page: docker thin provisioning 实践">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"docker  storage 驱动 devicemapper 配置","level":"1.5.13.2","depth":3,"next":{"title":"docker thin provisioning 实践","level":"1.5.13.3","depth":3,"path":"Docker/Storage/docker_storage_3_docker_thin_provisioning.md","ref":"Docker/Storage/docker_storage_3_docker_thin_provisioning.md","articles":[]},"previous":{"title":"docker device mapper 简介","level":"1.5.13.1","depth":3,"path":"Docker/Storage/docker_storage_1_docker_Device_Mapper_introduce.md","ref":"Docker/Storage/docker_storage_1_docker_Device_Mapper_introduce.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Docker Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["python"],"title":"Docker Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/docker-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/docker-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Docker Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Docker":"https://smoothies.com.cn/docker-docs/Overview.html","Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/Overview.html","Go":"https://smoothies.com.cn/go-docs/Overview.html","Prometheus":"https://smoothies.com.cn/prometheus-docs/Overview.html","Command":"https://smoothies.com.cn/linux-command-docs/Overview.html","Shell":"https://smoothies.com.cn/shell-docs/Overview.html","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/Overview.html","Python":"https://smoothies.com.cn/python-docs/Overview.html","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Docker](https://www.docker.com/) 的书籍"},"file":{"path":"Docker/Storage/docker_storage_2_docker_drive_devicemapper_config.md","mtime":"2022-12-23T08:26:48.004Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-22T09:17:25.614Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

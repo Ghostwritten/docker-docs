@@ -1,0 +1,1920 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Manage · Docker Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="docker_clean.html" />
+    
+    
+    <link rel="prev" href="../Logging/" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Docker Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/docker-docs/Overview.html" target="_blank" class="custom-link">Docker</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/Overview.html" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/Overview.html" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/Overview.html" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/Overview.html" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/Overview.html" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/Overview.html" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/Overview.html" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../Overview.html">
+            
+                <a href="../../Overview.html">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../Docker-Compose/">
+            
+                <a href="../../Docker-Compose/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Docker-Compose/docker-compose_1_install.html">
+            
+                <a href="../../Docker-Compose/docker-compose_1_install.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    docker compose 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                <a href="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    docker compose 安装 elasticsearch 集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../Docker-Swarm/">
+            
+                <a href="../../Docker-Swarm/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Docker Swarm
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    docker swarm 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    docker swarm 网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    docker swam 集群实现负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    docker swarm 创建加密覆盖网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    docker swarm 管理 secrets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    docker swarm 健康检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    dcoker swarm 更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    docker swarm 部署界面 ui portainer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    docker swarm 通过 docker compose 部署应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    docker swarm 维护模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../CICD/">
+            
+                <a href="../CICD/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    CICD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                <a href="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    docker   makefile  ci pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                <a href="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    github action 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                <a href="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    自托管构建 如何使用 harbor 搭建企业级镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../CICD/docker_Tekton_builds_image.html">
+            
+                <a href="../CICD/docker_Tekton_builds_image.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    自托管构建 如何使用 tekton 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                <a href="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    如何使用 gitlab ci 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Command/">
+            
+                <a href="../Command/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../Command/docker_command_inspect.html">
+            
+                <a href="../Command/docker_command_inspect.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    docker inspect   format
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Dockerfile/">
+            
+                <a href="../Dockerfile/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Image/">
+            
+                <a href="../Image/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Image
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../Image/build_images_with_buildah.html">
+            
+                <a href="../Image/build_images_with_buildah.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    构建镜像开源工具 buildah
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../Image/docker_Build_multi-platform_image.html">
+            
+                <a href="../Image/docker_Build_multi-platform_image.html">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    如何为不同语言快速构建多平台镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../Image/docker_Image_volume_reduced.html">
+            
+                <a href="../Image/docker_Image_volume_reduced.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    如何将镜像体积缩减 90
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="../Image/docker_image_1_library.html">
+            
+                <a href="../Image/docker_image_1_library.html">
+            
+                    
+                        <b>1.5.4.4.</b>
+                    
+                    docker 镜像源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="../Image/docker_image_2_manage.html">
+            
+                <a href="../Image/docker_image_2_manage.html">
+            
+                    
+                        <b>1.5.4.5.</b>
+                    
+                    docker 镜像管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Install/">
+            
+                <a href="../Install/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../Install/docker_1_install.html">
+            
+                <a href="../Install/docker_1_install.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    docker 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Issue/">
+            
+                <a href="../Issue/">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    Issue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Logging/">
+            
+                <a href="../Logging/">
+            
+                    
+                        <b>1.5.7.</b>
+                    
+                    Logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.8" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.8.</b>
+                    
+                    Manage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.8.1" data-path="docker_clean.html">
+            
+                <a href="docker_clean.html">
+            
+                    
+                        <b>1.5.8.1.</b>
+                    
+                    docker 资源清理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.2" data-path="docker_container_isolation_and_restrictions.html">
+            
+                <a href="docker_container_isolation_and_restrictions.html">
+            
+                    
+                        <b>1.5.8.2.</b>
+                    
+                    docker 容器隔离与限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Monitor/">
+            
+                <a href="../Monitor/">
+            
+                    
+                        <b>1.5.9.</b>
+                    
+                    Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../Network/">
+            
+                <a href="../Network/">
+            
+                    
+                        <b>1.5.10.</b>
+                    
+                    Network
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.10.1" data-path="../Network/docker_analyze_the_packet_loss.html">
+            
+                <a href="../Network/docker_analyze_the_packet_loss.html">
+            
+                    
+                        <b>1.5.10.1.</b>
+                    
+                    docker 容器应用总是丢包如何分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.2" data-path="../Network/docker_config_DNS.html">
+            
+                <a href="../Network/docker_config_DNS.html">
+            
+                    
+                        <b>1.5.10.2.</b>
+                    
+                    docker 配置 dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../Registry/">
+            
+                <a href="../Registry/">
+            
+                    
+                        <b>1.5.11.</b>
+                    
+                    Registry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.11.1" data-path="../Registry/harbor_get_started_guide.html">
+            
+                <a href="../Registry/harbor_get_started_guide.html">
+            
+                    
+                        <b>1.5.11.1.</b>
+                    
+                    harbor部署入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.2" data-path="../Registry/podman_deploy_private_registry.html">
+            
+                <a href="../Registry/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.5.11.2.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.3" data-path="../Registry/docker_registry_1_deploy.html">
+            
+                <a href="../Registry/docker_registry_1_deploy.html">
+            
+                    
+                        <b>1.5.11.3.</b>
+                    
+                    docker registry 仓库搭建并配置证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.4" data-path="../Registry/docker_registry_2_deploy_UI.html">
+            
+                <a href="../Registry/docker_registry_2_deploy_UI.html">
+            
+                    
+                        <b>1.5.11.4.</b>
+                    
+                    docker 部署 registry ui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.5" data-path="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                <a href="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                    
+                        <b>1.5.11.5.</b>
+                    
+                    centos 7 9 harbor 部署镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../Security/">
+            
+                <a href="../Security/">
+            
+                    
+                        <b>1.5.12.</b>
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../Storage/">
+            
+                <a href="../Storage/">
+            
+                    
+                        <b>1.5.13.</b>
+                    
+                    Storage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.13.1" data-path="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                <a href="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                    
+                        <b>1.5.13.1.</b>
+                    
+                    docker device mapper 简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.2" data-path="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                <a href="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                    
+                        <b>1.5.13.2.</b>
+                    
+                    docker  storage 驱动 devicemapper 配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.3" data-path="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                <a href="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                    
+                        <b>1.5.13.3.</b>
+                    
+                    docker thin provisioning 实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.4" data-path="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                <a href="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                    
+                        <b>1.5.13.4.</b>
+                    
+                    docker devicemapper 扩容
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="../Storage/docker_storage_5_nfs_volume.html">
+            
+                <a href="../Storage/docker_storage_5_nfs_volume.html">
+            
+                    
+                        <b>1.5.13.5.</b>
+                    
+                    docker nfs volume 创建与使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../原理/">
+            
+                <a href="../原理/">
+            
+                    
+                        <b>1.5.14.</b>
+                    
+                    原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.14.1" data-path="../原理/docker_Container_technology_overview.html">
+            
+                <a href="../原理/docker_Container_technology_overview.html">
+            
+                    
+                        <b>1.5.14.1.</b>
+                    
+                    容器技术概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14.2" data-path="../原理/Container_architecture_overview.html">
+            
+                <a href="../原理/Container_architecture_overview.html">
+            
+                    
+                        <b>1.5.14.2.</b>
+                    
+                    容器架构概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../docker_1_start.html">
+            
+                <a href="../docker_1_start.html">
+            
+                    
+                        <b>1.5.15.</b>
+                    
+                    入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../Podman/">
+            
+                <a href="../../Podman/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Podman
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Podman/podman_deploy_private_registry.html">
+            
+                <a href="../../Podman/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../Podman/podman_start.html">
+            
+                <a href="../../Podman/podman_start.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    podman 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Manage</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#docker-&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;"><b></b>Docker &#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;"><b></b>1. &#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;</a></li><li><span class="title-icon "></span><a href="#2-&#x547D;&#x540D;&#x7A7A;&#x95F4;"><b></b>2. &#x547D;&#x540D;&#x7A7A;&#x95F4;</a></li><li><span class="title-icon "></span><a href="#3-chroot"><b></b>3. chroot</a></li><li><span class="title-icon "></span><a href="#4-cgroups"><b></b>4. cgroups</a></li><ul><li><span class="title-icon "></span><a href="#41-&#x8FDB;&#x7A0B;&#x7684;cpu&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;"><b></b>4.1 &#x8FDB;&#x7A0B;&#x7684;CPU&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;</a></li><li><span class="title-icon "></span><a href="#42-&#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x914D;&#x7F6E;"><b></b>4.2 &#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x914D;&#x7F6E;</a></li><li><span class="title-icon "></span><a href="#43-&#x5982;&#x4F55;&#x914D;&#x7F6E;cgroups"><b></b>4.3 &#x5982;&#x4F55;&#x914D;&#x7F6E;cgroups?</a></li></ul><li><span class="title-icon "></span><a href="#5-seccomp--apparmor"><b></b>5. Seccomp / AppArmor</a></li><li><span class="title-icon "></span><a href="#6-capabilities"><b></b>6. Capabilities</a></li><li><span class="title-icon "></span><a href="#7-&#x5BB9;&#x5668;&#x955C;&#x50CF;"><b></b>7. &#x5BB9;&#x5668;&#x955C;&#x50CF;</a></li><li><span class="title-icon "></span><a href="#8-&#x521B;&#x5EFA;&#x7A7A;&#x955C;&#x50CF;"><b></b>8. &#x521B;&#x5EFA;&#x7A7A;&#x955C;&#x50CF;</a></li><li><span class="title-icon "></span><a href="#9-&#x4E0D;&#x4F7F;&#x7528;dockerfile&#x521B;&#x5EFA;&#x955C;&#x50CF;"><b></b>9. &#x4E0D;&#x4F7F;&#x7528;Dockerfile&#x521B;&#x5EFA;&#x955C;&#x50CF;</a></li></ul></ul></div><a href="#docker-&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="docker-&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;"><a name="docker-&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#docker-&#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>Docker &#x9AD8;&#x7EA7;&#x64CD;&#x4F5C;</h1>
+<h2 id="1-&#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;"><a name="1-&#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#1-&#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x5BB9;&#x5668;&#x7684;&#x8FDB;&#x7A0B;</h2>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> run -d --name<span class="token operator">=</span>db redis:alpine
+
+$ <span class="token function">docker</span> <span class="token function">ps</span>
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+e2edc005ea6e        redis:alpine        <span class="token string">&quot;docker-entrypoint.s&#x2026;&quot;</span>   <span class="token number">31</span> seconds ago      Up <span class="token number">30</span> seconds       <span class="token number">6379</span>/tcp            db
+
+<span class="token comment">#Docker&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;redis-server&#x7684;&#x8FDB;&#x7A0B;&#x3002;&#x5728;&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6240;&#x6709;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x5305;&#x62EC;&#x7531;Docker&#x542F;&#x52A8;&#x7684;&#x8FDB;&#x7A0B;&#x3002;</span>
+$ <span class="token function">ps</span> aux <span class="token operator">|</span> <span class="token function">grep</span> redis-server
+<span class="token number">999</span>       <span class="token number">1099</span>  <span class="token number">0.3</span>  <span class="token number">1.1</span>  <span class="token number">29156</span> <span class="token number">11316</span> ?        Ssl  08:50   <span class="token number">0</span>:00 redis-server *:6379
+
+<span class="token function">docker</span> <span class="token function">top</span> db
+<span class="token environment constant">UID</span>                 PID                 <span class="token environment constant">PPID</span>                C                   STIME               TTY                 TIME                CMD
+<span class="token number">999</span>                 <span class="token number">1099</span>                <span class="token number">1083</span>                <span class="token number">0</span>                   08:50               ?                   00:00:00            redis-server *:6379
+
+<span class="token comment">#&#x5C06;&#x5217;&#x51FA;&#x6240;&#x6709;&#x5B50;&#x8FDB;&#x7A0B;&#x3002;</span>
+$ pstree -c -p -A <span class="token variable"><span class="token variable">$(</span>pgrep dockerd<span class="token variable">)</span></span>
+dockerd<span class="token punctuation">(</span><span class="token number">679</span><span class="token punctuation">)</span>-+-docker-containe<span class="token punctuation">(</span><span class="token number">717</span><span class="token punctuation">)</span>-+-docker-containe<span class="token punctuation">(</span><span class="token number">1083</span><span class="token punctuation">)</span>-+-redis-server<span class="token punctuation">(</span><span class="token number">1099</span><span class="token punctuation">)</span>-+-<span class="token punctuation">{</span>bio_aof_fsync<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1134</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>                    <span class="token operator">|</span>-<span class="token punctuation">{</span>bio_close_file<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1133</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>                    <span class="token operator">|</span>-<span class="token punctuation">{</span>bio_lazy_free<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1135</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>                    <span class="token variable"><span class="token variable">`</span>-<span class="token punctuation">{</span>jemalloc_bg_thd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1136</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1084</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1085</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1086</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1087</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1088</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>                       <span class="token variable">`</span></span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1089</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">718</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">719</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">720</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">721</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">728</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">757</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token operator">|</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">758</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>                      <span class="token variable"><span class="token variable">`</span>-<span class="token punctuation">{</span>docker-containe<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">766</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">704</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">705</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">706</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">713</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">714</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">715</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">716</span><span class="token punctuation">)</span>
+             <span class="token operator">|</span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">734</span><span class="token punctuation">)</span>
+             <span class="token variable">`</span></span>-<span class="token punctuation">{</span>dockerd<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token number">1047</span><span class="token punctuation">)</span>
+
+
+
+
+$ <span class="token assign-left variable">DBPID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>pgrep redis-server<span class="token variable">)</span></span>
+$ <span class="token builtin class-name">echo</span> Redis is <span class="token variable">$DBPID</span>
+Redis is <span class="token number">1099</span>
+$ <span class="token function">ls</span> /proc
+<span class="token number">1</span>     <span class="token number">13</span>   <span class="token number">17</span>   <span class="token number">214</span>  <span class="token number">28</span>   <span class="token number">4</span>    <span class="token number">56</span>   <span class="token number">66</span>   <span class="token number">754</span>        bus          filesystems  kpagecount    partitions     thread-self
+<span class="token number">10</span>    <span class="token number">130</span>  <span class="token number">170</span>  <span class="token number">215</span>  <span class="token number">29</span>   <span class="token number">473</span>  <span class="token number">57</span>   <span class="token number">67</span>   <span class="token number">8</span>          cgroups      fs           kpageflags    sched_debug    timer_list
+<span class="token number">1083</span>  <span class="token number">131</span>  <span class="token number">18</span>   <span class="token number">22</span>   <span class="token number">3</span>    <span class="token number">475</span>  <span class="token number">58</span>   <span class="token number">674</span>  <span class="token number">844</span>        cmdline      interrupts   loadavg       schedstat      timer_stats
+<span class="token number">1099</span>  <span class="token number">132</span>  <span class="token number">19</span>   <span class="token number">220</span>  <span class="token number">30</span>   <span class="token number">483</span>  <span class="token number">59</span>   <span class="token number">679</span>  <span class="token number">85</span>         consoles     iomem        locks         scsi           <span class="token function">tty</span>
+<span class="token number">11</span>    <span class="token number">133</span>  <span class="token number">2</span>    <span class="token number">228</span>  <span class="token number">306</span>  <span class="token number">485</span>  <span class="token number">592</span>  <span class="token number">68</span>   <span class="token number">858</span>        cpuinfo      ioports      mdstat        self           <span class="token function">uptime</span>
+<span class="token number">1172</span>  <span class="token number">134</span>  <span class="token number">20</span>   <span class="token number">23</span>   <span class="token number">309</span>  <span class="token number">5</span>    <span class="token number">6</span>    <span class="token number">698</span>  <span class="token number">86</span>         crypto       irq          meminfo       slabinfo       version
+<span class="token number">12</span>    <span class="token number">135</span>  <span class="token number">200</span>  <span class="token number">235</span>  <span class="token number">31</span>   <span class="token number">52</span>   <span class="token number">60</span>   <span class="token number">7</span>    <span class="token number">87</span>         devices      kallsyms     misc          softirqs       version_signature
+<span class="token number">124</span>   <span class="token number">14</span>   <span class="token number">203</span>  <span class="token number">24</span>   <span class="token number">32</span>   <span class="token number">53</span>   <span class="token number">61</span>   <span class="token number">707</span>  <span class="token number">9</span>          diskstats    kcore        modules       <span class="token function">stat</span>           vmallocinfo
+<span class="token number">125</span>   <span class="token number">141</span>  <span class="token number">205</span>  <span class="token number">25</span>   <span class="token number">33</span>   <span class="token number">530</span>  <span class="token number">62</span>   <span class="token number">717</span>  <span class="token number">951</span>        dma          keys         mounts        swaps          <span class="token function">vmstat</span>
+<span class="token number">126</span>   <span class="token number">15</span>   <span class="token number">21</span>   <span class="token number">26</span>   <span class="token number">34</span>   <span class="token number">54</span>   <span class="token number">63</span>   <span class="token number">72</span>   <span class="token number">957</span>        driver       key-users    mtrr          sys            zoneinfo
+<span class="token number">127</span>   <span class="token number">16</span>   <span class="token number">210</span>  <span class="token number">264</span>  <span class="token number">35</span>   <span class="token number">540</span>  <span class="token number">64</span>   <span class="token number">725</span>  acpi       execdomains  kmsg         net           sysrq-trigger
+<span class="token number">129</span>   <span class="token number">169</span>  <span class="token number">213</span>  <span class="token number">27</span>   <span class="token number">36</span>   <span class="token number">55</span>   <span class="token number">65</span>   <span class="token number">750</span>  buddyinfo  fb           kpagecgroup  pagetypeinfo  sysvipc
+
+
+<span class="token comment">#&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x81EA;&#x5DF1;&#x7684;&#x914D;&#x7F6E;&#x548C;&#x5B89;&#x5168;&#x8BBE;&#x7F6E;</span>
+$ <span class="token function">ls</span> /proc/<span class="token variable">$DBPID</span>
+attr        cmdline          environ  io         mem         ns             pagemap      schedstat  <span class="token function">stat</span>     timers
+autogroup   <span class="token function">comm</span>             exe      limits     mountinfo   numa_maps      personality  sessionid  statm    uid_map
+auxv        coredump_filter  fd       loginuid   mounts      oom_adj        projid_map   setgroups  status   wchan
+cgroup      cpuset           fdinfo   map_files  mountstats  oom_score      root         smaps      syscall
+clear_refs  cwd              gid_map  maps       net         oom_score_adj  sched        stack      task
+
+<span class="token comment">#&#x4F8B;&#x5982;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x548C;&#x66F4;&#x65B0;&#x4E3A;&#x8BE5;&#x6D41;&#x7A0B;&#x5B9A;&#x4E49;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;</span>
+$ <span class="token function">cat</span> /proc/<span class="token variable">$DBPID</span>/environ
+*:6379
+
+$ <span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it db <span class="token function">env</span>
+<span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+<span class="token assign-left variable"><span class="token environment constant">HOSTNAME</span></span><span class="token operator">=</span>e2edc005ea6e
+<span class="token assign-left variable"><span class="token environment constant">TERM</span></span><span class="token operator">=</span>xterm
+<span class="token assign-left variable">REDIS_VERSION</span><span class="token operator">=</span><span class="token number">6.2</span>.5
+<span class="token assign-left variable">REDIS_DOWNLOAD_URL</span><span class="token operator">=</span>http://download.redis.io/releases/redis-6.2.5.tar.gz
+<span class="token assign-left variable">REDIS_DOWNLOAD_SHA</span><span class="token operator">=</span>4b9a75709a1b74b3785e20a6c158cab94cf52298aa381eea947a678a60d551ae
+<span class="token assign-left variable"><span class="token environment constant">HOME</span></span><span class="token operator">=</span>/root
+</code></pre>
+<h2 id="2-&#x547D;&#x540D;&#x7A7A;&#x95F4;"><a name="2-&#x547D;&#x540D;&#x7A7A;&#x95F4;" class="anchor-navigation-ex-anchor" href="#2-&#x547D;&#x540D;&#x7A7A;&#x95F4;"><i class="fa fa-link" aria-hidden="true"></i></a>2. &#x547D;&#x540D;&#x7A7A;&#x95F4;</h2>
+<p>&#x5BB9;&#x5668;&#x7684;&#x57FA;&#x672C;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x4E4B;&#x4E00;&#x662F;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x3002;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x7684;&#x6982;&#x5FF5;&#x662F;&#x9650;&#x5236;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x548C;&#x8BBF;&#x95EE;&#x7CFB;&#x7EDF;&#x7684;&#x67D0;&#x4E9B;&#x90E8;&#x5206;&#xFF0C;&#x6BD4;&#x5982;&#x5176;&#x4ED6;&#x7F51;&#x7EDC;&#x63A5;&#x53E3;&#x6216;&#x8FDB;&#x7A0B;&#x3002;</p>
+<p>&#x5F53;&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x65F6;(&#x5982;Docker)&#x5C06;&#x4E3A;&#x8FDB;&#x7A0B;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;&#x901A;&#x8FC7;&#x5728;&#x5B83;&#x81EA;&#x5DF1;&#x7684;Pid&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x8FD0;&#x884C;&#x8FDB;&#x7A0B;&#xFF0C;&#x5B83;&#x5C06;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x7CFB;&#x7EDF;&#x4E0A;&#x7684;&#x552F;&#x4E00;&#x8FDB;&#x7A0B;&#x3002;</p>
+<p>&#x53EF;&#x7528;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x6709;:
+Mount (mnt)</p>
+<p>Process ID (pid)</p>
+<p>Network (net)</p>
+<p>Interprocess Communication (ipc)</p>
+<p>UTS (hostnames)</p>
+<p>User ID (user)</p>
+<p>Control group (cgroup)</p>
+<p>&#x5728;&#x4E0D;&#x4F7F;&#x7528;Docker&#x7B49;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8FDB;&#x7A0B;&#x4ECD;&#x7136;&#x53EF;&#x4EE5;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x5185;&#x8FD0;&#x884C;&#x3002;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#x7684;&#x5DE5;&#x5177;&#x662F;<code>unshare</code>&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ unshare --help
+
+Usage:
+ unshare <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token operator">&lt;</span>program<span class="token operator">&gt;</span> <span class="token punctuation">[</span><span class="token operator">&lt;</span>argument<span class="token operator">&gt;</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+
+Run a program with some namespaces unshared from the parent.
+
+Options:
+ -m, --mount<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span class="token punctuation">]</span>      unshare mounts namespace
+ -u, --uts<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span class="token punctuation">]</span>        unshare UTS namespace <span class="token punctuation">(</span>hostname etc<span class="token punctuation">)</span>
+ -i, --ipc<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span class="token punctuation">]</span>        unshare System V IPC namespace
+ -n, --net<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span class="token punctuation">]</span>        unshare network namespace
+ -p, --pid<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span class="token punctuation">]</span>        unshare pid namespace
+ -U, --user<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>file<span class="token operator">&gt;</span><span class="token punctuation">]</span>       unshare user namespace
+ -f, --fork                fork before launching <span class="token operator">&lt;</span>program<span class="token operator">&gt;</span>
+     --mount-proc<span class="token punctuation">[</span><span class="token operator">=</span><span class="token operator">&lt;</span>dir<span class="token operator">&gt;</span><span class="token punctuation">]</span>  <span class="token function">mount</span> proc filesystem first <span class="token punctuation">(</span>implies --mount<span class="token punctuation">)</span>
+ -r, --map-root-user       map current user to root <span class="token punctuation">(</span>implies --user<span class="token punctuation">)</span>
+     --propagation slave<span class="token operator">|</span>shared<span class="token operator">|</span>private<span class="token operator">|</span>unchanged
+                           modify <span class="token function">mount</span> propagation <span class="token keyword">in</span> <span class="token function">mount</span> namespace
+ -s, --setgroups allow<span class="token operator">|</span>deny  control the setgroups syscall <span class="token keyword">in</span> user namespaces
+
+ -h, --help     display this <span class="token builtin class-name">help</span> and <span class="token builtin class-name">exit</span>
+ -V, --version  output version information and <span class="token builtin class-name">exit</span>
+</code></pre>
+<p>&#x4F7F;&#x7528;<code>unshare</code>&#xFF0C;&#x53EF;&#x4EE5;&#x542F;&#x52A8;&#x8FDB;&#x7A0B;&#x5E76;&#x8BA9;&#x5B83;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#xFF0C;&#x6BD4;&#x5982;Pid&#x3002;&#x901A;&#x8FC7;&#x4ECE;&#x4E3B;&#x673A;&#x53D6;&#x6D88;Pid&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x7684;&#x5171;&#x4EAB;&#xFF0C;&#x770B;&#x8D77;&#x6765;bash&#x63D0;&#x793A;&#x7B26;&#x662F;&#x552F;&#x4E00;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">sudo</span> unshare --fork --pid --mount-proc <span class="token function">bash</span>
+$ <span class="token function">ps</span>
+  PID TTY          TIME CMD
+    <span class="token number">1</span> pts/0    00:00:00 <span class="token function">bash</span>
+    <span class="token number">9</span> pts/0    00:00:00 <span class="token function">ps</span>
+$ <span class="token builtin class-name">exit</span>
+<span class="token builtin class-name">exit</span>
+</code></pre>
+<p>&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x662F;&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x7D22;&#x5F15;&#x8282;&#x70B9;&#x4F4D;&#x7F6E;&#x3002;&#x8FD9;&#x5141;&#x8BB8;&#x8FDB;&#x7A0B;<code>shared/reused</code>&#x76F8;&#x540C;&#x7684;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#xFF0C;&#x4ECE;&#x800C;&#x5141;&#x8BB8;&#x5B83;&#x4EEC;&#x8FDB;&#x884C;&#x67E5;&#x770B;&#x548C;&#x4EA4;&#x4E92;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment">#&#x5217;&#x51FA;&#x5BB9;&#x5668;&#x6240;&#x6709;&#x7684;&#x540D;&#x79F0;&#x7A7A;&#x95F4;</span>
+$ <span class="token function">ls</span> -lha /proc/<span class="token variable">$DBPID</span>/ns/
+total <span class="token number">0</span>
+dr-x--x--x <span class="token number">2</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:50 <span class="token builtin class-name">.</span>
+dr-xr-xr-x <span class="token number">9</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:50 <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 09:04 cgroup -<span class="token operator">&gt;</span> cgroup:<span class="token punctuation">[</span><span class="token number">4026531835</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:52 ipc -<span class="token operator">&gt;</span> ipc:<span class="token punctuation">[</span><span class="token number">4026532157</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:52 mnt -<span class="token operator">&gt;</span> mnt:<span class="token punctuation">[</span><span class="token number">4026532155</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:50 net -<span class="token operator">&gt;</span> net:<span class="token punctuation">[</span><span class="token number">4026532160</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:52 pid -<span class="token operator">&gt;</span> pid:<span class="token punctuation">[</span><span class="token number">4026532158</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:52 user -<span class="token operator">&gt;</span> user:<span class="token punctuation">[</span><span class="token number">4026531837</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:52 uts -<span class="token operator">&gt;</span> uts:<span class="token punctuation">[</span><span class="token number">4026532156</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x53E6;&#x4E00;&#x4E2A;&#x5DE5;&#x5177;<code>nsenter</code>&#x7528;&#x4E8E;&#x5C06;&#x8FDB;&#x7A0B;&#x9644;&#x52A0;&#x5230;&#x73B0;&#x6709;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;&#x5BF9;&#x8C03;&#x8BD5;&#x6709;&#x7528;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ nsenter --target <span class="token variable">$DBPID</span> --mount --uts --ipc --net --pid <span class="token function">ps</span> aux
+PID   <span class="token environment constant">USER</span>     TIME  COMMAND
+    <span class="token number">1</span> redis     <span class="token number">0</span>:02 redis-server *:6379
+   <span class="token number">16</span> root      <span class="token number">0</span>:00 <span class="token function">ps</span> aux
+</code></pre>
+<p>&#x5728;Docker&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8BED;&#x6CD5;<code>container:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>container-name</span><span class="token punctuation">&gt;</span></span></code>&#x5171;&#x4EAB;&#x8FD9;&#x4E9B;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x5C06;nginx&#x8FDE;&#x63A5;&#x5230;DB&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> run -d --name<span class="token operator">=</span>web --net<span class="token operator">=</span>container:db nginx:alpine
+<span class="token assign-left variable">WEBPID</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>pgrep nginx <span class="token operator">|</span> <span class="token function">tail</span> -n1<span class="token variable">)</span></span>
+$ <span class="token builtin class-name">echo</span> nginx is <span class="token variable">$WEBPID</span>
+$ <span class="token function">cat</span> /proc/<span class="token variable">$WEBPID</span>/cgroup
+<span class="token number">11</span>:hugetlb:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">10</span>:perf_event:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">9</span>:cpu,cpuacct:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">8</span>:cpuset:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">7</span>:freezer:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">6</span>:memory:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">5</span>:pids:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">4</span>:devices:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">3</span>:net_cls,net_prio:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">2</span>:blkio:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+<span class="token number">1</span>:name<span class="token operator">=</span>systemd:/docker/42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1
+</code></pre>
+<p>&#x867D;&#x7136;&#x7F51;&#x7EDC;&#x5DF2;&#x88AB;&#x5171;&#x4EAB;&#xFF0C;&#x4F46;&#x5B83;&#x4ECD;&#x5C06;&#x4F5C;&#x4E3A;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x5217;&#x51FA;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> -lha /proc/<span class="token variable">$WEBPID</span>/ns/
+total <span class="token number">0</span>
+dr-x--x--x <span class="token number">2</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 <span class="token builtin class-name">.</span>
+dr-xr-xr-x <span class="token number">9</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:07 <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 cgroup -<span class="token operator">&gt;</span> cgroup:<span class="token punctuation">[</span><span class="token number">4026531835</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 ipc -<span class="token operator">&gt;</span> ipc:<span class="token punctuation">[</span><span class="token number">4026532225</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 mnt -<span class="token operator">&gt;</span> mnt:<span class="token punctuation">[</span><span class="token number">4026532223</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 net -<span class="token operator">&gt;</span> net:<span class="token punctuation">[</span><span class="token number">4026532160</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 pid -<span class="token operator">&gt;</span> pid:<span class="token punctuation">[</span><span class="token number">4026532226</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 user -<span class="token operator">&gt;</span> user:<span class="token punctuation">[</span><span class="token number">4026531837</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 uts -<span class="token operator">&gt;</span> uts:<span class="token punctuation">[</span><span class="token number">4026532224</span><span class="token punctuation">]</span>
+</code></pre>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x8FDB;&#x7A0B;&#x7684;&#x7F51;&#x7EDC;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x6307;&#x5411;&#x76F8;&#x540C;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> -lha /proc/<span class="token variable">$WEBPID</span>/ns/ <span class="token operator">|</span> <span class="token function">grep</span> net
+dr-x--x--x <span class="token number">2</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 <span class="token builtin class-name">.</span>
+dr-xr-xr-x <span class="token number">9</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:07 <span class="token punctuation">..</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 cgroup -<span class="token operator">&gt;</span> cgroup:<span class="token punctuation">[</span><span class="token number">4026531835</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 ipc -<span class="token operator">&gt;</span> ipc:<span class="token punctuation">[</span><span class="token number">4026532225</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 mnt -<span class="token operator">&gt;</span> mnt:<span class="token punctuation">[</span><span class="token number">4026532223</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 net -<span class="token operator">&gt;</span> net:<span class="token punctuation">[</span><span class="token number">4026532160</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 pid -<span class="token operator">&gt;</span> pid:<span class="token punctuation">[</span><span class="token number">4026532226</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 user -<span class="token operator">&gt;</span> user:<span class="token punctuation">[</span><span class="token number">4026531837</span><span class="token punctuation">]</span>
+lrwxrwxrwx <span class="token number">1</span> systemd-network systemd-journal <span class="token number">0</span> Sep <span class="token number">27</span> 09:10 uts -<span class="token operator">&gt;</span> uts:<span class="token punctuation">[</span><span class="token number">4026532224</span><span class="token punctuation">]</span>
+$ <span class="token function">ls</span> -lha /proc/<span class="token variable">$DBPID</span>/ns/ <span class="token operator">|</span> <span class="token function">grep</span> net
+lrwxrwxrwx <span class="token number">1</span> <span class="token number">999</span> packer <span class="token number">0</span> Sep <span class="token number">27</span> 08:50 net -<span class="token operator">&gt;</span> net:<span class="token punctuation">[</span><span class="token number">4026532160</span><span class="token punctuation">]</span>
+</code></pre>
+<h2 id="3-chroot"><a name="3-chroot" class="anchor-navigation-ex-anchor" href="#3-chroot"><i class="fa fa-link" aria-hidden="true"></i></a>3. chroot</h2>
+<p>&#x5BB9;&#x5668;&#x8FDB;&#x7A0B;&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x90E8;&#x5206;&#x662F;&#x80FD;&#x591F;&#x62E5;&#x6709;&#x72EC;&#x7ACB;&#x4E8E;&#x4E3B;&#x673A;&#x7684;&#x4E0D;&#x540C;&#x6587;&#x4EF6;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x57FA;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x7CFB;&#x7EDF;&#x4E0A;&#x8FD0;&#x884C;&#x4E0D;&#x540C;&#x7684;Docker&#x6620;&#x50CF;&#x3002;</p>
+<p>Chroot&#x5141;&#x8BB8;&#x8FDB;&#x7A0B;&#x5728;&#x7236;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x4E0D;&#x540C;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x542F;&#x52A8;&#x3002;&#x8FD9;&#x5141;&#x8BB8;&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x51FA;&#x73B0;&#x5728;&#x6839;&#x76EE;&#x5F55;&#x4E2D;&#x3002;</p>
+<h2 id="4-cgroups"><a name="4-cgroups" class="anchor-navigation-ex-anchor" href="#4-cgroups"><i class="fa fa-link" aria-hidden="true"></i></a>4. cgroups</h2>
+<p>CGroups&#x9650;&#x5236;&#x4E86;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x6D88;&#x8017;&#x7684;&#x8D44;&#x6E90;&#x6570;&#x91CF;&#x3002;&#x8FD9;&#x4E9B;cgroup&#x662F;&#x5728;/proc&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x7279;&#x5B9A;&#x6587;&#x4EF6;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x503C;&#x3002;
+&#x9700;&#x8981;&#x67E5;&#x770B;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#xFF0C;&#x4F7F;&#x7528;&#x547D;&#x4EE4;:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /proc/<span class="token variable">$DBPID</span>/cgroup
+<span class="token number">11</span>:hugetlb:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">10</span>:perf_event:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">9</span>:cpu,cpuacct:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">8</span>:cpuset:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">7</span>:freezer:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">6</span>:memory:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">5</span>:pids:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">4</span>:devices:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">3</span>:net_cls,net_prio:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">2</span>:blkio:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+<span class="token number">1</span>:name<span class="token operator">=</span>systemd:/docker/e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0
+</code></pre>
+<p>&#x8FD9;&#x4E9B;&#x88AB;&#x6620;&#x5C04;&#x5230;&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x5176;&#x4ED6;cgroup&#x76EE;&#x5F55;:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> /sys/fs/cgroup/
+blkio  cpuacct      cpuset   freezer  memory   net_cls,net_prio  perf_event  systemd
+cpu    cpu,cpuacct  devices  hugetlb  net_cls  net_prio          pids
+</code></pre>
+<h3 id="41-&#x8FDB;&#x7A0B;&#x7684;cpu&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;"><a name="41-&#x8FDB;&#x7A0B;&#x7684;cpu&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;" class="anchor-navigation-ex-anchor" href="#41-&#x8FDB;&#x7A0B;&#x7684;cpu&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;"><i class="fa fa-link" aria-hidden="true"></i></a>4.1 &#x8FDB;&#x7A0B;&#x7684;CPU&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;</h3>
+<p>CPU&#x7EDF;&#x8BA1;&#x6570;&#x636E;&#x548C;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#x4E5F;&#x5B58;&#x50A8;&#x5728;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;!</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /sys/fs/cgroup/cpu,cpuacct/docker/<span class="token variable">$DBID</span>/cpuacct.stat
+user <span class="token number">139</span>
+system <span class="token number">144</span>
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x8FD8;&#x5B9A;&#x4E49;&#x4E86;CPU&#x5171;&#x4EAB;&#x9650;&#x5236;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /sys/fs/cgroup/cpu,cpuacct/docker/<span class="token variable">$DBID</span>/cpu.shares
+<span class="token number">1024</span>
+</code></pre>
+<h3 id="42-&#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x914D;&#x7F6E;"><a name="42-&#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#42-&#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2 &#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x914D;&#x7F6E;</h3>
+<p>&#x6240;&#x6709;&#x7528;&#x4E8E;&#x5BB9;&#x5668;&#x5185;&#x5B58;&#x914D;&#x7F6E;&#x7684;Docker cgroups&#x90FD;&#x5B58;&#x50A8;&#x5728;:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> /sys/fs/cgroup/memory/docker/
+42e8d3ecb8137817669b58fd33c2b6e133bae8237513c7ed8af0a49a936248d1  memory.kmem.usage_in_bytes
+cgroup.clone_children                                             memory.limit_in_bytes
+cgroup.event_control                                              memory.max_usage_in_bytes
+cgroup.procs                                                      memory.move_charge_at_immigrate
+e2edc005ea6ef33fededdb8f7b58162665c81552a29a2ea777b8b9d05bd393d0  memory.numa_stat
+memory.failcnt                                                    memory.oom_control
+memory.force_empty                                                memory.pressure_level
+memory.kmem.failcnt                                               memory.soft_limit_in_bytes
+memory.kmem.limit_in_bytes                                        memory.stat
+memory.kmem.max_usage_in_bytes                                    memory.swappiness
+memory.kmem.slabinfo                                              memory.usage_in_bytes
+memory.kmem.tcp.failcnt                                           memory.use_hierarchy
+memory.kmem.tcp.limit_in_bytes                                    notify_on_release
+memory.kmem.tcp.max_usage_in_bytes                                tasks
+memory.kmem.tcp.usage_in_bytes
+</code></pre>
+<h3 id="43-&#x5982;&#x4F55;&#x914D;&#x7F6E;cgroups"><a name="43-&#x5982;&#x4F55;&#x914D;&#x7F6E;cgroups" class="anchor-navigation-ex-anchor" href="#43-&#x5982;&#x4F55;&#x914D;&#x7F6E;cgroups"><i class="fa fa-link" aria-hidden="true"></i></a>4.3 &#x5982;&#x4F55;&#x914D;&#x7F6E;cgroups?</h3>
+<p>Docker&#x7684;&#x5C5E;&#x6027;&#x4E4B;&#x4E00;&#x662F;&#x63A7;&#x5236;&#x5185;&#x5B58;&#x9650;&#x5236;&#x7684;&#x80FD;&#x529B;&#x3002;&#x8FD9;&#x662F;&#x901A;&#x8FC7;cgroup&#x8BBE;&#x7F6E;&#x5B8C;&#x6210;&#x7684;&#x3002;
+&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5BB9;&#x5668;&#x5BF9;&#x5185;&#x5B58;&#x6CA1;&#x6709;&#x9650;&#x5236;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>docker stats</code>&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> stats db --no-stream
+CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+e2edc005ea6e        db                  <span class="token number">0.17</span>%               <span class="token number">6</span>.754MiB / <span class="token number">992</span>.1MiB   <span class="token number">0.68</span>%               <span class="token number">1</span>.3kB / 0B          0B / 0B             <span class="token number">5</span>
+</code></pre>
+<p>&#x5185;&#x5B58;&#x5F15;&#x53F7;&#x5B58;&#x50A8;&#x5728;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;<code>memory.limit_in_bytes</code></p>
+<p>&#x901A;&#x8FC7;&#x5199;&#x5165;&#x6587;&#x4EF6;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6539;&#x53D8;&#x8FDB;&#x7A0B;&#x7684;&#x9650;&#x5236;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token builtin class-name">echo</span> <span class="token number">8000000</span> <span class="token operator">&gt;</span> /sys/fs/cgroup/memory/docker/<span class="token variable">$DBID</span>/memory.limit_in_bytes
+</code></pre>
+<p>&#x5982;&#x679C;&#x5C06;&#x6587;&#x4EF6;&#x8BFB;&#x56DE;&#x53BB;&#xFF0C;&#x60A8;&#x5C06;&#x6CE8;&#x610F;&#x5230;&#x5B83;&#x5DF2;&#x88AB;&#x8F6C;&#x6362;&#x4E3A;7999488&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /sys/fs/cgroup/memory/docker/<span class="token variable">$DBID</span>/memory.limit_in_bytes
+<span class="token number">7999488</span>
+</code></pre>
+<p>&#x5F53;&#x518D;&#x6B21;&#x68C0;&#x67E5;Docker Stats&#x65F6;&#xFF0C;&#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x5B58;&#x9650;&#x5236;&#x73B0;&#x5728;&#x662F;7.629M</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> stats db --no-stream
+CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+e2edc005ea6e        db                  <span class="token number">0.19</span>%               <span class="token number">6</span>.176MiB / <span class="token number">992</span>.1MiB   <span class="token number">0.62</span>%               <span class="token number">1</span>.3kB / 0B          <span class="token number">61</span>.4kB / 0B         <span class="token number">5</span>
+</code></pre>
+<h2 id="5-seccomp--apparmor"><a name="5-seccomp--apparmor" class="anchor-navigation-ex-anchor" href="#5-seccomp--apparmor"><i class="fa fa-link" aria-hidden="true"></i></a>5. Seccomp / AppArmor</h2>
+<p>Linux&#x4E2D;&#x7684;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x6765;&#x5B8C;&#x6210;&#x7684;&#x3002;&#x5185;&#x6838;&#x6709;330&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x6267;&#x884C;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x3001;&#x5173;&#x95ED;&#x53E5;&#x67C4;&#x548C;&#x68C0;&#x67E5;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x7B49;&#x64CD;&#x4F5C;&#x3002;&#x6240;&#x6709;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x90FD;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x7EC4;&#x5408;&#x6765;&#x6267;&#x884C;&#x6240;&#x9700;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p><code>AppArmor</code>&#x662F;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x63CF;&#x8FF0;&#x4E86;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x7CFB;&#x7EDF;&#x7684;&#x54EA;&#x4E9B;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x65B9;&#x5F0F;&#x67E5;&#x770B;&#x5206;&#x914D;&#x7ED9;&#x8FDB;&#x7A0B;&#x7684;&#x5F53;&#x524D;AppArmor&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /proc/<span class="token variable">$DBPID</span>/attr/current
+docker-default <span class="token punctuation">(</span>enforce<span class="token punctuation">)</span>
+</code></pre>
+<p>Docker&#x7684;&#x9ED8;&#x8BA4;<code>AppArmor</code>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x662F;<code>docker-default (enforce)</code></p>
+<p>&#x5728;Docker 1.13&#x4E4B;&#x524D;&#xFF0C;&#x5B83;&#x5C06;AppArmor&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x5728;<code>/etc/ AppArmor.d/Docker-default</code>(&#x5728;Docker&#x542F;&#x52A8;&#x65F6;&#x88AB;&#x8986;&#x76D6;&#xFF0C;&#x56E0;&#x6B64;&#x7528;&#x6237;&#x65E0;&#x6CD5;&#x4FEE;&#x6539;&#x5B83;&#x3002;&#x5728;v1.13&#x4E4B;&#x540E;&#xFF0C;Docker&#x73B0;&#x5728;&#x5728;<code>tmpfs</code>&#x4E2D;&#x751F;&#x6210;<code>Docker -default</code>&#xFF0C;&#x4F7F;&#x7528;<code>apparmor_parser</code>&#x5C06;&#x5176;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x6838;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x5220;&#x9664;&#x8BE5;&#x6587;&#x4EF6;</p>
+<p>&#x8BE5;&#x6A21;&#x677F;&#x53EF;&#x5728;<a href="https://github.com/moby/moby/blob/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/profiles/apparmor/template.go" target="_blank">https://github.com/moby/moby/blob/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/profiles/apparmor/template.go</a></p>
+<p>Seccomp&#x63D0;&#x4F9B;&#x4E86;&#x9650;&#x5236;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x963B;&#x6B62;&#x8BF8;&#x5982;&#x5B89;&#x88C5;&#x5185;&#x6838;&#x6A21;&#x5757;&#x6216;&#x66F4;&#x6539;&#x6587;&#x4EF6;&#x6743;&#x9650;&#x7B49;&#x65B9;&#x9762;&#x3002;</p>
+<p>Docker&#x9ED8;&#x8BA4;&#x5141;&#x8BB8;&#x7684;&#x8C03;&#x7528;&#x53EF;&#x4EE5;&#x5728;<a href="https://github.com/moby/moby/blob/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/profiles/seccomp/default.json" target="_blank">https://github.com/moby/moby/blob/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/profiles/seccomp/default.json</a></p>
+<p>&#x5F53;&#x5206;&#x914D;&#x7ED9;&#x8FDB;&#x7A0B;&#x65F6;&#xFF0C;&#x5B83;&#x610F;&#x5473;&#x7740;&#x8FDB;&#x7A0B;&#x5C06;&#x88AB;&#x9650;&#x5236;&#x5728;&#x80FD;&#x529B;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x5B50;&#x96C6;&#x3002;&#x5982;&#x679C;&#x5B83;&#x8BD5;&#x56FE;&#x8C03;&#x7528;&#x4E00;&#x4E2A;&#x88AB;&#x963B;&#x585E;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x5C06;&#x6536;&#x5230;&#x9519;&#x8BEF;&#x201C;&#x64CD;&#x4F5C;&#x4E0D;&#x5141;&#x8BB8;&#x201D;&#x3002;</p>
+<p><code>SecComp</code>&#x7684;&#x72B6;&#x6001;&#x4E5F;&#x5728;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x5B9A;&#x4E49;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /proc/<span class="token variable">$DBPID</span>/status
+Name:   redis-server
+State:  S <span class="token punctuation">(</span>sleeping<span class="token punctuation">)</span>
+Tgid:   <span class="token number">1099</span>
+Ngid:   <span class="token number">0</span>
+Pid:    <span class="token number">1099</span>
+PPid:   <span class="token number">1083</span>
+TracerPid:      <span class="token number">0</span>
+Uid:    <span class="token number">999</span>     <span class="token number">999</span>     <span class="token number">999</span>     <span class="token number">999</span>
+Gid:    <span class="token number">1000</span>    <span class="token number">1000</span>    <span class="token number">1000</span>    <span class="token number">1000</span>
+FDSize: <span class="token number">64</span>
+Groups: <span class="token number">1000</span> <span class="token number">1000</span> 
+NStgid: <span class="token number">1099</span>    <span class="token number">1</span>
+NSpid:  <span class="token number">1099</span>    <span class="token number">1</span>
+NSpgid: <span class="token number">1099</span>    <span class="token number">1</span>
+NSsid:  <span class="token number">1099</span>    <span class="token number">1</span>
+VmPeak:    <span class="token number">29156</span> kB
+VmSize:    <span class="token number">29156</span> kB
+VmLck:         <span class="token number">0</span> kB
+VmPin:         <span class="token number">0</span> kB
+VmHWM:     <span class="token number">11316</span> kB
+VmRSS:      <span class="token number">7032</span> kB
+VmData:    <span class="token number">23204</span> kB
+VmStk:       <span class="token number">132</span> kB
+VmExe:      <span class="token number">1672</span> kB
+VmLib:      <span class="token number">1656</span> kB
+VmPTE:        <span class="token number">56</span> kB
+VmPMD:        <span class="token number">12</span> kB
+VmSwap:     <span class="token number">4324</span> kB
+HugetlbPages:          <span class="token number">0</span> kB
+Threads:        <span class="token number">5</span>
+SigQ:   <span class="token number">0</span>/3824
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000001001
+SigCgt: 00000000000044ea
+CapInh: 00000000a80425fb
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: 00000000a80425fb
+CapAmb: 0000000000000000
+Seccomp:        <span class="token number">2</span>
+Cpus_allowed:   <span class="token number">3</span>
+Cpus_allowed_list:      <span class="token number">0</span>-1
+Mems_allowed:   00000000,00000001
+Mems_allowed_list:      <span class="token number">0</span>
+voluntary_ctxt_switches:        <span class="token number">24583</span>
+nonvoluntary_ctxt_switches:     <span class="token number">507</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /proc/<span class="token variable">$DBPID</span>/status <span class="token operator">|</span> <span class="token function">grep</span> Seccomp
+Seccomp:        <span class="token number">2</span>
+</code></pre>
+<p>&#x6807;&#x5FD7;&#x4F4D;&#x542B;&#x4E49;&#x4E3A;:0:&#x5173;&#x95ED;&#x3002;1:&#x4E25;&#x683C;&#x3002;2:&#x8FC7;&#x6EE4;</p>
+<h2 id="6-capabilities"><a name="6-capabilities" class="anchor-navigation-ex-anchor" href="#6-capabilities"><i class="fa fa-link" aria-hidden="true"></i></a>6. Capabilities</h2>
+<p><code>Capabilities</code>&#x662F;&#x5173;&#x4E8E;&#x8FDB;&#x7A0B;&#x6216;&#x7528;&#x6237;&#x6709;&#x6743;&#x505A;&#x4EC0;&#x4E48;&#x7684;&#x5206;&#x7EC4;&#x3002;&#x8FD9;&#x4E9B;&#x529F;&#x80FD;&#x53EF;&#x80FD;&#x5305;&#x62EC;&#x591A;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x6216;&#x64CD;&#x4F5C;&#xFF0C;&#x4F8B;&#x5982;&#x66F4;&#x6539;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;&#x6216;&#x4E3B;&#x673A;&#x540D;&#x3002;</p>
+<p>&#x72B6;&#x6001;&#x6587;&#x4EF6;&#x8FD8;&#x5305;&#x542B;&#x4E86;<code>Capabilities</code>&#x6807;&#x5FD7;&#x3002;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x4E22;&#x5F03;&#x5C3D;&#x53EF;&#x80FD;&#x591A;&#x7684;capability&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x5176;&#x5B89;&#x5168;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /proc/<span class="token variable">$DBPID</span>/status <span class="token operator">|</span> <span class="token function">grep</span> ^Cap
+CapInh: 00000000a80425fb
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: 00000000a80425fb
+CapAmb: 0000000000000000
+</code></pre>
+<p>&#x6807;&#x5FD7;&#x88AB;&#x5B58;&#x50A8;&#x4E3A;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x7528;capsh&#x89E3;&#x7801;&#x7684;&#x4F4D;&#x63A9;&#x7801;</p>
+<pre class="language-"><code class="lang-bash">$ capsh --decode<span class="token operator">=</span>00000000a80425fb
+<span class="token assign-left variable">0x00000000a80425fb</span><span class="token operator">=</span>cap_chown,cap_dac_override,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_net_bind_service,cap_net_raw,cap_sys_chroot,cap_mknod,cap_audit_write,cap_setfcap
+</code></pre>
+<h2 id="7-&#x5BB9;&#x5668;&#x955C;&#x50CF;"><a name="7-&#x5BB9;&#x5668;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#7-&#x5BB9;&#x5668;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>7. &#x5BB9;&#x5668;&#x955C;&#x50CF;</h2>
+<p>&#x5BB9;&#x5668;&#x6620;&#x50CF;&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;tar&#x6587;&#x4EF6;&#x7684;tar&#x6587;&#x4EF6;&#x3002;&#x6BCF;&#x4E2A;tar&#x6587;&#x4EF6;&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5C42;&#x3002;&#x4E00;&#x65E6;&#x6240;&#x6709;tar&#x6587;&#x4EF6;&#x88AB;&#x63D0;&#x53D6;&#x5230;&#x76F8;&#x540C;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x90A3;&#x4E48;&#x60A8;&#x5C31;&#x62E5;&#x6709;&#x4E86;&#x5BB9;&#x5668;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>&#x8FD9;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Docker&#x8FDB;&#x884C;&#x63A2;&#x7D22;&#x3002;&#x628A;&#x8FD9;&#x4E9B;image&#x653E;&#x5230;&#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x4E0A;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> pull redis:3.2.11-alpine
+<span class="token number">3.2</span>.11-alpine: Pulling from library/redis
+ff3a5c916c92: Pull complete 
+aae70a2e6027: Pull complete 
+87c655da471c: Pull complete 
+bc3141806bdc: Pull complete 
+53616fb426d9: Pull complete 
+9791c5883c6a: Pull complete 
+Digest: sha256:ebf1948b84dcaaa0f8a2849cce6f2548edb8862e2829e3e7d9e4cd5a324fb3b7
+Status: Downloaded newer image <span class="token keyword">for</span> redis:3.2.11-alpine
+</code></pre>
+<p>&#x5C06;images&#x5BFC;&#x51FA;&#x4E3A;&#x539F;&#x59CB;tar&#x683C;&#x5F0F;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker</span> save redis:3.2.11-alpine <span class="token operator">&gt;</span> redis.tar
+</code></pre>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">tar</span> -xvf redis.tar
+46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557/
+46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557/VERSION
+46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557/json
+46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557/layer.tar
+498654318d0999ce36c7b90901ed8bd8cb63d86837cb101ea1ec9bb092f44e59/
+498654318d0999ce36c7b90901ed8bd8cb63d86837cb101ea1ec9bb092f44e59/VERSION
+498654318d0999ce36c7b90901ed8bd8cb63d86837cb101ea1ec9bb092f44e59/json
+498654318d0999ce36c7b90901ed8bd8cb63d86837cb101ea1ec9bb092f44e59/layer.tar
+ad01e7adb4e23f63a0a1a1d258c165d852768fb2e4cc2d9d5e71698e9672093c/
+ad01e7adb4e23f63a0a1a1d258c165d852768fb2e4cc2d9d5e71698e9672093c/VERSION
+ad01e7adb4e23f63a0a1a1d258c165d852768fb2e4cc2d9d5e71698e9672093c/json
+ad01e7adb4e23f63a0a1a1d258c165d852768fb2e4cc2d9d5e71698e9672093c/layer.tar
+ca0b6709748d024a67c502558ea88dc8a1f8a858d380f5ddafa1504126a3b018.json
+da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c/
+da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c/VERSION
+da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c/json
+da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c/layer.tar
+db1a23fc1daa8135a1c6c695f7b416a0ac0eb1d8ca873928385a3edaba6ac9a3/
+db1a23fc1daa8135a1c6c695f7b416a0ac0eb1d8ca873928385a3edaba6ac9a3/VERSION
+db1a23fc1daa8135a1c6c695f7b416a0ac0eb1d8ca873928385a3edaba6ac9a3/json
+db1a23fc1daa8135a1c6c695f7b416a0ac0eb1d8ca873928385a3edaba6ac9a3/layer.tar
+f07352aa34c241692cae1ce60ade187857d0bffa3a31390867038d46b1e7739c/
+f07352aa34c241692cae1ce60ade187857d0bffa3a31390867038d46b1e7739c/VERSION
+f07352aa34c241692cae1ce60ade187857d0bffa3a31390867038d46b1e7739c/json
+f07352aa34c241692cae1ce60ade187857d0bffa3a31390867038d46b1e7739c/layer.tar
+manifest.json
+repositories
+</code></pre>
+<p>&#x6240;&#x6709;&#x7684;tar&#x5C42;&#x6587;&#x4EF6;&#x73B0;&#x5728;&#x90FD;&#x662F;&#x53EF;&#x89C1;&#x7684;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span>
+46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557
+498654318d0999ce36c7b90901ed8bd8cb63d86837cb101ea1ec9bb092f44e59
+ad01e7adb4e23f63a0a1a1d258c165d852768fb2e4cc2d9d5e71698e9672093c
+ca0b6709748d024a67c502558ea88dc8a1f8a858d380f5ddafa1504126a3b018.json
+da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c
+db1a23fc1daa8135a1c6c695f7b416a0ac0eb1d8ca873928385a3edaba6ac9a3
+f07352aa34c241692cae1ce60ade187857d0bffa3a31390867038d46b1e7739c
+manifest.json
+redis.tar
+repositories
+</code></pre>
+<p>images&#x8FD8;&#x5305;&#x542B;&#x5173;&#x4E8E;images&#x7684;&#x5143;&#x6570;&#x636E;&#xFF0C;&#x5982;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x548C;&#x6807;&#x8BB0;&#x540D;&#x79F0;.</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> repositories
+<span class="token punctuation">{</span><span class="token string">&quot;redis&quot;</span>:<span class="token punctuation">{</span><span class="token string">&quot;3.2.11-alpine&quot;</span><span class="token builtin class-name">:</span><span class="token string">&quot;46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+$ <span class="token function">cat</span> manifest.json
+<span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">&quot;Config&quot;</span><span class="token builtin class-name">:</span><span class="token string">&quot;ca0b6709748d024a67c502558ea88dc8a1f8a858d380f5ddafa1504126a3b018.json&quot;</span>,<span class="token string">&quot;RepoTags&quot;</span>:<span class="token punctuation">[</span><span class="token string">&quot;redis:3.2.11-alpine&quot;</span><span class="token punctuation">]</span>,<span class="token string">&quot;Layers&quot;</span>:<span class="token punctuation">[</span><span class="token string">&quot;498654318d0999ce36c7b90901ed8bd8cb63d86837cb101ea1ec9bb092f44e59/layer.tar&quot;</span>,<span class="token string">&quot;ad01e7adb4e23f63a0a1a1d258c165d852768fb2e4cc2d9d5e71698e9672093c/layer.tar&quot;</span>,<span class="token string">&quot;da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c/layer.tar&quot;</span>,<span class="token string">&quot;db1a23fc1daa8135a1c6c695f7b416a0ac0eb1d8ca873928385a3edaba6ac9a3/layer.tar&quot;</span>,<span class="token string">&quot;f07352aa34c241692cae1ce60ade187857d0bffa3a31390867038d46b1e7739c/layer.tar&quot;</span>,<span class="token string">&quot;46a2fed8167f5d523f9a9c07f17a7cd151412fed437272b517ee4e46587e5557/layer.tar&quot;</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+</code></pre>
+<p>tar&#x4E2D;&#x6587;&#x4EF6;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">tar</span> -xvf da2a73e79c2ccb87834d7ce3e43d274a750177fe6527ea3f8492d08d3bb0123c/layer.tar
+etc/
+etc/apk/
+etc/apk/world
+lib/
+lib/apk/
+lib/apk/db/
+lib/apk/db/installed
+lib/apk/db/lock
+lib/apk/db/scripts.tar
+lib/apk/db/triggers
+sbin/
+sbin/su-exec
+var/
+var/cache/
+var/cache/misc/
+</code></pre>
+<h2 id="8-&#x521B;&#x5EFA;&#x7A7A;&#x955C;&#x50CF;"><a name="8-&#x521B;&#x5EFA;&#x7A7A;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#8-&#x521B;&#x5EFA;&#x7A7A;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>8. &#x521B;&#x5EFA;&#x7A7A;&#x955C;&#x50CF;</h2>
+<p>&#x7531;&#x4E8E;images&#x53EA;&#x662F;&#x4E00;&#x4E2A;tar&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x521B;&#x5EFA;&#x7A7A;images</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">tar</span> cv --files-from /dev/null <span class="token operator">|</span> <span class="token function">docker</span> <span class="token function">import</span> - empty
+sha256:ba14edd8949ad44677f1955e37b9a35f9978d2a687b3f8ab86711811d46e2c53
+</code></pre>
+<p>&#x901A;&#x8FC7;&#x5BFC;&#x5165;tar&#xFF0C;&#x5C06;&#x521B;&#x5EFA;&#x989D;&#x5916;&#x7684;&#x5143;&#x6570;&#x636E;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+empty               latest              ba14edd8949a        <span class="token number">24</span> seconds ago      0B
+redis               <span class="token number">3.2</span>.11-alpine       ca0b6709748d        <span class="token number">3</span> years ago         <span class="token number">20</span>.7MB
+</code></pre>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x7531;&#x4E8E;&#x5BB9;&#x5668;&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x5185;&#x5BB9;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x4E0D;&#x80FD;&#x542F;&#x52A8;&#x8FDB;&#x7A0B;&#x3002;</p>
+<h2 id="9-&#x4E0D;&#x4F7F;&#x7528;dockerfile&#x521B;&#x5EFA;&#x955C;&#x50CF;"><a name="9-&#x4E0D;&#x4F7F;&#x7528;dockerfile&#x521B;&#x5EFA;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#9-&#x4E0D;&#x4F7F;&#x7528;dockerfile&#x521B;&#x5EFA;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>9. &#x4E0D;&#x4F7F;&#x7528;Dockerfile&#x521B;&#x5EFA;&#x955C;&#x50CF;</h2>
+<p>&#x53EF;&#x4EE5;&#x6269;&#x5C55;&#x524D;&#x9762;&#x5BFC;&#x5165;Tar&#x6587;&#x4EF6;&#x7684;&#x60F3;&#x6CD5;&#xFF0C;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x521B;&#x5EFA;&#x6574;&#x4E2A;&#x6620;&#x50CF;&#x3002;
+&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4F7F;&#x7528;BusyBox&#x4F5C;&#x4E3A;&#x57FA;&#x7840;&#x3002;&#x8FD9;&#x5C06;&#x4E3A;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x57FA;&#x672C;&#x7684;linux&#x547D;&#x4EE4;&#x3002;&#x5B83;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;rootfs&#x3002;rootfs&#x662F;&#x2026;&#x2026;
+Docker&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x6765;&#x4E0B;&#x8F7D;BusyBox rootfs
+<a href="https://github.com/moby/moby/blob/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/contrib/mkimage/busybox-static" target="_blank">https://github.com/moby/moby/blob/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/contrib/mkimage/busybox-static</a></p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">curl</span> -LO https://raw.githubusercontent.com/moby/moby/a575b0b1384b2ba89b79cbd7e770fbeb616758b3/contrib/mkimage/busybox-static <span class="token operator">&amp;&amp;</span> <span class="token function">chmod</span> +x busybox-static
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+<span class="token number">100</span>   <span class="token number">782</span>  <span class="token number">100</span>   <span class="token number">782</span>    <span class="token number">0</span>     <span class="token number">0</span>   <span class="token number">2177</span>      <span class="token number">0</span> --:--:-- --:--:-- --:--:--  <span class="token number">2184</span>
+$ 
+
+$ ./busybox-static busybox
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x8BE5;&#x811A;&#x672C;&#x5C06;&#x4E0B;&#x8F7D;rootfs&#x548C;&#x4E3B;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">ls</span> -lha busybox
+total 20K
+drwxr-xr-x  <span class="token number">5</span> root root <span class="token number">4</span>.0K Sep <span class="token number">27</span> 09:43 <span class="token builtin class-name">.</span>
+drwx------ <span class="token number">15</span> root root <span class="token number">4</span>.0K Sep <span class="token number">27</span> 09:43 <span class="token punctuation">..</span>
+drwxr-xr-x  <span class="token number">2</span> root root <span class="token number">4</span>.0K Sep <span class="token number">27</span> 09:43 bin
+drwxr-xr-x  <span class="token number">2</span> root root <span class="token number">4</span>.0K Sep <span class="token number">27</span> 09:43 sbin
+drwxr-xr-x  <span class="token number">4</span> root root <span class="token number">4</span>.0K Sep <span class="token number">27</span> 09:43 usr
+</code></pre>
+<p>&#x9ED8;&#x8BA4;&#x7684;Busybox rootfs&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x7248;&#x672C;&#x4FE1;&#x606F;&#xFF0C;&#x6240;&#x4EE5;&#x8BA9;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token builtin class-name">echo</span> KatacodaPrivateBuild <span class="token operator">&gt;</span> busybox/release
+</code></pre>
+<p>&#x4E0E;&#x524D;&#x9762;&#x4E00;&#x6837;&#xFF0C;&#x8BE5;&#x76EE;&#x5F55;&#x53EF;&#x4EE5;&#x8F6C;&#x6362;&#x4E3A;tar&#xFF0C;&#x5E76;&#x81EA;&#x52A8;&#x5BFC;&#x5165;&#x5230;Docker&#x4E2D;&#x4F5C;&#x4E3A;&#x6620;&#x50CF;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">tar</span> -C busybox -c <span class="token builtin class-name">.</span> <span class="token operator">|</span> <span class="token function">docker</span> <span class="token function">import</span> - busybox
+sha256:73b25a6703da535db5cbc43073c2920b60f5f8a76db17de093e851f1a2d5f69c
+</code></pre>
+<p>&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x4F5C;&#x4E3A;&#x5BB9;&#x5668;&#x542F;&#x52A8;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> run busybox <span class="token function">cat</span> /release
+KatacodaPrivateBuild
+</code></pre>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-23 16:26:47
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../Logging/" class="navigation navigation-prev " aria-label="Previous page: Logging">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="docker_clean.html" class="navigation navigation-next " aria-label="Next page: docker 资源清理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Manage","level":"1.5.8","depth":2,"next":{"title":"docker 资源清理","level":"1.5.8.1","depth":3,"path":"Docker/Manage/docker_clean.md","ref":"Docker/Manage/docker_clean.md","articles":[]},"previous":{"title":"Logging","level":"1.5.7","depth":2,"path":"Docker/Logging/README.md","ref":"Docker/Logging/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Docker Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["python"],"title":"Docker Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/docker-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/docker-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Docker Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Docker":"https://smoothies.com.cn/docker-docs/Overview.html","Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/Overview.html","Go":"https://smoothies.com.cn/go-docs/Overview.html","Prometheus":"https://smoothies.com.cn/prometheus-docs/Overview.html","Command":"https://smoothies.com.cn/linux-command-docs/Overview.html","Shell":"https://smoothies.com.cn/shell-docs/Overview.html","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/Overview.html","Python":"https://smoothies.com.cn/python-docs/Overview.html","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Docker](https://www.docker.com/) 的书籍"},"file":{"path":"Docker/Manage/README.md","mtime":"2022-12-23T08:26:47.999Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-22T09:17:25.614Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

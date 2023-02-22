@@ -1,0 +1,2311 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>harbor部署入门指南 · Docker Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="podman_deploy_private_registry.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Docker Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/docker-docs/Overview.html" target="_blank" class="custom-link">Docker</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/Overview.html" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/Overview.html" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/Overview.html" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/Overview.html" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/Overview.html" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/Overview.html" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/Overview.html" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../Overview.html">
+            
+                <a href="../../Overview.html">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../Docker-Compose/">
+            
+                <a href="../../Docker-Compose/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Docker-Compose/docker-compose_1_install.html">
+            
+                <a href="../../Docker-Compose/docker-compose_1_install.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    docker compose 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                <a href="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    docker compose 安装 elasticsearch 集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../Docker-Swarm/">
+            
+                <a href="../../Docker-Swarm/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Docker Swarm
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    docker swarm 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    docker swarm 网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    docker swam 集群实现负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    docker swarm 创建加密覆盖网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    docker swarm 管理 secrets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    docker swarm 健康检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    dcoker swarm 更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    docker swarm 部署界面 ui portainer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    docker swarm 通过 docker compose 部署应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    docker swarm 维护模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../CICD/">
+            
+                <a href="../CICD/">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    CICD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                <a href="../CICD/docker_makefile_CI_Pipeline.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    docker   makefile  ci pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                <a href="../CICD/docker_GitHub_Action_builds_image.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    github action 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                <a href="../CICD/docker_deploy_enterprise-level_harbor.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    自托管构建 如何使用 harbor 搭建企业级镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="../CICD/docker_Tekton_builds_image.html">
+            
+                <a href="../CICD/docker_Tekton_builds_image.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    自托管构建 如何使用 tekton 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                <a href="../CICD/docker_GitLab_CI_builds_image.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    如何使用 gitlab ci 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Command/">
+            
+                <a href="../Command/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../Command/docker_command_inspect.html">
+            
+                <a href="../Command/docker_command_inspect.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    docker inspect   format
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Dockerfile/">
+            
+                <a href="../Dockerfile/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Image/">
+            
+                <a href="../Image/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Image
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../Image/build_images_with_buildah.html">
+            
+                <a href="../Image/build_images_with_buildah.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    构建镜像开源工具 buildah
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../Image/docker_Build_multi-platform_image.html">
+            
+                <a href="../Image/docker_Build_multi-platform_image.html">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    如何为不同语言快速构建多平台镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../Image/docker_Image_volume_reduced.html">
+            
+                <a href="../Image/docker_Image_volume_reduced.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    如何将镜像体积缩减 90
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="../Image/docker_image_1_library.html">
+            
+                <a href="../Image/docker_image_1_library.html">
+            
+                    
+                        <b>1.5.4.4.</b>
+                    
+                    docker 镜像源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="../Image/docker_image_2_manage.html">
+            
+                <a href="../Image/docker_image_2_manage.html">
+            
+                    
+                        <b>1.5.4.5.</b>
+                    
+                    docker 镜像管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Install/">
+            
+                <a href="../Install/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../Install/docker_1_install.html">
+            
+                <a href="../Install/docker_1_install.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    docker 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Issue/">
+            
+                <a href="../Issue/">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    Issue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Logging/">
+            
+                <a href="../Logging/">
+            
+                    
+                        <b>1.5.7.</b>
+                    
+                    Logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Manage/">
+            
+                <a href="../Manage/">
+            
+                    
+                        <b>1.5.8.</b>
+                    
+                    Manage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.8.1" data-path="../Manage/docker_clean.html">
+            
+                <a href="../Manage/docker_clean.html">
+            
+                    
+                        <b>1.5.8.1.</b>
+                    
+                    docker 资源清理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.2" data-path="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                <a href="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                    
+                        <b>1.5.8.2.</b>
+                    
+                    docker 容器隔离与限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Monitor/">
+            
+                <a href="../Monitor/">
+            
+                    
+                        <b>1.5.9.</b>
+                    
+                    Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../Network/">
+            
+                <a href="../Network/">
+            
+                    
+                        <b>1.5.10.</b>
+                    
+                    Network
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.10.1" data-path="../Network/docker_analyze_the_packet_loss.html">
+            
+                <a href="../Network/docker_analyze_the_packet_loss.html">
+            
+                    
+                        <b>1.5.10.1.</b>
+                    
+                    docker 容器应用总是丢包如何分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.2" data-path="../Network/docker_config_DNS.html">
+            
+                <a href="../Network/docker_config_DNS.html">
+            
+                    
+                        <b>1.5.10.2.</b>
+                    
+                    docker 配置 dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.11.</b>
+                    
+                    Registry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.11.1" data-path="harbor_get_started_guide.html">
+            
+                <a href="harbor_get_started_guide.html">
+            
+                    
+                        <b>1.5.11.1.</b>
+                    
+                    harbor部署入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.2" data-path="podman_deploy_private_registry.html">
+            
+                <a href="podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.5.11.2.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.3" data-path="docker_registry_1_deploy.html">
+            
+                <a href="docker_registry_1_deploy.html">
+            
+                    
+                        <b>1.5.11.3.</b>
+                    
+                    docker registry 仓库搭建并配置证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.4" data-path="docker_registry_2_deploy_UI.html">
+            
+                <a href="docker_registry_2_deploy_UI.html">
+            
+                    
+                        <b>1.5.11.4.</b>
+                    
+                    docker 部署 registry ui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.5" data-path="centos_7.9_deploy_harbor_practice.html">
+            
+                <a href="centos_7.9_deploy_harbor_practice.html">
+            
+                    
+                        <b>1.5.11.5.</b>
+                    
+                    centos 7 9 harbor 部署镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../Security/">
+            
+                <a href="../Security/">
+            
+                    
+                        <b>1.5.12.</b>
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../Storage/">
+            
+                <a href="../Storage/">
+            
+                    
+                        <b>1.5.13.</b>
+                    
+                    Storage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.13.1" data-path="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                <a href="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                    
+                        <b>1.5.13.1.</b>
+                    
+                    docker device mapper 简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.2" data-path="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                <a href="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                    
+                        <b>1.5.13.2.</b>
+                    
+                    docker  storage 驱动 devicemapper 配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.3" data-path="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                <a href="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                    
+                        <b>1.5.13.3.</b>
+                    
+                    docker thin provisioning 实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.4" data-path="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                <a href="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                    
+                        <b>1.5.13.4.</b>
+                    
+                    docker devicemapper 扩容
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="../Storage/docker_storage_5_nfs_volume.html">
+            
+                <a href="../Storage/docker_storage_5_nfs_volume.html">
+            
+                    
+                        <b>1.5.13.5.</b>
+                    
+                    docker nfs volume 创建与使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../原理/">
+            
+                <a href="../原理/">
+            
+                    
+                        <b>1.5.14.</b>
+                    
+                    原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.14.1" data-path="../原理/docker_Container_technology_overview.html">
+            
+                <a href="../原理/docker_Container_technology_overview.html">
+            
+                    
+                        <b>1.5.14.1.</b>
+                    
+                    容器技术概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14.2" data-path="../原理/Container_architecture_overview.html">
+            
+                <a href="../原理/Container_architecture_overview.html">
+            
+                    
+                        <b>1.5.14.2.</b>
+                    
+                    容器架构概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../docker_1_start.html">
+            
+                <a href="../docker_1_start.html">
+            
+                    
+                        <b>1.5.15.</b>
+                    
+                    入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../Podman/">
+            
+                <a href="../../Podman/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Podman
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Podman/podman_deploy_private_registry.html">
+            
+                <a href="../../Podman/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../Podman/podman_start.html">
+            
+                <a href="../../Podman/podman_start.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    podman 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >harbor部署入门指南</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;"><b></b>harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x4EC0;&#x4E48;&#x662F;harbor"><b></b>1. &#x4EC0;&#x4E48;&#x662F;harbor</a></li><li><span class="title-icon "></span><a href="#2-harbor&#x7684;&#x67B6;&#x6784;"><b></b>2. Harbor&#x7684;&#x67B6;&#x6784;</a></li><li><span class="title-icon "></span><a href="#&#x51C6;&#x5907;&#x6761;&#x4EF6;"><b></b>&#x51C6;&#x5907;&#x6761;&#x4EF6;</a></li><ul><li><span class="title-icon "></span><a href="#harbor-&#x5B89;&#x88C5;&#x6761;&#x4EF6;"><b></b>Harbor &#x5B89;&#x88C5;&#x6761;&#x4EF6;</a></li><li><span class="title-icon "></span><a href="#docker&#x5B89;&#x88C5;"><b></b>docker&#x5B89;&#x88C5;</a></li><li><span class="title-icon "></span><a href="#docker-compose&#x5B89;&#x88C5;"><b></b>docker-compose&#x5B89;&#x88C5;</a></li></ul><li><span class="title-icon "></span><a href="#3-harbor-http-ip&#x90E8;&#x7F72;"><b></b>3. Harbor http ip&#x90E8;&#x7F72;</a></li><ul><li><span class="title-icon "></span><a href="#31-harbor&#x5B89;&#x88C5;"><b></b>3.1 harbor&#x5B89;&#x88C5;</a></li><li><span class="title-icon "></span><a href="#32-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><b></b>3.2 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</a></li></ul><li><span class="title-icon "></span><a href="#4-harbor-http-&#x57DF;&#x540D;&#x90E8;&#x7F72;"><b></b>4. Harbor http &#x57DF;&#x540D;&#x90E8;&#x7F72;</a></li><ul><li><span class="title-icon "></span><a href="#41-&#x6E05;&#x7406;&#x6742;&#x8D28;"><b></b>4.1 &#x6E05;&#x7406;&#x6742;&#x8D28;</a></li><li><span class="title-icon "></span><a href="#42-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><b></b>4.2 &#x4FEE;&#x6539;&#x914D;&#x7F6E;</a></li><li><span class="title-icon "></span><a href="#43-harbor&#x5B89;&#x88C5;"><b></b>4.3 harbor&#x5B89;&#x88C5;</a></li><li><span class="title-icon "></span><a href="#43-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><b></b>4.3 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</a></li></ul><li><span class="title-icon "></span><a href="#5-harbor-https-ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;"><b></b>5. Harbor https ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;</a></li><ul><li><span class="title-icon "></span><a href="#51-&#x6E05;&#x7406;&#x6742;&#x8D28;"><b></b>5.1 &#x6E05;&#x7406;&#x6742;&#x8D28;</a></li><li><span class="title-icon "></span><a href="#52-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><b></b>5.2 &#x4FEE;&#x6539;&#x914D;&#x7F6E;</a></li><li><span class="title-icon "></span><a href="#53-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor"><b></b>5.3 &#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E; Harbor</a></li><li><span class="title-icon "></span><a href="#54-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><b></b>5.4 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</a></li></ul><li><span class="title-icon "></span><a href="#6-harbor-https-&#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x90E8;&#x7F72;"><b></b>6 Harbor https &#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x90E8;&#x7F72;</a></li><ul><li><span class="title-icon "></span><a href="#61-&#x6E05;&#x7406;&#x6742;&#x8D28;"><b></b>6.1 &#x6E05;&#x7406;&#x6742;&#x8D28;</a></li><li><span class="title-icon "></span><a href="#62-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><b></b>6.2 &#x4FEE;&#x6539;&#x914D;&#x7F6E;</a></li><li><span class="title-icon "></span><a href="#63-&#x914D;&#x7F6E;&#x8BC1;&#x4E66;"><b></b>6.3 &#x914D;&#x7F6E;&#x8BC1;&#x4E66;</a></li><li><span class="title-icon "></span><a href="#64-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor"><b></b>6.4 &#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E; Harbor</a></li><li><span class="title-icon "></span><a href="#65-&#x6D4B;&#x8BD5;"><b></b>6.5 &#x6D4B;&#x8BD5;</a></li></ul></ul></ul></div><a href="#harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;"><a name="harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;" class="anchor-navigation-ex-anchor" href="#harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;"><i class="fa fa-link" aria-hidden="true"></i></a>harbor&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;</h1><!-- tags --><div id="tags" class="tags"><p><i class="fa fa-tags" aria-hidden="true"></i> <a href="../../tags.html#registry">registry</a></p></div><!-- tagsstop --><ul>
+<li><a href="https://ghostwritten.blog.csdn.net/article/details/105926147" target="_blank">docker registry&#x4ED3;&#x5E93;&#x642D;&#x5EFA;&#x5E76;&#x914D;&#x7F6E;&#x8BC1;&#x4E66;</a></li>
+<li><a href="https://ghostwritten.blog.csdn.net/article/details/107406198" target="_blank">docker&#x90E8;&#x7F72;&#x5E26;&#x6709;&#x754C;&#x9762;&#x7684;registry&#x4ED3;&#x5E93;</a></li>
+<li><a href="https://ghostwritten.blog.csdn.net/article/details/121381151" target="_blank">harbor&#x3010;1&#x3011;&#x521D;&#x7EA7;&#x90E8;&#x7F72;&#x5165;&#x95E8;&#x6307;&#x5357;</a></li>
+<li><a href="https://ghostwritten.blog.csdn.net/article/details/119462437" target="_blank">docker&#x5723;&#x7ECF;</a></li>
+<li><a href="https://ghostwritten.blog.csdn.net/article/details/108562082" target="_blank">&#x4E91;&#x539F;&#x751F;&#x5723;&#x7ECF;</a></li>
+</ul>
+<hr>
+<h2 id="1-&#x4EC0;&#x4E48;&#x662F;harbor"><a name="1-&#x4EC0;&#x4E48;&#x662F;harbor" class="anchor-navigation-ex-anchor" href="#1-&#x4EC0;&#x4E48;&#x662F;harbor"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x4EC0;&#x4E48;&#x662F;harbor</h2>
+<p><a href="https://www.docker.com/" target="_blank">Docker</a>&#x6709;&#x4E2A;&#x5F62;&#x8C61;&#x7684;&#x6BD4;&#x55BB;&#x53EB;&#x96C6;&#x88C5;&#x7BB1;&#xFF0C;<a href="https://kubernetes.io/" target="_blank">kubernetes</a>&#x662F;&#x8235;&#x624B;&#xFF0C;&#x800C;<a href="https://goharbor.io/" target="_blank">Harbor</a>&#x662F;&#x6E2F;&#x6E7E;&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x5BB9;&#x5668;&#x955C;&#x50CF;&#x7684;&#x4ED3;&#x5E93;&#xFF0C;&#x4F01;&#x4E1A;&#x4F7F;&#x7528;docker&#x3001;kubernetes&#x65F6;&#xFF0C;&#x4E00;&#x822C;&#x90FD;&#x9700;&#x8981;&#x4E2A;&#x79C1;&#x6709;&#x955C;&#x50CF;&#x4ED3;&#x5E93;&#x7684;&#xFF0C;<code>Harbor</code>&#x5C31;&#x662F;&#x5176;&#x4E2D;&#x7684;&#x4F7C;&#x4F7C;&#x8005;&#x3002;&#x5B98;&#x65B9;&#x7684;&#x89E3;&#x91CA;&#xFF1A;harbor&#x901A;&#x8FC7;&#x7B56;&#x7565;&#x548C;&#x57FA;&#x4E8E;&#x89D2;&#x8272;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x6765;&#x4FDD;&#x62A4;&#x5DE5;&#x4EF6;&#xFF0C;&#x786E;&#x4FDD;&#x56FE;&#x50CF;&#x88AB;&#x626B;&#x63CF;&#x4E14;&#x6CA1;&#x6709;&#x6F0F;&#x6D1E;&#xFF0C;&#x5E76;&#x5C06;&#x56FE;&#x50CF;&#x7B7E;&#x540D;&#x4E3A;&#x53D7;&#x4FE1;&#x4EFB;&#x7684;&#x3002;Harbor &#x662F; CNCF &#x6BD5;&#x4E1A;&#x7684;&#x9879;&#x76EE;&#xFF0C;&#x53EF;&#x63D0;&#x4F9B;&#x5408;&#x89C4;&#x6027;&#x3001;&#x6027;&#x80FD;&#x548C;&#x4E92;&#x64CD;&#x4F5C;&#x6027;&#xFF0C;&#x5E2E;&#x52A9;&#x60A8;&#x8DE8;&#x4E91;&#x539F;&#x751F;&#x8BA1;&#x7B97;&#x5E73;&#x53F0;&#xFF08;&#x5982; Kubernetes &#x548C; Docker&#xFF09;&#x4E00;&#x81F4;&#x4E14;&#x5B89;&#x5168;&#x5730;&#x7BA1;&#x7406;&#x5DE5;&#x4EF6;&#x3002;</p>
+<p>&#x7279;&#x70B9;&#xFF1A;
+&#x5B89;&#x5168;</p>
+<ul>
+<li>&#x5B89;&#x5168;&#x548C;&#x6F0F;&#x6D1E;&#x5206;&#x6790;</li>
+<li>&#x5185;&#x5BB9;&#x7B7E;&#x540D;&#x548C;&#x9A8C;&#x8BC1;</li>
+</ul>
+<p>&#x7BA1;&#x7406;</p>
+<ul>
+<li>&#x591A;&#x79DF;&#x6237;</li>
+<li>&#x53EF;&#x6269;&#x5C55;&#x7684; API &#x548C; Web UI</li>
+<li>&#x8DE8;&#x591A;&#x4E2A;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x590D;&#x5236;&#xFF0C;&#x5305;&#x62EC; Harbor</li>
+<li>&#x8EAB;&#x4EFD;&#x96C6;&#x6210;&#x548C;&#x57FA;&#x4E8E;&#x89D2;&#x8272;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;</li>
+</ul>
+<h2 id="2-harbor&#x7684;&#x67B6;&#x6784;"><a name="2-harbor&#x7684;&#x67B6;&#x6784;" class="anchor-navigation-ex-anchor" href="#2-harbor&#x7684;&#x67B6;&#x6784;"><i class="fa fa-link" aria-hidden="true"></i></a>2. Harbor&#x7684;&#x67B6;&#x6784;</h2>
+<p><img src="https://img-blog.csdnimg.cn/5f22f15f5fd44e938eefeebf27245a15.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<ul>
+<li><code>Proxy</code>: <code>Harbor</code>&#x7684;<code>registry</code>&#x3001;<code>UI</code>&#x3001;<code>token services</code>&#x7B49;&#x7EC4;&#x4EF6;&#xFF0C;&#x90FD;&#x5904;&#x5728;&#x4E00;&#x4E2A;&#x53CD;&#x5411;&#x4EE3;&#x7406;&#x540E;&#x8FB9;&#x3002;&#x8BE5;&#x4EE3;&#x7406;&#x5C06;&#x6765;&#x81EA;&#x6D4F;&#x89C8;&#x5668;&#x3001;<code>docker clients</code>&#x7684;&#x8BF7;&#x6C42;&#x8F6C;&#x53D1;&#x5230;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x4E0A;&#x3002;</li>
+<li><code>Registry</code>: &#x8D1F;&#x8D23;&#x5B58;&#x50A8;<code>Docker</code>&#x955C;&#x50CF;&#xFF0C;&#x4EE5;&#x53CA;&#x5904;&#x7406;<code>Docker push/pull</code>&#x8BF7;&#x6C42;&#x3002;&#x56E0;&#x4E3A;<code>Harbor</code>&#x5F3A;&#x5236;&#x8981;&#x6C42;&#x5BF9;&#x955C;&#x50CF;&#x7684;&#x8BBF;&#x95EE;&#x505A;&#x6743;&#x9650;&#x63A7;&#x5236;&#xFF0C; &#x5728;&#x6BCF;&#x4E00;&#x6B21;<code>push/pull</code>&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;<code>Registry</code>&#x4F1A;&#x5F3A;&#x5236;&#x8981;&#x6C42;&#x5BA2;&#x6237;&#x7AEF;&#x4ECE;<code>token service</code>&#x90A3;&#x91CC;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x7684;<code>token</code>&#x3002;</li>
+</ul>
+<p><code>Core services</code>: Harbor&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#xFF0C;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#x5982;&#x4E0B;3&#x4E2A;&#x670D;&#x52A1;:</p>
+<ul>
+<li><code>UI</code>: &#x4F5C;&#x4E3A;<code>Registry Webhook</code>, &#x4EE5;&#x56FE;&#x50CF;&#x7528;&#x6237;&#x754C;&#x9762;&#x7684;&#x65B9;&#x5F0F;&#x8F85;&#x52A9;&#x7528;&#x6237;&#x7BA1;&#x7406;&#x955C;&#x50CF;&#x3002;
+1 WebHook&#x662F;&#x5728;registry&#x4E2D;&#x914D;&#x7F6E;&#x7684;&#x4E00;&#x79CD;&#x673A;&#x5236;&#xFF0C; &#x5F53;registry&#x4E2D;&#x955C;&#x50CF;&#x53D1;&#x751F;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x77E5;&#x5230;Harbor&#x7684;<code>webhook endpoint</code>&#x3002;Harbor&#x4F7F;&#x7528;<code>webhook</code>&#x6765;&#x66F4;&#x65B0;&#x65E5;&#x5FD7;&#x3001;&#x521D;&#x59CB;&#x5316;&#x540C;&#x6B65;job&#x7B49;&#x3002;
+2 <code>Token service</code>&#x4F1A;&#x6839;&#x636E;&#x8BE5;&#x7528;&#x6237;&#x5728;&#x4E00;&#x4E2A;&#x5DE5;&#x7A0B;&#x4E2D;&#x7684;&#x89D2;&#x8272;&#xFF0C;&#x4E3A;&#x6BCF;&#x4E00;&#x6B21;&#x7684;push/pull&#x8BF7;&#x6C42;&#x5206;&#x914D;&#x5BF9;&#x5E94;&#x7684;token&#x3002;&#x5047;&#x5982;&#x76F8;&#x5E94;&#x7684;&#x8BF7;&#x6C42;&#x5E76;&#x6CA1;&#x6709;&#x5305;&#x542B;token&#x7684;&#x8BDD;&#xFF0C;<code>registry</code>&#x4F1A;&#x5C06;&#x8BE5;&#x8BF7;&#x6C42;&#x91CD;&#x5B9A;&#x5411;&#x5230;<code>token service</code>&#x3002;
+3 <code>Database</code> &#x7528;&#x4E8E;&#x5B58;&#x653E;&#x5DE5;&#x7A0B;&#x5143;&#x6570;&#x636E;&#x3001;&#x7528;&#x6237;&#x6570;&#x636E;&#x3001;&#x89D2;&#x8272;&#x6570;&#x636E;&#x3001;&#x540C;&#x6B65;&#x7B56;&#x7565;&#x4EE5;&#x53CA;&#x955C;&#x50CF;&#x5143;&#x6570;&#x636E;&#x3002;</li>
+<li><code>Job services</code>: &#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x955C;&#x50CF;&#x590D;&#x5236;&#xFF0C;&#x672C;&#x5730;&#x955C;&#x50CF;&#x53EF;&#x4EE5;&#x88AB;&#x540C;&#x6B65;&#x5230;&#x8FDC;&#x7A0B;Harbor&#x5B9E;&#x4F8B;&#x4E0A;&#x3002;</li>
+<li><code>Log</code>: &#x8D1F;&#x8D23;&#x6536;&#x96C6;&#x5176;&#x4ED6;&#x6A21;&#x5757;&#x7684;&#x65E5;&#x5FD7;&#x5230;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x3002;</li>
+</ul>
+<h2 id="&#x51C6;&#x5907;&#x6761;&#x4EF6;"><a name="&#x51C6;&#x5907;&#x6761;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#&#x51C6;&#x5907;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x51C6;&#x5907;&#x6761;&#x4EF6;</h2>
+<h3 id="harbor-&#x5B89;&#x88C5;&#x6761;&#x4EF6;"><a name="harbor-&#x5B89;&#x88C5;&#x6761;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#harbor-&#x5B89;&#x88C5;&#x6761;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>Harbor &#x5B89;&#x88C5;&#x6761;&#x4EF6;</h3>
+<p><a href="https://goharbor.io/docs/2.4.0/install-config/installation-prereqs/" target="_blank">harbor &#x5B89;&#x88C5;&#x6761;&#x4EF6;</a></p>
+<h3 id="docker&#x5B89;&#x88C5;"><a name="docker&#x5B89;&#x88C5;" class="anchor-navigation-ex-anchor" href="#docker&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>docker&#x5B89;&#x88C5;</h3>
+<p><a href="https://docs.docker.com/engine/install/ubuntu/#installation-methods" target="_blank">docker&#x5B89;&#x88C5;</a></p>
+<h3 id="docker-compose&#x5B89;&#x88C5;"><a name="docker-compose&#x5B89;&#x88C5;" class="anchor-navigation-ex-anchor" href="#docker-compose&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>docker-compose&#x5B89;&#x88C5;</h3>
+<p><a href="https://ghostwritten.blog.csdn.net/article/details/108769857" target="_blank">docker-compose&#x5B89;&#x88C5;</a></p>
+<p><a href="https://goharbor.io/docs/2.4.0/install-config/download-installer/" target="_blank">&#x5B98;&#x65B9;harbor &#x5B89;&#x88C5;</a></p>
+<h2 id="3-harbor-http-ip&#x90E8;&#x7F72;"><a name="3-harbor-http-ip&#x90E8;&#x7F72;" class="anchor-navigation-ex-anchor" href="#3-harbor-http-ip&#x90E8;&#x7F72;"><i class="fa fa-link" aria-hidden="true"></i></a>3. Harbor http ip&#x90E8;&#x7F72;</h2>
+<h3 id="31-harbor&#x5B89;&#x88C5;"><a name="31-harbor&#x5B89;&#x88C5;" class="anchor-navigation-ex-anchor" href="#31-harbor&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>3.1 harbor&#x5B89;&#x88C5;</h3>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">tar</span> xzvf harbor-online-installer-v2.3.4.tgz 
+harbor/prepare
+harbor/LICENSE
+harbor/install.sh
+harbor/common.sh
+harbor/harbor.yml.tmpl
+$ <span class="token function">ls</span>
+harbor  harbor-online-installer-v2.3.4.tgz
+$ <span class="token builtin class-name">cd</span> harbor/
+harbor/$ <span class="token function">ls</span>
+common.sh  harbor.yml.tmpl  install.sh  LICENSE  prepare
+</code></pre>
+<blockquote>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC; &#x5C1D;&#x8BD5;&#x91CD;&#x65B0;&#x5B89;&#x88C5;&#x7684;&#x8BDD;&#xFF0C;&#x4E00;&#x5B9A;&#x8981;&#x4FDD;&#x6301;harbor&#x76EE;&#x5F55;&#x6700;&#x521D;&#x89E3;&#x538B;&#x7684;&#x6837;&#x5B50;&#xFF0C;&#x5F53;&#x7136;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x91CD;&#x65B0;&#x5B89;&#x88C5;&#x4E0D;&#x4FEE;&#x6539;&#x6570;&#x636E;&#x76EE;&#x5F55;&#xFF0C;&#x5E94;&#x8BE5;&#x4E5F;&#x8981;&#x5C06;&#x5176;&#x5220;&#x9664;&#xFF1A;<code>rm -r
+/data/*</code></p>
+</blockquote>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cp</span> harbor.yml.tmpl harbor.yml
+$ <span class="token function">vim</span> harbor.yml
+$ <span class="token function">cat</span> harbor.yml<span class="token operator">|</span><span class="token function">grep</span> -v <span class="token string">&apos;#&apos;</span> <span class="token operator">|</span><span class="token function">grep</span> -v <span class="token string">&apos;^$&apos;</span>
+hostname: <span class="token number">192.168</span>.211.70
+http:
+  port: <span class="token number">80</span>
+harbor_admin_password: <span class="token number">123456</span>
+database:
+  password: root123
+  max_idle_conns: <span class="token number">100</span>
+  max_open_conns: <span class="token number">900</span>
+data_volume: /data
+trivy:
+  ignore_unfixed: <span class="token boolean">false</span>
+  skip_update: <span class="token boolean">false</span>
+  insecure: <span class="token boolean">false</span>
+jobservice:
+  max_job_workers: <span class="token number">10</span>
+notification:
+  webhook_job_max_retry: <span class="token number">10</span>
+chart:
+  absolute_url: disabled
+log:
+  level: info
+  local:
+    rotate_count: <span class="token number">50</span>
+    rotate_size: 200M
+    location: /var/log/harbor
+_version: <span class="token number">2.3</span>.0
+proxy:
+  http_proxy:
+  https_proxy:
+  no_proxy:
+  components:
+    - core
+    - jobservice
+    - trivy
+</code></pre>
+<p>&#x6211;&#x4FEE;&#x6539;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>hostname&#x4E3A;&#x672C;&#x673A;&#x7684;ip&#x5730;&#x5740;&#xFF1A;192.168.211.70</li>
+<li>&#x6CE8;&#x91CA;&#x6389;&#x4E86;https&#x90E8;&#x5206;&#x7684;&#x76F8;&#x5173;&#x914D;&#x7F6E;</li>
+</ul>
+<blockquote>
+<p>&#x4E5F;&#x8BB8;&#x4F60;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>harbor.yaml</code>&#x6709;&#x6539;&#x5BC6;&#x7801;&#x7684;&#x51B2;&#x52A8;&#xFF0C;&#x4F46;&#x5728;&#x6CE8;&#x91CA;&#x4E2D;&#x7684;&#x89E3;&#x91CA;&#x8BF4;&#x6211;&#x4EEC;&#x5E94;&#x8BE5;&#x5728;&#x767B;&#x9646;&#x754C;&#x9762;ui&#x53BB;&#x4FEE;&#x6539;&#x5B83;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x4E86;admin&#x7684;&#x767B;&#x9646;&#x5BC6;&#x7801;&#x4E3A;&#xFF1A;123456&#xFF0C;&#x4E5F;&#x8BB8;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x4E0D;&#x7BA1;&#x600E;&#x4E48;&#x8BF4;&#xFF0C;&#x6211;&#x9047;&#x5230;&#x4E86;&#xFF0C;&#x4E5F;&#x8BB8;&#x662F;&#x6211;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x7F13;&#x5B58;&#x95EE;&#x9898;&#x3002;&#x6216;&#x8005;&#x90E8;&#x7F72;&#x673A;&#x5668;&#x7684;&#x6742;&#x8D28;&#x95EE;&#x9898;&#x3002;</p>
+</blockquote>
+<pre class="language-"><code class="lang-bash">$ ./prepare 
+prepare base <span class="token function">dir</span> is <span class="token builtin class-name">set</span> to /root/harbor/harbor1/harbor
+WARNING:root:WARNING: HTTP protocol is insecure. Harbor will deprecate http protocol <span class="token keyword">in</span> the future. Please <span class="token function">make</span> sure to upgrade to https
+Generated configuration file: /config/portal/nginx.conf
+Generated configuration file: /config/log/logrotate.conf
+Generated configuration file: /config/log/rsyslog_docker.conf
+Generated configuration file: /config/nginx/nginx.conf
+Generated configuration file: /config/core/env
+Generated configuration file: /config/core/app.conf
+Generated configuration file: /config/registry/config.yml
+Generated configuration file: /config/registryctl/env
+Generated configuration file: /config/registryctl/config.yml
+Generated configuration file: /config/db/env
+Generated configuration file: /config/jobservice/env
+Generated configuration file: /config/jobservice/config.yml
+Generated and saved secret to file: /data/secret/keys/secretkey
+Successfully called func: create_root_cert
+Generated configuration file: /compose_location/docker-compose.yml
+Clean up the input <span class="token function">dir</span>
+
+<span class="token comment">#&#x4F1A;&#x5728;/data&#x76EE;&#x5F55;&#x751F;&#x6210;&#x4E00;&#x4E9B;&#x914D;&#x7F6E;&#x548C;&#x6570;&#x636E;&#x3002;</span>
+$ <span class="token function">ls</span> /data/
+ca_download  database  job_logs  redis  registry  secret
+</code></pre>
+<p>&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x90E8;&#x7F72;&#x7684;&#x662F;&#x975E;&#x5B89;&#x5168;&#x7684;harbor&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x8981;&#x5FD8;&#x4E86;&#x5BF9;docker&#x7684;&#x914D;&#x7F6E;&#x505A;&#x4E00;&#x4E9B;&#x4FEE;&#x6539;&#x3002;&#x6DFB;&#x52A0;<code>insecure-registries</code>&#x53C2;&#x6570;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>,
+   <span class="token string">&quot;insecure-registries&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+       <span class="token string">&quot;192.168.211.70&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x7136;&#x540E;&#x90E8;&#x7F72;&#x5B89;&#x88C5;&#xFF0C;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x6B21;&#x53EF;&#x80FD;&#x56E0;&#x4E3A;&#x62C9;&#x53D6;&#x955C;&#x50CF;&#x6709;&#x70B9;&#x6162;&#xFF0C;&#x4F46;&#x5F80;&#x540E;&#x90E8;&#x7F72;&#x4E5F;&#x5C31;&#x51E0;&#x79D2;&#x949F;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ ./install.sh 
+
+<span class="token punctuation">[</span>Step <span class="token number">0</span><span class="token punctuation">]</span>: checking <span class="token keyword">if</span> <span class="token function">docker</span> is installed <span class="token punctuation">..</span>.
+
+Note: <span class="token function">docker</span> version: <span class="token number">20.10</span>.10
+
+<span class="token punctuation">[</span>Step <span class="token number">1</span><span class="token punctuation">]</span>: checking <span class="token function">docker-compose</span> is installed <span class="token punctuation">..</span>.
+
+Note: <span class="token function">docker-compose</span> version: <span class="token number">2.1</span>.1
+
+
+<span class="token punctuation">[</span>Step <span class="token number">2</span><span class="token punctuation">]</span>: preparing environment <span class="token punctuation">..</span>.
+
+<span class="token punctuation">[</span>Step <span class="token number">3</span><span class="token punctuation">]</span>: preparing harbor configs <span class="token punctuation">..</span>.
+prepare base <span class="token function">dir</span> is <span class="token builtin class-name">set</span> to /root/harbor/harbor1/harbor
+WARNING:root:WARNING: HTTP protocol is insecure. Harbor will deprecate http protocol <span class="token keyword">in</span> the future. Please <span class="token function">make</span> sure to upgrade to https
+Clearing the configuration file: /config/nginx/nginx.conf
+Clearing the configuration file: /config/core/app.conf
+Clearing the configuration file: /config/core/env
+Clearing the configuration file: /config/portal/nginx.conf
+Clearing the configuration file: /config/registryctl/config.yml
+Clearing the configuration file: /config/registryctl/env
+Clearing the configuration file: /config/registry/passwd
+Clearing the configuration file: /config/registry/config.yml
+Clearing the configuration file: /config/log/rsyslog_docker.conf
+Clearing the configuration file: /config/log/logrotate.conf
+Clearing the configuration file: /config/jobservice/config.yml
+Clearing the configuration file: /config/jobservice/env
+Clearing the configuration file: /config/db/env
+Generated configuration file: /config/portal/nginx.conf
+Generated configuration file: /config/log/logrotate.conf
+Generated configuration file: /config/log/rsyslog_docker.conf
+Generated configuration file: /config/nginx/nginx.conf
+Generated configuration file: /config/core/env
+Generated configuration file: /config/core/app.conf
+Generated configuration file: /config/registry/config.yml
+Generated configuration file: /config/registryctl/env
+Generated configuration file: /config/registryctl/config.yml
+Generated configuration file: /config/db/env
+Generated configuration file: /config/jobservice/env
+Generated configuration file: /config/jobservice/config.yml
+loaded secret from file: /data/secret/keys/secretkey
+Generated configuration file: /compose_location/docker-compose.yml
+Clean up the input <span class="token function">dir</span>
+
+
+
+<span class="token punctuation">[</span>Step <span class="token number">4</span><span class="token punctuation">]</span>: starting Harbor <span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Running <span class="token number">10</span>/10
+ &#x283F; Network harbor_harbor        Created                                                                                                                                                                                                                <span class="token number">0</span>.1s
+ &#x283F; Container harbor-log         Started                                                                                                                                                                                                                <span class="token number">2</span>.2s
+ &#x283F; Container registry           Started                                                                                                                                                                                                                <span class="token number">5</span>.5s
+ &#x283F; Container harbor-portal      Started                                                                                                                                                                                                                <span class="token number">6</span>.1s
+ &#x283F; Container registryctl        Started                                                                                                                                                                                                                <span class="token number">8</span>.2s
+ &#x283F; Container redis              Started                                                                                                                                                                                                                <span class="token number">8</span>.7s
+ &#x283F; Container harbor-db          Started                                                                                                                                                                                                                <span class="token number">6</span>.5s
+ &#x283F; Container harbor-core        Started                                                                                                                                                                                                               <span class="token number">10</span>.1s
+ &#x283F; Container nginx              Started                                                                                                                                                                                                               <span class="token number">12</span>.4s
+ &#x283F; Container harbor-jobservice  Started                                                                                                                                                                                                               <span class="token number">13</span>.4s
+&#x2714; ----Harbor has been installed and started successfully.----
+
+$ <span class="token function">docker</span> <span class="token function">ps</span>
+CONTAINER ID   IMAGE                                COMMAND                  CREATED          STATUS                    PORTS                                         NAMES
+aace64158bb9   goharbor/nginx-photon:v2.3.4         <span class="token string">&quot;nginx -g &apos;daemon of&#x2026;&quot;</span>   <span class="token number">20</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   <span class="token number">0.0</span>.0.0:80-<span class="token operator">&gt;</span><span class="token number">8080</span>/tcp, <span class="token number">0.0</span>.0.0:443-<span class="token operator">&gt;</span><span class="token number">8443</span>/tcp   nginx
+2fb44007a910   goharbor/harbor-jobservice:v2.3.4    <span class="token string">&quot;/harbor/entrypoint.&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 harbor-jobservice
+07e9c7fc4789   goharbor/harbor-core:v2.3.4          <span class="token string">&quot;/harbor/entrypoint.&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 harbor-core
+6a530d9902f0   goharbor/redis-photon:v2.3.4         <span class="token string">&quot;redis-server /etc/r&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 redis
+857e8929f318   goharbor/registry-photon:v2.3.4      <span class="token string">&quot;/home/harbor/entryp&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 registry
+a6f1e3951798   goharbor/harbor-registryctl:v2.3.4   <span class="token string">&quot;/home/harbor/start.&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 registryctl
+044a0dbe8f0f   goharbor/harbor-db:v2.3.4            <span class="token string">&quot;/docker-entrypoint.&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 harbor-db
+3a111e636acd   goharbor/harbor-portal:v2.3.4        <span class="token string">&quot;nginx -g &apos;daemon of&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>                                                 harbor-portal
+da038195ace4   goharbor/harbor-log:v2.3.4           <span class="token string">&quot;/bin/sh -c /usr/loc&#x2026;&quot;</span>   <span class="token number">21</span> minutes ago   Up <span class="token number">20</span> minutes <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   <span class="token number">127.0</span>.0.1:1514-<span class="token operator">&gt;</span><span class="token number">10514</span>/tcp                     harbor-log
+
+$ <span class="token function">docker-compose</span> <span class="token function">ps</span>
+NAME                COMMAND                  SERVICE             STATUS              PORTS
+harbor-core         <span class="token string">&quot;/harbor/entrypoint.&#x2026;&quot;</span>   core                running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   
+harbor-db           <span class="token string">&quot;/docker-entrypoint.&#x2026;&quot;</span>   postgresql          running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   
+harbor-jobservice   <span class="token string">&quot;/harbor/entrypoint.&#x2026;&quot;</span>   jobservice          running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   
+harbor-log          <span class="token string">&quot;/bin/sh -c /usr/loc&#x2026;&quot;</span>   log                 running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   <span class="token number">127.0</span>.0.1:1514-<span class="token operator">&gt;</span><span class="token number">10514</span>/tcp
+harbor-portal       <span class="token string">&quot;nginx -g &apos;daemon of&#x2026;&quot;</span>   portal              running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   
+nginx               <span class="token string">&quot;nginx -g &apos;daemon of&#x2026;&quot;</span>   proxy               running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   <span class="token number">0.0</span>.0.0:80-<span class="token operator">&gt;</span><span class="token number">8080</span>/tcp, <span class="token number">0.0</span>.0.0:443-<span class="token operator">&gt;</span><span class="token number">8443</span>/tcp
+redis               <span class="token string">&quot;redis-server /etc/r&#x2026;&quot;</span>   redis               running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   
+registry            <span class="token string">&quot;/home/harbor/entryp&#x2026;&quot;</span>   registry            running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>   
+registryctl         <span class="token string">&quot;/home/harbor/start.&#x2026;&quot;</span>   registryctl         running <span class="token punctuation">(</span>healthy<span class="token punctuation">)</span>
+</code></pre>
+<p>Harbor&#x5B89;&#x88C5;&#x7ED3;&#x675F;&#xFF0C;&#x6211;&#x4EEC;&#x9A8C;&#x8BC1;&#x4E00;&#x4E0B;&#x3002;</p>
+<h3 id="32-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><a name="32-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;" class="anchor-navigation-ex-anchor" href="#32-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>3.2 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</h3>
+<h4 id="321-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><a name="321-&#x4ED3;&#x5E93;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#321-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>3.2.1 &#x4ED3;&#x5E93;&#x767B;&#x9646;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> login <span class="token number">192.168</span>.211.70
+Authenticating with existing credentials<span class="token punctuation">..</span>.
+Stored credentials invalid or expired
+Username <span class="token punctuation">(</span>admin<span class="token punctuation">)</span>: admin
+Password: &#x9690;&#x85CF;&#x8F93;&#x5165;&#xFF08;Harbor12345&#xFF09;
+WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
+
+Login Succeeded
+</code></pre>
+<h4 id="422-&#x754C;&#x9762;&#x767B;&#x9646;"><a name="422-&#x754C;&#x9762;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#422-&#x754C;&#x9762;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2.2 &#x754C;&#x9762;&#x767B;&#x9646;</h4>
+<p>&#x754C;&#x9762;&#x767B;&#x9646;&#x7528;&#x6237;&#x5BC6;&#x7801;&#xFF1A;<code>admin/Harbor12345</code>
+<img src="https://img-blog.csdnimg.cn/a7a7d5549a1f40d0b65e0b7be063d534.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h4 id="423-&#x4FEE;&#x6539;&#x5BC6;&#x7801;"><a name="423-&#x4FEE;&#x6539;&#x5BC6;&#x7801;" class="anchor-navigation-ex-anchor" href="#423-&#x4FEE;&#x6539;&#x5BC6;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2.3 &#x4FEE;&#x6539;&#x5BC6;&#x7801;</h4>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x628A;admin&#x7684;&#x521D;&#x59CB;&#x5BC6;&#x7801;<code>Harbor12345</code>&#x6539;&#x4E3A;<code>123456</code>&#xFF0C;&#x8BD5;&#x4E00;&#x8BD5;&#x3002;</p>
+<p><img src="https://img-blog.csdnimg.cn/9d2bc5be0121467fb47e3492396e08eb.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;">
+<strong>&#x53D1;&#x73B0;&#x539F;&#x6765;admin&#x5BC6;&#x7801;&#x7684;&#x8BBE;&#x7F6E;&#x8981;&#x652F;&#x6301;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x7B26;&#x5E76;&#x4E14;&#x6709;&#x6570;&#x5B57;</strong>&#x3002;
+<img src="https://img-blog.csdnimg.cn/5a0b26bd78b4463ebb89e67d0bfcd0fd.png?" alt="&#x4FEE;&#x6539;harbor&#x5BC6;&#x7801;">
+&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x628A;<code>admin</code>&#x7684;&#x5BC6;&#x7801;&#x6539;&#x4E3A;<code>Ghost12345</code>
+<img src="https://img-blog.csdnimg.cn/f14ae54830004ff1af12939af2afdcc9.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;">
+&#x4FEE;&#x6539;&#x6210;&#x529F;&#xFF0C;&#x5E76;&#x4E14;&#x9000;&#x51FA;&#x91CD;&#x65B0;&#x767B;&#x9646;&#x6210;&#x529F;&#x4E86;&#xFF08;&#x56FE;&#x7565;&#xFF09;&#x3002;
+&#x5F53;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4ED3;&#x5E93;&#x767B;&#x9646;&#x5BC6;&#x7801;&#x4E5F;&#x4F1A;&#x968F;&#x4E4B;&#x53D8;&#x5316;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> login <span class="token number">192.168</span>.211.70
+Authenticating with existing credentials<span class="token punctuation">..</span>.
+Stored credentials invalid or expired
+Username <span class="token punctuation">(</span>admin<span class="token punctuation">)</span>: 
+Password: &#x9690;&#x85CF;&#x8F93;&#x5165;&#xFF08;Ghost12345&#xFF09;
+WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
+
+Login Succeeded
+</code></pre>
+<h4 id="424-&#x63A8;&#x9001;&#x955C;&#x50CF;"><a name="424-&#x63A8;&#x9001;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#424-&#x63A8;&#x9001;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2.4 &#x63A8;&#x9001;&#x955C;&#x50CF;</h4>
+<p>&#x6211;&#x4EEC;&#x8981;&#x628A;&#x955C;&#x50CF;&#x63A8;&#x9001;&#x5230;&#x4ED3;&#x5E93;&#xFF0C;&#x90A3;&#x4E48;&#x955C;&#x50CF;&#x540D;&#x8981;&#x9075;&#x5B88;&#x6070;&#x5F53;&#x7684;&#x683C;&#x5F0F;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker</span> push &#x4ED3;&#x5E93;&#x540D;/&#x9879;&#x76EE;&#x540D;/&#x955C;&#x50CF;&#x540D;:&#x6807;&#x7B7E;
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x7684;&#x4ED3;&#x5E93;&#x540D;&#x662F;<code>192.168.211.70</code>,&#x9879;&#x76EE;&#x540D;&#x5F53;&#x524D;&#x9ED8;&#x8BA4;&#x662F;<code>library</code>&#xFF0C;&#x5F53;&#x7136;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x7684;&#x9700;&#x6C42;&#x5728;&#x754C;&#x9762;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x9879;&#x76EE;&#x540D;&#x3002;&#x4F8B;&#x5982;base
+<img src="https://img-blog.csdnimg.cn/9af19670e1904bd0bfb7c4227d86cf5b.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;">
+&#x7136;&#x540E;&#x7ED9;&#x4E00;&#x4E2A;&#x955C;&#x50CF;&#x6253;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x3002;&#x63A8;&#x9001;&#x5230;&#x4ED3;&#x5E93;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> tag busybox:latest <span class="token number">192.168</span>.211.70/base/busybox:latest
+$ <span class="token function">docker</span> push <span class="token number">192.168</span>.211.70/base/busybox:latest
+The push refers to repository <span class="token punctuation">[</span><span class="token number">192.168</span>.211.70/base/busybox<span class="token punctuation">]</span>
+cfd97936a580: Pushed 
+latest: digest: sha256:febcf61cd6e1ac9628f6ac14fa40836d16f3c6ddef3b303ff0321606e55ddd0b size: <span class="token number">527</span>
+</code></pre>
+<p>&#x754C;&#x9762;&#x6211;&#x4EEC;&#x4E5F;&#x80FD;&#x770B;&#x5230;&#x63A8;&#x9001;&#x8FDB;&#x6765;&#x7684;&#x955C;&#x50CF;&#x3002;
+<img src="https://img-blog.csdnimg.cn/f4003f76b7ea4ae9b868dc6a8c0538c6.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h4 id="425-&#x62C9;&#x53D6;&#x955C;&#x50CF;"><a name="425-&#x62C9;&#x53D6;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#425-&#x62C9;&#x53D6;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2.5 &#x62C9;&#x53D6;&#x955C;&#x50CF;</h4>
+<p>&#x6211;&#x4EEC;&#x6362;&#x5230;&#x53E6;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x62C9;&#x53D6;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#xFF0C;&#x8981;&#x600E;&#x4E48;&#x505A;&#x5462;&#xFF1F;&#x4FEE;&#x6539;<code>/etc/docker/daemon.json</code> &#x6DFB;&#x52A0;<code>insecure-registries</code>&#x53C2;&#x6570;&#x662F;&#x6700;&#x4E3A;&#x5173;&#x952E;&#x7684;&#x4E00;&#x6B65;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$  <span class="token function">vim</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>,
+    <span class="token string">&quot;insecure-registries&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+       <span class="token string">&quot;192.168.211.70&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+
+$ systemctl daemon-reload <span class="token operator">&amp;&amp;</span> systemctl restart <span class="token function">docker</span>
+
+<span class="token comment">#&#x62C9;&#x53D6;&#x6210;&#x529F;</span>
+$ <span class="token function">docker</span> pull <span class="token number">192.168</span>.211.70/base/busybox:latest
+latest: Pulling from base/busybox
+24fb2886d6f6: Pull complete 
+Digest: sha256:febcf61cd6e1ac9628f6ac14fa40836d16f3c6ddef3b303ff0321606e55ddd0b
+Status: Downloaded newer image <span class="token keyword">for</span> <span class="token number">192.168</span>.211.70/base/busybox:latest
+<span class="token number">192.168</span>.211.70/base/busybox:latest
+</code></pre>
+<p> <a href="https://goharbor.io/docs/2.4.0/install-config/configure-yml-file/" target="_blank">&#x914D;&#x7F6E; Harbor YML &#x6587;&#x4EF6;</a></p>
+<p><img src="https://img-blog.csdnimg.cn/b223471adbd54a3b8b1721bd52943829.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAZ2hvc3R3cml0dGVu,size_20,color_FFFFFF,t_70,g_se,x_16" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h2 id="4-harbor-http-&#x57DF;&#x540D;&#x90E8;&#x7F72;"><a name="4-harbor-http-&#x57DF;&#x540D;&#x90E8;&#x7F72;" class="anchor-navigation-ex-anchor" href="#4-harbor-http-&#x57DF;&#x540D;&#x90E8;&#x7F72;"><i class="fa fa-link" aria-hidden="true"></i></a>4. Harbor http &#x57DF;&#x540D;&#x90E8;&#x7F72;</h2>
+<h3 id="41-&#x6E05;&#x7406;&#x6742;&#x8D28;"><a name="41-&#x6E05;&#x7406;&#x6742;&#x8D28;" class="anchor-navigation-ex-anchor" href="#41-&#x6E05;&#x7406;&#x6742;&#x8D28;"><i class="fa fa-link" aria-hidden="true"></i></a>4.1 &#x6E05;&#x7406;&#x6742;&#x8D28;</h3>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker-compose</span> down
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Running <span class="token number">10</span>/10
+ &#x283F; Container harbor-jobservice  Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container registryctl        Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container nginx              Removed                                                                                                                                                                                                                <span class="token number">0</span>.5s
+ &#x283F; Container harbor-portal      Removed                                                                                                                                                                                                                <span class="token number">0</span>.4s
+ &#x283F; Container harbor-core        Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container redis              Removed                                                                                                                                                                                                                <span class="token number">1</span>.0s
+ &#x283F; Container harbor-db          Removed                                                                                                                                                                                                                <span class="token number">0</span>.9s
+ &#x283F; Container registry           Removed                                                                                                                                                                                                               <span class="token number">11</span>.1s
+ &#x283F; Container harbor-log         Removed                                                                                                                                                                                                               <span class="token number">10</span>.7s
+ &#x283F; Network harbor_harbor        Removed 
+
+$ <span class="token function">rm</span> -rf /data/*
+$ <span class="token function">rm</span> -rf common
+</code></pre>
+<p>&#x6D4F;&#x89C8;&#x5668;&#x754C;&#x9762;&#x6E05;&#x7406;&#x7F13;&#x5B58;</p>
+<h3 id="42-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><a name="42-&#x4FEE;&#x6539;&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#42-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>4.2 &#x4FEE;&#x6539;&#x914D;&#x7F6E;</h3>
+<p>a. <code>harbor.yaml</code>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x53EA;&#x4FEE;&#x6539;&#x4E86;<code>hostname</code>&#x53C2;&#x6570;</p>
+<pre class="language-"><code class="lang-bash">hostname: ghost.harbor.com
+</code></pre>
+<p>b. </p>
+<pre class="language-"><code class="lang-bash">$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;192.168.211.70 ghost.harbor.com&quot;</span> <span class="token operator">&gt;&gt;</span> /etc/hosts
+
+$ <span class="token function">nslookup</span> ghost.harbor.com
+Server:        <span class="token number">127.0</span>.0.53
+Address:    <span class="token number">127.0</span>.0.53<span class="token comment">#53</span>
+
+Non-authoritative answer:
+Name:    ghost.harbor.com
+Address: <span class="token number">192.168</span>.211.70
+</code></pre>
+<p>c.
+docker&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>/etc/docker/daemon.json</code> &#x53C2;&#x6570;<code>insecure-registries</code> &#x7531;<code>192.168.211.70</code>&#x4FEE;&#x6539;&#x4E3A;<code>ghost.harbor.com</code></p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>,
+   <span class="token string">&quot;insecure-registries&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+       <span class="token string">&quot;ghost.harbor.com&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5E76;&#x91CD;&#x542F;docker</p>
+<pre class="language-"><code class="lang-bash">systemctl daemon-reload <span class="token operator">&amp;&amp;</span> systemctl restart <span class="token function">docker</span>
+</code></pre>
+<h3 id="43-harbor&#x5B89;&#x88C5;"><a name="43-harbor&#x5B89;&#x88C5;" class="anchor-navigation-ex-anchor" href="#43-harbor&#x5B89;&#x88C5;"><i class="fa fa-link" aria-hidden="true"></i></a>4.3 harbor&#x5B89;&#x88C5;</h3>
+<pre class="language-"><code class="lang-bash">$ ./prepare 
+$ ./install.sh 
+$ <span class="token function">docker</span> <span class="token function">ps</span>
+$ <span class="token function">docker-compose</span> <span class="token function">ps</span>
+</code></pre>
+<h3 id="43-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><a name="43-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;" class="anchor-navigation-ex-anchor" href="#43-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>4.3 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</h3>
+<h4 id="431-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><a name="431-&#x4ED3;&#x5E93;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#431-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>4.3.1 &#x4ED3;&#x5E93;&#x767B;&#x9646;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> login ghost.harbor.com
+Username: admin
+Password: 
+WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
+
+Login Succeeded
+</code></pre>
+<h4 id="432-&#x754C;&#x9762;&#x767B;&#x9646;"><a name="432-&#x754C;&#x9762;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#432-&#x754C;&#x9762;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>4.3.2 &#x754C;&#x9762;&#x767B;&#x9646;</h4>
+<p>&#x672C;&#x673A;windows&#x914D;&#x7F6E;</p>
+<pre class="language-"><code class="lang-bash">C:<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>System32<span class="token punctuation">\</span>drivers<span class="token punctuation">\</span>etc<span class="token punctuation">\</span>hosts
+<span class="token number">192.168</span>.211.70 ghost.harbor.com
+</code></pre>
+<p>&#x8BBF;&#x95EE;&#xFF1A;<code>http://ghost.harbor.com</code>
+&#x7528;&#x6237;&#x540D;/&#x5BC6;&#x7801;&#xFF1A;<code>admin</code>/<code>Harbor12345</code></p>
+<p>&#x767B;&#x9646;&#x6210;&#x529F;
+<img src="https://img-blog.csdnimg.cn/ef4e6398233b4a69be3fb4921c2db283.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h4 id="433-&#x955C;&#x50CF;&#x63A8;&#x9001;"><a name="433-&#x955C;&#x50CF;&#x63A8;&#x9001;" class="anchor-navigation-ex-anchor" href="#433-&#x955C;&#x50CF;&#x63A8;&#x9001;"><i class="fa fa-link" aria-hidden="true"></i></a>4.3.3 &#x955C;&#x50CF;&#x63A8;&#x9001;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> tag busybox:latest ghost.harbor.com/library/busybox:latest
+
+$ <span class="token function">docker</span> push ghost.harbor.com/library/busybox:latest
+The push refers to repository <span class="token punctuation">[</span>ghost.harbor.com/library/busybox<span class="token punctuation">]</span>
+cfd97936a580: Pushed 
+latest: digest: sha256:febcf61cd6e1ac9628f6ac14fa40836d16f3c6ddef3b303ff0321606e55ddd0b size: <span class="token number">527</span>
+</code></pre>
+<p>Harbor http&#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x7684;&#x90E8;&#x7F72;&#x7ED3;&#x675F;&#x3002;</p>
+<hr>
+<h2 id="5-harbor-https-ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;"><a name="5-harbor-https-ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;" class="anchor-navigation-ex-anchor" href="#5-harbor-https-ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;"><i class="fa fa-link" aria-hidden="true"></i></a>5. Harbor https ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;</h2>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Harbor &#x4E0D;&#x9644;&#x5E26;&#x8BC1;&#x4E66;&#x3002;&#x53EF;&#x4EE5;&#x5728;&#x6CA1;&#x6709;&#x5B89;&#x5168;&#x6027;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x90E8;&#x7F72; Harbor&#xFF0C;&#x4EE5;&#x4FBF;&#x60A8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; HTTP &#x8FDE;&#x63A5;&#x5230;&#x5B83;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x4EC5;&#x5728;&#x6CA1;&#x6709;&#x8FDE;&#x63A5;&#x5230;&#x5916;&#x90E8; Internet &#x7684;&#x6C14;&#x9699;&#x6D4B;&#x8BD5;&#x6216;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E2D;&#x624D;&#x53EF;&#x63A5;&#x53D7;&#x4F7F;&#x7528; HTTP&#x3002;&#x5728;&#x516C;&#x6709;&#x73AF;&#x5883;&#x4E2D;&#x4F7F;&#x7528; HTTP &#x4F1A;&#x4F7F;&#x60A8;&#x9762;&#x4E34;&#x4E2D;&#x95F4;&#x4EBA;&#x653B;&#x51FB;&#x3002;&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x59CB;&#x7EC8;&#x4F7F;&#x7528; HTTPS&#x3002;&#x5982;&#x679C;&#x60A8;&#x542F;&#x7528; <code>Content Trust with Notary</code> &#x4EE5;&#x6B63;&#x786E;&#x7B7E;&#x7F72;&#x6240;&#x6709;&#x56FE;&#x50CF;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x4F7F;&#x7528; HTTPS&#x3002;</p>
+<p>&#x8981;&#x914D;&#x7F6E; HTTPS&#xFF0C;&#x60A8;&#x5FC5;&#x987B;&#x521B;&#x5EFA; SSL &#x8BC1;&#x4E66;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x53D7;&#x4FE1;&#x4EFB;&#x7684;&#x7B2C;&#x4E09;&#x65B9; CA &#x7B7E;&#x7F72;&#x7684;&#x8BC1;&#x4E66;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x81EA;&#x7B7E;&#x540D;&#x8BC1;&#x4E66;&#x3002;&#x672C;&#x8282;&#x4ECB;&#x7ECD;&#x5982;&#x4F55;&#x4F7F;&#x7528; <a href="https://www.openssl.org/" target="_blank">OpenSSL</a>&#x521B;&#x5EFA; CA&#xFF0C;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x60A8;&#x7684; CA &#x7B7E;&#x7F72;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5176;&#x4ED6; CA &#x63D0;&#x4F9B;&#x5546;&#xFF0C;&#x4F8B;&#x5982; <a href="https://letsencrypt.org/" target="_blank">Let&apos;s Encrypt</a>&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x8FC7;&#x7A0B;&#x5047;&#x8BBE;&#x60A8;&#x7684; Harbor &#x6CE8;&#x518C;&#x8868;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x662F;<code>192.168.211.70</code>&#xFF0C;&#x5E76;&#x4E14;&#x5176; DNS &#x8BB0;&#x5F55;&#x6307;&#x5411;&#x60A8;&#x8FD0;&#x884C; Harbor &#x7684;&#x4E3B;&#x673A;&#x3002;</p>
+<h3 id="51-&#x6E05;&#x7406;&#x6742;&#x8D28;"><a name="51-&#x6E05;&#x7406;&#x6742;&#x8D28;" class="anchor-navigation-ex-anchor" href="#51-&#x6E05;&#x7406;&#x6742;&#x8D28;"><i class="fa fa-link" aria-hidden="true"></i></a>5.1 &#x6E05;&#x7406;&#x6742;&#x8D28;</h3>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker-compose</span> down
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Running <span class="token number">10</span>/10
+ &#x283F; Container harbor-jobservice  Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container registryctl        Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container nginx              Removed                                                                                                                                                                                                                <span class="token number">0</span>.5s
+ &#x283F; Container harbor-portal      Removed                                                                                                                                                                                                                <span class="token number">0</span>.4s
+ &#x283F; Container harbor-core        Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container redis              Removed                                                                                                                                                                                                                <span class="token number">1</span>.0s
+ &#x283F; Container harbor-db          Removed                                                                                                                                                                                                                <span class="token number">0</span>.9s
+ &#x283F; Container registry           Removed                                                                                                                                                                                                               <span class="token number">11</span>.1s
+ &#x283F; Container harbor-log         Removed                                                                                                                                                                                                               <span class="token number">10</span>.7s
+ &#x283F; Network harbor_harbor        Removed 
+
+$ <span class="token function">rm</span> -rf /data/*
+$ <span class="token function">rm</span> -rf common
+</code></pre>
+<h3 id="52-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><a name="52-&#x4FEE;&#x6539;&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#52-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>5.2 &#x4FEE;&#x6539;&#x914D;&#x7F6E;</h3>
+<h4 id="521-harboryaml"><a name="521-harboryaml" class="anchor-navigation-ex-anchor" href="#521-harboryaml"><i class="fa fa-link" aria-hidden="true"></i></a>5.2.1 harbor.yaml</h4>
+<p> <code>harbor.yaml</code>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4FEE;&#x6539;<code>hostname</code>&#x53C2;&#x6570;&#x5E76;&#x914D;&#x7F6E;&#x4E86;https&#x76F8;&#x5173;&#x53C2;&#x6570;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> harbor.yml<span class="token operator">|</span><span class="token function">grep</span> -v <span class="token string">&apos;#&apos;</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">&apos;^$&apos;</span>
+hostname: <span class="token number">192.168</span>.211.70 
+http:
+  port: <span class="token number">80</span>
+https:
+  port: <span class="token number">443</span>
+  certificate: /data/cert/192.168.211.70.crt
+  private_key: /data/cert/192.168.211.70.key
+harbor_admin_password: Harbor12345
+database:
+  password: root123
+  max_idle_conns: <span class="token number">100</span>
+  max_open_conns: <span class="token number">900</span>
+data_volume: /data
+trivy:
+  ignore_unfixed: <span class="token boolean">false</span>
+  skip_update: <span class="token boolean">false</span>
+  insecure: <span class="token boolean">false</span>
+jobservice:
+  max_job_workers: <span class="token number">10</span>
+notification:
+  webhook_job_max_retry: <span class="token number">10</span>
+chart:
+  absolute_url: disabled
+log:
+  level: info
+  local:
+    rotate_count: <span class="token number">50</span>
+    rotate_size: 200M
+    location: /var/log/harbor
+_version: <span class="token number">2.3</span>.0
+proxy:
+  http_proxy:
+  https_proxy:
+  no_proxy:
+  components:
+    - core
+    - jobservice
+    - trivy
+</code></pre>
+<h4 id="522-etcdockerdaemonjson"><a name="522-etcdockerdaemonjson" class="anchor-navigation-ex-anchor" href="#522-etcdockerdaemonjson"><i class="fa fa-link" aria-hidden="true"></i></a>5.2.2 /etc/docker/daemon.json</h4>
+<p>docker&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>/etc/docker/daemon.json</code> &#x53C2;&#x6570;<code>insecure-registries</code> &#x8981;&#x628A;&#x5B83;&#x53BB;&#x6389;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5E76;&#x91CD;&#x542F;docker</p>
+<pre class="language-"><code class="lang-bash">systemctl daemon-reload <span class="token operator">&amp;&amp;</span> systemctl restart <span class="token function">docker</span>
+</code></pre>
+<h4 id="523-&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;"><a name="523-&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#523-&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>5.2.3 &#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;</h4>
+<p>&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x60A8;&#x5E94;&#x8BE5;&#x4ECE; CA &#x83B7;&#x53D6;&#x8BC1;&#x4E66;&#x3002;&#x5728;&#x6D4B;&#x8BD5;&#x6216;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x751F;&#x6210;&#x81EA;&#x5DF1;&#x7684; CA&#x3002;&#x8981;&#x751F;&#x6210; CA &#x8BC1;&#x4E66;&#xFF0C;&#x8BF7;&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x3002;
+&#x751F;&#x6210; CA &#x8BC1;&#x4E66;&#x79C1;&#x94A5;</p>
+<pre class="language-"><code class="lang-bash">$ openssl genrsa -out ca.key <span class="token number">4096</span>
+Generating RSA private key, <span class="token number">4096</span> bit long modulus <span class="token punctuation">(</span><span class="token number">2</span> primes<span class="token punctuation">)</span>
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>++++
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>.++++
+e is <span class="token number">65537</span> <span class="token punctuation">(</span>0x010001<span class="token punctuation">)</span>
+</code></pre>
+<p>&#x751F;&#x6210; CA &#x8BC1;&#x4E66;
+&#x8C03;&#x6574;<code>-subj</code>&#x9009;&#x9879;&#x4E2D;&#x7684;&#x503C;&#x4EE5;&#x53CD;&#x6620;&#x60A8;&#x7684;&#x7EC4;&#x7EC7;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528; <code>FQDN</code> &#x8FDE;&#x63A5; <code>Harbor</code> &#x4E3B;&#x673A;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5C06;&#x5176;&#x6307;&#x5B9A;&#x4E3A;&#x516C;&#x7528;&#x540D; ( CN) &#x5C5E;&#x6027;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">openssl req -x509 -new -nodes -sha512 -days <span class="token number">3650</span> <span class="token punctuation">\</span>
+ -subj <span class="token string">&quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.211.70&quot;</span> <span class="token punctuation">\</span>
+ -key ca.key <span class="token punctuation">\</span>
+ -out ca.crt
+</code></pre>
+<h4 id="524-&#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;"><a name="524-&#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#524-&#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>5.2.4 &#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;</h4>
+<p>&#x8BC1;&#x4E66;&#x901A;&#x5E38;&#x5305;&#x542B;&#x4E00;&#x4E2A;.crt&#x6587;&#x4EF6;&#x548C;&#x4E00;&#x4E2A;.key&#x6587;&#x4EF6;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;<code>192.168.211.70.crt</code>&#x548C;<code>192.168.211.70.key</code>.
+<strong>&#x751F;&#x6210;&#x79C1;&#x94A5;</strong></p>
+<pre class="language-"><code class="lang-bash">openssl genrsa -out <span class="token number">192.168</span>.211.70.key <span class="token number">4096</span>
+</code></pre>
+<p><strong>&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x7B7E;&#x540D;&#x8BF7;&#x6C42; (CSR)</strong>
+&#x8C03;&#x6574;<code>-subj</code>&#x9009;&#x9879;&#x4E2D;&#x7684;&#x503C;&#x4EE5;&#x53CD;&#x6620;&#x60A8;&#x7684;&#x7EC4;&#x7EC7;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528; FQDN &#x8FDE;&#x63A5; Harbor &#x4E3B;&#x673A;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5C06;&#x5176;&#x6307;&#x5B9A;&#x4E3A;&#x516C;&#x7528;&#x540D; ( CN) &#x5C5E;&#x6027;&#x5E76;&#x5728;&#x5BC6;&#x94A5;&#x548C; CSR &#x6587;&#x4EF6;&#x540D;&#x4E2D;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">openssl req -sha512 -new <span class="token punctuation">\</span>
+    -subj <span class="token string">&quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.211.70&quot;</span> <span class="token punctuation">\</span>
+    -key <span class="token number">192.168</span>.211.70.key <span class="token punctuation">\</span>
+    -out <span class="token number">192.168</span>.211.70.csr
+</code></pre>
+<p><strong>&#x751F;&#x6210; x509 v3 &#x6269;&#x5C55;&#x6587;&#x4EF6;</strong>
+&#x65E0;&#x8BBA;&#x60A8;&#x662F;&#x4F7F;&#x7528; FQDN &#x8FD8;&#x662F; IP &#x5730;&#x5740;&#x8FDE;&#x63A5;&#x5230;&#x60A8;&#x7684; Harbor &#x4E3B;&#x673A;&#xFF0C;&#x60A8;&#x90FD;&#x5FC5;&#x987B;&#x521B;&#x5EFA;&#x6B64;&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x4FBF;&#x4E3A;&#x60A8;&#x7684; Harbor &#x4E3B;&#x673A;&#x751F;&#x6210;&#x7B26;&#x5408;&#x4E3B;&#x9898;&#x5907;&#x7528;&#x540D;&#x79F0; (SAN) &#x548C; x509 v3 &#x7684;&#x8BC1;&#x4E66;&#x6269;&#x5C55;&#x8981;&#x6C42;&#x3002;&#x66FF;&#x6362;DNS&#x6761;&#x76EE;&#x4EE5;&#x53CD;&#x6620;&#x60A8;&#x7684;&#x57DF;&#x3002;</p>
+<p><strong>&#x4F7F;&#x7528;&#x8BE5;<code>extfile.cnf</code>&#x6587;&#x4EF6;&#x4E3A;&#x60A8;&#x7684; Harbor &#x4E3B;&#x673A;&#x751F;&#x6210;&#x8BC1;&#x4E66;</strong>
+&#x5C06;192.168.211.70CRS &#x548C; CRT &#x6587;&#x4EF6;&#x540D;&#x4E2D;&#x7684; &#x66FF;&#x6362;&#x4E3A; Harbor &#x4E3B;&#x673A;&#x540D;</p>
+<pre class="language-"><code class="lang-bash"><span class="token builtin class-name">echo</span> subjectAltName <span class="token operator">=</span> IP:192.168.211.70 <span class="token operator">&gt;</span> extfile.cnf
+</code></pre>
+<pre class="language-"><code class="lang-bash">openssl x509 -req -sha512 -days <span class="token number">3650</span> <span class="token punctuation">\</span>
+    -extfile extfile.cnf <span class="token punctuation">\</span>
+    -CA ca.crt -CAkey ca.key -CAcreateserial <span class="token punctuation">\</span>
+    -in <span class="token number">192.168</span>.211.70.csr <span class="token punctuation">\</span>
+    -out <span class="token number">192.168</span>.211.70.crt
+</code></pre>
+<h4 id="525-&#x5411;-harbor-&#x548C;-docker-&#x63D0;&#x4F9B;&#x8BC1;&#x4E66;"><a name="525-&#x5411;-harbor-&#x548C;-docker-&#x63D0;&#x4F9B;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#525-&#x5411;-harbor-&#x548C;-docker-&#x63D0;&#x4F9B;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>5.2.5 &#x5411; Harbor &#x548C; Docker &#x63D0;&#x4F9B;&#x8BC1;&#x4E66;</h4>
+<p>&#x751F;&#x6210;&#x540E;<code>ca.crt</code>&#xFF0C;<code>192.168.211.70.crt</code>&#x548C;<code>192.168.211.70.key</code>&#x6587;&#x4EF6;&#xFF0C;&#x5FC5;&#x987B;&#x5C06;&#x5B83;&#x4EEC;&#x63D0;&#x4F9B;&#x7ED9;Harbor and  Docker&#xFF0C;&#x548C;&#x91CD;&#x65B0;&#x914D;&#x7F6E;harbor&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;
+<strong>a. &#x5C06;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x548C;&#x5BC6;&#x94A5;&#x590D;&#x5236;&#x5230; Harbor &#x4E3B;&#x673A;&#x4E0A;&#x7684; certficates &#x6587;&#x4EF6;&#x5939;&#x4E2D;</strong></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">mkdir</span> /data/cert
+<span class="token function">cp</span> <span class="token number">192.168</span>.211.70.crt /data/cert/
+<span class="token function">cp</span> <span class="token number">192.168</span>.211.70.key /data/cert/
+</code></pre>
+<p><strong>b. &#x8F6C;&#x6362;192.168.211.70.crt&#x4E3A;192.168.211.70.cert&#xFF0C;&#x4F9B; Docker &#x4F7F;&#x7528;</strong>
+Docker &#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x5C06;.crt&#x6587;&#x4EF6;&#x89E3;&#x91CA;&#x4E3A; CA &#x8BC1;&#x4E66;&#xFF0C;&#x5C06;.cert&#x6587;&#x4EF6;&#x89E3;&#x91CA;&#x4E3A;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">openssl x509 -inform PEM -in <span class="token number">192.168</span>.211.70.crt -out <span class="token number">192.168</span>.211.70.cert
+</code></pre>
+<p><strong>c. &#x5C06;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x3001;&#x5BC6;&#x94A5;&#x548C; CA &#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230; Harbor &#x4E3B;&#x673A;&#x4E0A;&#x7684; Docker &#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x3002;&#x60A8;&#x5FC5;&#x987B;&#x9996;&#x5148;&#x521B;&#x5EFA;&#x9002;&#x5F53;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x3002;</strong></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">mkdir</span> -p /etc/docker/certs.d/192.168.211.70/
+<span class="token function">cp</span> <span class="token number">192.168</span>.211.70.cert /etc/docker/certs.d/192.168.211.70/
+<span class="token function">cp</span> <span class="token number">192.168</span>.211.70.key /etc/docker/certs.d/192.168.211.70/
+<span class="token function">cp</span> ca.crt /etc/docker/certs.d/192.168.211.70/
+</code></pre>
+<p>&#x5982;&#x679C;&#x60A8;&#x5C06;&#x9ED8;&#x8BA4;nginx&#x7AEF;&#x53E3; 443&#x6620;&#x5C04;&#x5230;&#x5176;&#x4ED6;&#x7AEF;&#x53E3;&#xFF0C;&#x8BF7;&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;<code>/etc/docker/certs.d/192.168.211.70:port</code>&#x6216;<code>/etc/docker/certs.d/harbor_IP:port</code>&#x3002;
+<strong>d. &#x91CD;&#x542F;docker</strong></p>
+<pre class="language-"><code class="lang-bash">systemctl daemon-reload <span class="token operator">&amp;&amp;</span> systemctl restart <span class="token function">docker</span>
+</code></pre>
+<h4 id="526-&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;"><a name="526-&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#526-&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>5.2.6 &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;</h4>
+<p>e. <strong>&#x5F53; Docker &#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x5728;&#x67D0;&#x4E9B;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x60A8;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;</strong>&#x3002;
+&#x4F8B;&#x5982;&#xFF0C;&#x8FD0;&#x884C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;
+<strong>ubuntu</strong></p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cp</span> <span class="token number">192.168</span>.211.70.crt /usr/local/share/ca-certificates/192.168.211.70.crt 
+$ update-ca-certificates
+Updating certificates <span class="token keyword">in</span> /etc/ssl/certs<span class="token punctuation">..</span>.
+<span class="token number">1</span> added, <span class="token number">0</span> removed<span class="token punctuation">;</span> done.
+Running hooks <span class="token keyword">in</span> /etc/ca-certificates/update.d<span class="token punctuation">..</span>.
+done.
+</code></pre>
+<p><strong>Red Hat (CentOS etc)</strong>:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cp</span> yourdomain.com.crt /etc/pki/ca-trust/source/anchors/yourdomain.com.crt
+$ update-ca-trust
+</code></pre>
+<h3 id="53-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor"><a name="53-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor" class="anchor-navigation-ex-anchor" href="#53-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor"><i class="fa fa-link" aria-hidden="true"></i></a>5.3 &#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E; Harbor</h3>
+<p>&#x5982;&#x679C;&#x60A8;&#x5C1A;&#x672A;&#x90E8;&#x7F72; Harbor&#xFF0C;&#x8BF7;&#x53C2;&#x9605; <a href="https://goharbor.io/docs/2.4.0/install-config/configure-yml-file/" target="_blank">&#x914D;&#x7F6E; Harbor YML &#x6587;&#x4EF6;</a>&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x5982;&#x4F55;&#x901A;&#x8FC7;&#x5728; &#x4E2D;&#x6307;&#x5B9A;<code>hostname</code>&#x548C;<code>https</code>&#x5C5E;&#x6027;&#x6765;&#x914D;&#x7F6E; Harbor &#x4EE5;&#x4F7F;&#x7528;&#x8BC1;&#x4E66;&#x7684;&#x4FE1;&#x606F;<code>harbor.yml</code>&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60A8;&#x5DF2;&#x7ECF;&#x4F7F;&#x7528; HTTP &#x90E8;&#x7F72;&#x4E86; Harbor &#x5E76;&#x5E0C;&#x671B;&#x5C06;&#x5176;&#x91CD;&#x65B0;&#x914D;&#x7F6E;&#x4E3A;&#x4F7F;&#x7528; HTTPS&#xFF0C;&#x8BF7;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x3002;
+<strong>a. &#x8FD0;&#x884C;prepare&#x811A;&#x672C;&#x4EE5;&#x542F;&#x7528; HTTPS</strong></p>
+<pre class="language-"><code class="lang-bash">./prepare
+</code></pre>
+<p><strong>b. &#x5982;&#x679C; Harbor &#x6B63;&#x5728;&#x8FD0;&#x884C;&#xFF0C;&#x8BF7;&#x505C;&#x6B62;&#x5E76;&#x5220;&#x9664;&#x73B0;&#x6709;&#x5B9E;&#x4F8B;</strong></p>
+<p>&#x60A8;&#x7684;&#x56FE;&#x50CF;&#x6570;&#x636E;&#x4FDD;&#x7559;&#x5728;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x4E22;&#x5931;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker-compose</span> down -v
+</code></pre>
+<p><strong>c. &#x91CD;&#x542F;</strong></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker-compose</span> up -d
+</code></pre>
+<h3 id="54-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><a name="54-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;" class="anchor-navigation-ex-anchor" href="#54-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>5.4 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</h3>
+<h4 id="541-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><a name="541-&#x4ED3;&#x5E93;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#541-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>5.4.1 &#x4ED3;&#x5E93;&#x767B;&#x9646;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> login <span class="token number">192.168</span>.211.70
+Authenticating with existing credentials<span class="token punctuation">..</span>.
+Stored credentials invalid or expired
+Username <span class="token punctuation">(</span>admin<span class="token punctuation">)</span>: admin
+Password: 
+WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
+
+Login Succeeded
+</code></pre>
+<h4 id="542-&#x754C;&#x9762;&#x767B;&#x9646;"><a name="542-&#x754C;&#x9762;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#542-&#x754C;&#x9762;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>5.4.2 &#x754C;&#x9762;&#x767B;&#x9646;</h4>
+<p><a href="https://192.168.211.70" target="_blank">https://192.168.211.70</a>
+&#x7528;&#x6237;&#x5BC6;&#x7801;&#xFF1A;admin/Harbor12345
+<img src="https://img-blog.csdnimg.cn/cfc4bbcdfcbd477296b3d48e9e4bbfcc.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h4 id="543-&#x63A8;&#x9001;&#x955C;&#x50CF;"><a name="543-&#x63A8;&#x9001;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#543-&#x63A8;&#x9001;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>5.4.3 &#x63A8;&#x9001;&#x955C;&#x50CF;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> push <span class="token number">192.168</span>.211.70/library/alpine:v1.0 
+The push refers to repository <span class="token punctuation">[</span><span class="token number">192.168</span>.211.70/library/alpine<span class="token punctuation">]</span>
+e2eb06d8af82: Pushed 
+v1.0: digest: sha256:69704ef328d05a9f806b6b8502915e6a0a4faa4d72018dc42343f511490daf8a size: <span class="token number">528</span>
+</code></pre>
+<h4 id="544-&#x62C9;&#x53D6;&#x955C;&#x50CF;"><a name="544-&#x62C9;&#x53D6;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#544-&#x62C9;&#x53D6;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>5.4.4 &#x62C9;&#x53D6;&#x955C;&#x50CF;</h4>
+<p>&#x6211;&#x4EEC;&#x6362;&#x5230;&#x53E6;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x62C9;&#x53D6;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#xFF0C;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x914D;&#x7F6E;&#x5462;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#xFF0C;&#x53EA;&#x9700;&#x8FDE;&#x901A;&#x5373;&#x53EF;&#x3002;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> pull <span class="token number">192.168</span>.211.70/library/alpine:v1.0
+v1.0: Pulling from library/alpine
+a0d0a0d46f8b: Pull complete 
+Digest: sha256:69704ef328d05a9f806b6b8502915e6a0a4faa4d72018dc42343f511490daf8a
+Status: Downloaded newer image <span class="token keyword">for</span> <span class="token number">192.168</span>.211.70/library/alpine:v1.0
+<span class="token number">192.168</span>.211.70/library/alpine:v1.0
+</code></pre>
+<p>harbor https ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;&#x6210;&#x529F;&#x7ED3;&#x675F;</p>
+<hr>
+<h2 id="6-harbor-https-&#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x90E8;&#x7F72;"><a name="6-harbor-https-&#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x90E8;&#x7F72;" class="anchor-navigation-ex-anchor" href="#6-harbor-https-&#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x90E8;&#x7F72;"><i class="fa fa-link" aria-hidden="true"></i></a>6 Harbor https &#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x90E8;&#x7F72;</h2>
+<h3 id="61-&#x6E05;&#x7406;&#x6742;&#x8D28;"><a name="61-&#x6E05;&#x7406;&#x6742;&#x8D28;" class="anchor-navigation-ex-anchor" href="#61-&#x6E05;&#x7406;&#x6742;&#x8D28;"><i class="fa fa-link" aria-hidden="true"></i></a>6.1 &#x6E05;&#x7406;&#x6742;&#x8D28;</h3>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker-compose</span> down
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Running <span class="token number">10</span>/10
+ &#x283F; Container harbor-jobservice  Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container registryctl        Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container nginx              Removed                                                                                                                                                                                                                <span class="token number">0</span>.5s
+ &#x283F; Container harbor-portal      Removed                                                                                                                                                                                                                <span class="token number">0</span>.4s
+ &#x283F; Container harbor-core        Removed                                                                                                                                                                                                               <span class="token number">10</span>.5s
+ &#x283F; Container redis              Removed                                                                                                                                                                                                                <span class="token number">1</span>.0s
+ &#x283F; Container harbor-db          Removed                                                                                                                                                                                                                <span class="token number">0</span>.9s
+ &#x283F; Container registry           Removed                                                                                                                                                                                                               <span class="token number">11</span>.1s
+ &#x283F; Container harbor-log         Removed                                                                                                                                                                                                               <span class="token number">10</span>.7s
+ &#x283F; Network harbor_harbor        Removed 
+
+$ <span class="token function">rm</span> -rf /data/*
+$ <span class="token function">rm</span> -rf common         
+$ <span class="token function">rm</span> -rf /etc/docker/certs.d/*
+</code></pre>
+<h3 id="62-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><a name="62-&#x4FEE;&#x6539;&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#62-&#x4FEE;&#x6539;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>6.2 &#x4FEE;&#x6539;&#x914D;&#x7F6E;</h3>
+<h4 id="621-harboryaml"><a name="621-harboryaml" class="anchor-navigation-ex-anchor" href="#621-harboryaml"><i class="fa fa-link" aria-hidden="true"></i></a>6.2.1 harbor.yaml</h4>
+<p> <code>harbor.yaml</code>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4FEE;&#x6539;<code>hostname</code>&#x53C2;&#x6570;&#x5E76;&#x91CD;&#x65B0;&#x914D;&#x7F6E;&#x4E86;https&#x76F8;&#x5173;&#x53C2;&#x6570;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> harbor.yml<span class="token operator">|</span><span class="token function">grep</span> -v <span class="token string">&apos;#&apos;</span> <span class="token operator">|</span> <span class="token function">grep</span> -v <span class="token string">&apos;^$&apos;</span>
+hostname: ghost.harbor.com
+http:
+  port: <span class="token number">80</span>
+https:
+  port: <span class="token number">443</span>
+  certificate: /data/cert/ghost.harbor.com.crt
+  private_key: /data/cert/ghost.harbor.com.key
+harbor_admin_password: Harbor12345
+database:
+  password: root123
+  max_idle_conns: <span class="token number">100</span>
+  max_open_conns: <span class="token number">900</span>
+data_volume: /data
+trivy:
+  ignore_unfixed: <span class="token boolean">false</span>
+  skip_update: <span class="token boolean">false</span>
+  insecure: <span class="token boolean">false</span>
+jobservice:
+  max_job_workers: <span class="token number">10</span>
+notification:
+  webhook_job_max_retry: <span class="token number">10</span>
+chart:
+  absolute_url: disabled
+log:
+  level: info
+  local:
+    rotate_count: <span class="token number">50</span>
+    rotate_size: 200M
+    location: /var/log/harbor
+_version: <span class="token number">2.3</span>.0
+proxy:
+  http_proxy:
+  https_proxy:
+  no_proxy:
+  components:
+    - core
+    - jobservice
+    - trivy
+</code></pre>
+<h4 id="622-etcdockerdaemonjson"><a name="622-etcdockerdaemonjson" class="anchor-navigation-ex-anchor" href="#622-etcdockerdaemonjson"><i class="fa fa-link" aria-hidden="true"></i></a>6.2.2 /etc/docker/daemon.json</h4>
+<p>&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x5E76;&#x91CD;&#x542F;docker</p>
+<pre class="language-"><code class="lang-bash">systemctl daemon-reload <span class="token operator">&amp;&amp;</span> systemctl restart <span class="token function">docker</span>
+</code></pre>
+<h3 id="63-&#x914D;&#x7F6E;&#x8BC1;&#x4E66;"><a name="63-&#x914D;&#x7F6E;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#63-&#x914D;&#x7F6E;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>6.3 &#x914D;&#x7F6E;&#x8BC1;&#x4E66;</h3>
+<h4 id="631--&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;"><a name="631--&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#631--&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>6.3.1  &#x751F;&#x6210;&#x8BC1;&#x4E66;&#x9881;&#x53D1;&#x673A;&#x6784;&#x8BC1;&#x4E66;</h4>
+<pre class="language-"><code class="lang-bash"><span class="token comment">#&#x751F;&#x6210; CA &#x8BC1;&#x4E66;&#x79C1;&#x94A5;</span>
+$ openssl genrsa -out ca.key <span class="token number">4096</span>
+
+<span class="token comment">#&#x751F;&#x6210; CA &#x8BC1;&#x4E66;</span>
+openssl req -x509 -new -nodes -sha512 -days <span class="token number">3650</span> <span class="token punctuation">\</span>
+ -subj <span class="token string">&quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=ghost.harbor.com&quot;</span> <span class="token punctuation">\</span>
+ -key ca.key <span class="token punctuation">\</span>
+ -out ca.crt
+</code></pre>
+<h4 id="632-&#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;"><a name="632-&#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#632-&#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>6.3.2 &#x751F;&#x6210;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;</h4>
+<pre class="language-"><code class="lang-bash"><span class="token comment">#&#x751F;&#x6210;&#x79C1;&#x94A5;</span>
+openssl genrsa -out ghost.harbor.com.key <span class="token number">4096</span>
+
+<span class="token comment">#&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x7B7E;&#x540D;&#x8BF7;&#x6C42; (CSR)</span>
+openssl req -sha512 -new <span class="token punctuation">\</span>
+    -subj <span class="token string">&quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=ghost.harbor.com&quot;</span> <span class="token punctuation">\</span>
+    -key ghost.harbor.com.key <span class="token punctuation">\</span>
+    -out ghost.harbor.com.csr
+
+<span class="token comment">#&#x751F;&#x6210; x509 v3 &#x6269;&#x5C55;&#x6587;&#x4EF6;**</span>
+<span class="token function">cat</span> <span class="token operator">&gt;</span> v3.ext <span class="token operator">&lt;&lt;-</span><span class="token string">EOF
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1=ghost.harbor.com
+DNS.2=ghost.harbor
+DNS.3=hostname
+EOF</span>
+
+
+<span class="token comment">#&#x4F7F;&#x7528;&#x8BE5;v3.ext&#x6587;&#x4EF6;&#x4E3A;&#x60A8;&#x7684; Harbor &#x4E3B;&#x673A;&#x751F;&#x6210;&#x8BC1;&#x4E66;</span>
+openssl x509 -req -sha512 -days <span class="token number">3650</span> <span class="token punctuation">\</span>
+    -extfile v3.ext <span class="token punctuation">\</span>
+    -CA ca.crt -CAkey ca.key -CAcreateserial <span class="token punctuation">\</span>
+    -in ghost.harbor.com.csr <span class="token punctuation">\</span>
+    -out ghost.harbor.com.crt
+</code></pre>
+<h4 id="634-&#x5411;-harbor-&#x548C;-docker-&#x63D0;&#x4F9B;&#x8BC1;&#x4E66;"><a name="634-&#x5411;-harbor-&#x548C;-docker-&#x63D0;&#x4F9B;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#634-&#x5411;-harbor-&#x548C;-docker-&#x63D0;&#x4F9B;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>6.3.4 &#x5411; Harbor &#x548C; Docker &#x63D0;&#x4F9B;&#x8BC1;&#x4E66;</h4>
+<pre class="language-"><code class="lang-bash"><span class="token comment">#a. &#x5C06;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x548C;&#x5BC6;&#x94A5;&#x590D;&#x5236;&#x5230; Harbor &#x4E3B;&#x673A;&#x4E0A;&#x7684; certficates &#x6587;&#x4EF6;&#x5939;&#x4E2D;**</span>
+<span class="token function">mkdir</span> /data/cert
+<span class="token function">cp</span> ghost.harbor.com.crt /data/cert/
+<span class="token function">cp</span> ghost.harbor.com.key /data/cert/
+
+<span class="token comment">#b. &#x8F6C;&#x6362;ghost.harbor.com.crt&#x4E3A;ghost.harbor.com.cert&#xFF0C;&#x4F9B; Docker &#x4F7F;&#x7528;**</span>
+openssl x509 -inform PEM -in ghost.harbor.com.crt -out ghost.harbor.com.cert
+
+<span class="token comment">#**c. &#x5C06;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x3001;&#x5BC6;&#x94A5;&#x548C; CA &#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230; Harbor &#x4E3B;&#x673A;&#x4E0A;&#x7684; Docker &#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x3002;&#x60A8;&#x5FC5;&#x987B;&#x9996;&#x5148;&#x521B;&#x5EFA;&#x9002;&#x5F53;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x3002;**</span>
+<span class="token function">mkdir</span> -p /etc/docker/certs.d/ghost.harbor.com/
+<span class="token function">cp</span> ghost.harbor.com.cert /etc/docker/certs.d/ghost.harbor.com/
+<span class="token function">cp</span> ghost.harbor.com.key /etc/docker/certs.d/ghost.harbor.com/
+<span class="token function">cp</span> ca.crt /etc/docker/certs.d/ghost.harbor.com/
+</code></pre>
+<blockquote>
+<p>&#x5982;&#x679C;&#x60A8;&#x5C06;&#x9ED8;&#x8BA4;nginx&#x7AEF;&#x53E3;443&#x6620;&#x5C04;&#x5230;&#x5176;&#x4ED6;&#x7AEF;&#x53E3;&#xFF0C;&#x8BF7;&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x5939;<code>/etc/docker/certs.d/ghost.harbor.com:port</code>&#x6216;<code>/etc/docker/certs.d/harbor_IP:port</code>&#x3002;</p>
+</blockquote>
+<p>&#x91CD;&#x542F;docker</p>
+<pre class="language-"><code class="lang-bash">
+systemctl daemon-reload <span class="token operator">&amp;&amp;</span> systemctl restart <span class="token function">docker</span>
+</code></pre>
+<h4 id="635-&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;"><a name="635-&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;" class="anchor-navigation-ex-anchor" href="#635-&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;"><i class="fa fa-link" aria-hidden="true"></i></a>6.3.5 &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;</h4>
+<p>e. <strong>&#x5F53; Docker &#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x5728;&#x67D0;&#x4E9B;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x60A8;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EA7;&#x522B;&#x4FE1;&#x4EFB;&#x8BC1;&#x4E66;</strong>&#x3002;</p>
+<p><strong>ubuntu</strong></p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cp</span> ghost.harbor.com.crt /usr/local/share/ca-certificates/ghost.harbor.com.crt 
+$ update-ca-certificates
+Updating certificates <span class="token keyword">in</span> /etc/ssl/certs<span class="token punctuation">..</span>.
+<span class="token number">1</span> added, <span class="token number">0</span> removed<span class="token punctuation">;</span> done.
+Running hooks <span class="token keyword">in</span> /etc/ca-certificates/update.d<span class="token punctuation">..</span>.
+done.
+</code></pre>
+<p><strong>Red Hat (CentOS etc)</strong>:</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cp</span> ghost.harbor.com.crt /etc/pki/ca-trust/source/anchors/ghost.harbor.com.crt
+$ update-ca-trust
+</code></pre>
+<h3 id="64-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor"><a name="64-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor" class="anchor-navigation-ex-anchor" href="#64-&#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E;-harbor"><i class="fa fa-link" aria-hidden="true"></i></a>6.4 &#x90E8;&#x7F72;&#x6216;&#x91CD;&#x65B0;&#x914D;&#x7F6E; Harbor</h3>
+<p>&#x5982;&#x679C;&#x60A8;&#x5C1A;&#x672A;&#x90E8;&#x7F72; Harbor&#xFF0C;&#x8BF7;&#x53C2;&#x9605; <a href="https://goharbor.io/docs/2.4.0/install-config/configure-yml-file/" target="_blank">&#x914D;&#x7F6E; Harbor YML &#x6587;&#x4EF6;</a>&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x5982;&#x4F55;&#x901A;&#x8FC7;&#x5728; &#x4E2D;&#x6307;&#x5B9A;<code>hostname</code>&#x548C;<code>https</code>&#x5C5E;&#x6027;&#x6765;&#x914D;&#x7F6E; Harbor &#x4EE5;&#x4F7F;&#x7528;&#x8BC1;&#x4E66;&#x7684;&#x4FE1;&#x606F;<code>harbor.yml</code>&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60A8;&#x5DF2;&#x7ECF;&#x4F7F;&#x7528; HTTP &#x90E8;&#x7F72;&#x4E86; Harbor &#x5E76;&#x5E0C;&#x671B;&#x5C06;&#x5176;&#x91CD;&#x65B0;&#x914D;&#x7F6E;&#x4E3A;&#x4F7F;&#x7528; HTTPS&#xFF0C;&#x8BF7;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x3002;
+<strong>a. &#x8FD0;&#x884C;prepare&#x811A;&#x672C;&#x4EE5;&#x542F;&#x7528; HTTPS</strong></p>
+<pre class="language-"><code class="lang-bash">./prepare
+</code></pre>
+<p><strong>b. &#x5982;&#x679C; Harbor &#x6B63;&#x5728;&#x8FD0;&#x884C;&#xFF0C;&#x8BF7;&#x505C;&#x6B62;&#x5E76;&#x5220;&#x9664;&#x73B0;&#x6709;&#x5B9E;&#x4F8B;</strong></p>
+<p>&#x60A8;&#x7684;&#x56FE;&#x50CF;&#x6570;&#x636E;&#x4FDD;&#x7559;&#x5728;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x4E22;&#x5931;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker-compose</span> down -v
+</code></pre>
+<p><strong>c. &#x91CD;&#x542F;</strong></p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker-compose</span> up -d
+</code></pre>
+<h3 id="65-&#x6D4B;&#x8BD5;"><a name="65-&#x6D4B;&#x8BD5;" class="anchor-navigation-ex-anchor" href="#65-&#x6D4B;&#x8BD5;"><i class="fa fa-link" aria-hidden="true"></i></a>6.5 &#x6D4B;&#x8BD5;</h3>
+<h4 id="651-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><a name="651-&#x4ED3;&#x5E93;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#651-&#x4ED3;&#x5E93;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>6.5.1 &#x4ED3;&#x5E93;&#x767B;&#x9646;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> login ghost.harbor.com
+Authenticating with existing credentials<span class="token punctuation">..</span>.
+WARNING<span class="token operator">!</span> Your password will be stored unencrypted <span class="token keyword">in</span> /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/<span class="token comment">#credentials-store</span>
+
+Login Succeeded
+</code></pre>
+<h4 id="652-&#x754C;&#x9762;&#x767B;&#x9646;"><a name="652-&#x754C;&#x9762;&#x767B;&#x9646;" class="anchor-navigation-ex-anchor" href="#652-&#x754C;&#x9762;&#x767B;&#x9646;"><i class="fa fa-link" aria-hidden="true"></i></a>6.5.2 &#x754C;&#x9762;&#x767B;&#x9646;</h4>
+<p><img src="https://img-blog.csdnimg.cn/348d588802ca4ea1917ef48e778838c2.png?" alt="&#x5728;&#x8FD9;&#x91CC;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x63CF;&#x8FF0;"></p>
+<h4 id="653-&#x63A8;&#x9001;&#x955C;&#x50CF;"><a name="653-&#x63A8;&#x9001;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#653-&#x63A8;&#x9001;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>6.5.3 &#x63A8;&#x9001;&#x955C;&#x50CF;</h4>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">docker</span> push ghost.harbor.com/library/busybox:latest 
+The push refers to repository <span class="token punctuation">[</span>ghost.harbor.com/library/busybox<span class="token punctuation">]</span>
+cfd97936a580: Pushed 
+latest: digest: sha256:febcf61cd6e1ac9628f6ac14fa40836d16f3c6ddef3b303ff0321606e55ddd0b size: <span class="token number">527</span>
+</code></pre>
+<h4 id="654-&#x62C9;&#x53D6;&#x955C;&#x50CF;"><a name="654-&#x62C9;&#x53D6;&#x955C;&#x50CF;" class="anchor-navigation-ex-anchor" href="#654-&#x62C9;&#x53D6;&#x955C;&#x50CF;"><i class="fa fa-link" aria-hidden="true"></i></a>6.5.4 &#x62C9;&#x53D6;&#x955C;&#x50CF;</h4>
+<p>&#x6211;&#x4EEC;&#x6362;&#x5230;&#x53E6;&#x4E00;&#x53F0;&#x673A;&#x5668;<code>192.168.211.71</code>&#x5C1D;&#x8BD5;&#x4E00;&#x4E0B;&#x62C9;&#x53D6;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#xFF0C;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x914D;&#x7F6E;&#x5462;&#xFF0C;
+<code>/etc/docker/daemon.json</code>&#x914D;&#x7F6E;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre class="language-"><code class="lang-bash">$ <span class="token function">cat</span> /etc/docker/daemon.json 
+<span class="token punctuation">{</span>
+   <span class="token string">&quot;exec-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token string">&quot;native.cgroupdriver=systemd&quot;</span><span class="token punctuation">]</span>,
+   <span class="token string">&quot;log-driver&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;json-file&quot;</span>,
+   <span class="token string">&quot;log-opts&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+   <span class="token string">&quot;max-size&quot;</span><span class="token builtin class-name">:</span>  <span class="token string">&quot;100m&quot;</span>
+    <span class="token punctuation">}</span>,
+   <span class="token string">&quot;registry-mirrors&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;https://hub-mirror.c.163.com&quot;</span>,
+    <span class="token string">&quot;https://mirror.baidubce.com&quot;</span>
+  <span class="token punctuation">]</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<p>&#x914D;&#x7F6E;<code>/etc/hosts</code></p>
+<pre class="language-"><code class="lang-bash"><span class="token number">192.168</span>.211.70 ghost.harbor.com
+</code></pre>
+<blockquote>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x914D;&#x7F6E;hosts&#x53EF;&#x80FD;&#x4F1A;&#x62A5;&#x8FD9;&#x6837;&#x7684;&#x9519; $ docker pull
+ghost.harbor.com/library/busybox:latest Error response from daemon:
+Get <a href="https://ghost.harbor.com/v2/" target="_blank">https://ghost.harbor.com/v2/</a>: <code>x509: certificate has expire</code>d or is
+not yet valid &#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x4E24;&#x53F0;&#x673A;&#x5668;&#x7684;&#x65F6;&#x95F4;&#x6CA1;&#x6709;&#x540C;&#x6B65;&#xFF0C;&#x9700;&#x8981;&#x914D;&#x7F6E;<code>ntp</code></p>
+</blockquote>
+<p> &#x53E6;&#x5916;&#x8981;&#x914D;&#x7F6E;docker&#x8BC1;&#x4E66;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">mkdir</span> -p /etc/docker/certs.d/ghost.harbor.com/
+<span class="token function">scp</span> root@192.168.211.70:/etc/docker/certs.d/ghost.harbor.com/ghost.harbor.com.cert /etc/docker/certs.d/ghost.harbor.com/
+<span class="token function">scp</span> root@192.168.211.70:/etc/docker/certs.d/ghost.harbor.com/ghost.harbor.com.key /etc/docker/certs.d/ghost.harbor.com/
+<span class="token function">scp</span> root@192.168.211.70:/etc/docker/certs.d/ghost.harbor.com/ca.crt /etc/docker/certs.d/ghost.harbor.com/
+</code></pre>
+<blockquote>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8BC1;&#x4E66;&#x5C06;&#x4F1A;&#x8FD9;&#x6837;&#x62A5;&#x9519; 
+$ docker pull ghost.harbor.com/library/busybox:latest
+Error response from daemon: Get <a href="https://ghost.harbor.com/v2/" target="_blank">https://ghost.harbor.com/v2/</a>: x509:
+<code>certificate signed by unknown authority</code></p>
+</blockquote>
+<p>&#x6700;&#x540E;&#xFF0C;&#x7ECF;&#x5386;&#x91CD;&#x91CD;&#x9669;&#x963B;&#xFF0C;&#x6210;&#x529F;&#x4E86;&#x3002;</p>
+<pre class="language-"><code class="lang-bash"><span class="token function">docker</span> pull ghost.harbor.com/library/busybox:latest
+latest: Pulling from library/busybox
+Digest: sha256:febcf61cd6e1ac9628f6ac14fa40836d16f3c6ddef3b303ff0321606e55ddd0b
+Status: Downloaded newer image <span class="token keyword">for</span> ghost.harbor.com/library/busybox:latest
+ghost.harbor.com/library/busybox:latest
+</code></pre>
+<p>harbor https ip&#x8BBF;&#x95EE;&#x90E8;&#x7F72;&#x6210;&#x529F;&#x7ED3;&#x675F;</p>
+<p>&#x6D4F;&#x89C8;&#x5668;&#x754C;&#x9762;&#x6E05;&#x7406;&#x7F13;&#x5B58;</p>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<ul>
+<li><a href="https://goharbor.io/docs/2.4.0/install-config/run-installer-script/" target="_blank">&#x591A;&#x79CD;&#x6A21;&#x5F0F;&#x90E8;&#x7F72;</a></li>
+<li><a href="https://goharbor.io/docs/2.4.0/install-config/configure-internal-tls/" target="_blank">&#x914D;&#x7F6E; Harbor &#x7EC4;&#x4EF6;&#x4E4B;&#x95F4;&#x7684;&#x5185;&#x90E8; TLS &#x901A;&#x4FE1;</a></li>
+<li><a href="https://goharbor.io/docs/2.4.0/install-config/troubleshoot-installation/" target="_blank">Harbor &#x5B89;&#x88C5;&#x6545;&#x969C;&#x6392;&#x9664;</a></li>
+<li><a href="https://goharbor.io/docs/2.4.0/install-config/reconfigure-manage-lifecycle/" target="_blank">&#x91CD;&#x65B0;&#x914D;&#x7F6E; Harbor &#x5E76;&#x7BA1;&#x7406; Harbor &#x751F;&#x547D;&#x5468;&#x671F;</a></li>
+<li><a href="https://goharbor.io/docs/2.4.0/install-config/customize-token-service/" target="_blank">&#x81EA;&#x5B9A;&#x4E49; Harbor &#x4EE4;&#x724C;&#x670D;&#x52A1;</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-23 16:26:48
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Registry">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="podman_deploy_private_registry.html" class="navigation navigation-next " aria-label="Next page: podman 部署私有镜像仓库">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"harbor部署入门指南","level":"1.5.11.1","depth":3,"next":{"title":"podman 部署私有镜像仓库","level":"1.5.11.2","depth":3,"path":"Docker/Registry/podman_deploy_private_registry.md","ref":"Docker/Registry/podman_deploy_private_registry.md","articles":[]},"previous":{"title":"Registry","level":"1.5.11","depth":2,"path":"Docker/Registry/README.md","ref":"Docker/Registry/README.md","articles":[{"title":"harbor部署入门指南","level":"1.5.11.1","depth":3,"path":"Docker/Registry/harbor_get_started_guide.md","ref":"Docker/Registry/harbor_get_started_guide.md","articles":[]},{"title":"podman 部署私有镜像仓库","level":"1.5.11.2","depth":3,"path":"Docker/Registry/podman_deploy_private_registry.md","ref":"Docker/Registry/podman_deploy_private_registry.md","articles":[]},{"title":"docker registry 仓库搭建并配置证书","level":"1.5.11.3","depth":3,"path":"Docker/Registry/docker_registry_1_deploy.md","ref":"Docker/Registry/docker_registry_1_deploy.md","articles":[]},{"title":"docker 部署 registry ui","level":"1.5.11.4","depth":3,"path":"Docker/Registry/docker_registry_2_deploy_UI.md","ref":"Docker/Registry/docker_registry_2_deploy_UI.md","articles":[]},{"title":"centos 7 9 harbor 部署镜像仓库","level":"1.5.11.5","depth":3,"path":"Docker/Registry/centos_7.9_deploy_harbor_practice.md","ref":"Docker/Registry/centos_7.9_deploy_harbor_practice.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Docker Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["python"],"title":"Docker Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/docker-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/docker-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Docker Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Docker":"https://smoothies.com.cn/docker-docs/Overview.html","Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/Overview.html","Go":"https://smoothies.com.cn/go-docs/Overview.html","Prometheus":"https://smoothies.com.cn/prometheus-docs/Overview.html","Command":"https://smoothies.com.cn/linux-command-docs/Overview.html","Shell":"https://smoothies.com.cn/shell-docs/Overview.html","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/Overview.html","Python":"https://smoothies.com.cn/python-docs/Overview.html","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Docker](https://www.docker.com/) 的书籍"},"file":{"path":"Docker/Registry/harbor_get_started_guide.md","mtime":"2022-12-23T08:26:48.002Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-22T09:17:25.614Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

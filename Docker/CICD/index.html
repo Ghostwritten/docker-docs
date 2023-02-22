@@ -1,0 +1,1472 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>CICD · Docker Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="宗勋 - zongxun">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-accordion/accordion.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-change_girls/girls.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism-holi-theme.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-sidebar-style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tags/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="docker_makefile_CI_Pipeline.html" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    <link href="http://smoothies.com.cn/rss" title="Docker Docs" rel="alternate" type="application/rss+xml" />
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/docker-docs/Overview.html" target="_blank" class="custom-link">Docker</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn" target="_blank" class="custom-link">Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/kubernetes-docs/Overview.html" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/go-docs/Overview.html" target="_blank" class="custom-link">Go</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/prometheus-docs/Overview.html" target="_blank" class="custom-link">Prometheus</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-command-docs/Overview.html" target="_blank" class="custom-link">Command</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/shell-docs/Overview.html" target="_blank" class="custom-link">Shell</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/linux-docs/" target="_blank" class="custom-link">Linux</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/gitbook-docs/Overview.html" target="_blank" class="custom-link">Gitbook</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://smoothies.com.cn/python-docs/Overview.html" target="_blank" class="custom-link">Python</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://ghostwritten.gitbook.io/kubernetes-exam-in-action/" target="_blank" class="custom-link">Exam</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../Overview.html">
+            
+                <a href="../../Overview.html">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    序言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../Docker-Compose/">
+            
+                <a href="../../Docker-Compose/">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Docker Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Docker-Compose/docker-compose_1_install.html">
+            
+                <a href="../../Docker-Compose/docker-compose_1_install.html">
+            
+                    
+                        <b>1.3.1.</b>
+                    
+                    docker compose 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                <a href="../../Docker-Compose/docker-compose_install_2_elasticsearch.html">
+            
+                    
+                        <b>1.3.2.</b>
+                    
+                    docker compose 安装 elasticsearch 集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../Docker-Swarm/">
+            
+                <a href="../../Docker-Swarm/">
+            
+                    
+                        <b>1.4.</b>
+                    
+                    Docker Swarm
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_1_start.html">
+            
+                    
+                        <b>1.4.1.</b>
+                    
+                    docker swarm 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_2_network.html">
+            
+                    
+                        <b>1.4.2.</b>
+                    
+                    docker swarm 网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_3_load_balancing.html">
+            
+                    
+                        <b>1.4.3.</b>
+                    
+                    docker swam 集群实现负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_4_encrypted_network.html">
+            
+                    
+                        <b>1.4.4.</b>
+                    
+                    docker swarm 创建加密覆盖网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_5_secrets.html">
+            
+                    
+                        <b>1.4.5.</b>
+                    
+                    docker swarm 管理 secrets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_6_healthcheck.html">
+            
+                    
+                        <b>1.4.6.</b>
+                    
+                    docker swarm 健康检查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_7_update.html">
+            
+                    
+                        <b>1.4.7.</b>
+                    
+                    dcoker swarm 更新
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_8_UI_Portainer.html">
+            
+                    
+                        <b>1.4.8.</b>
+                    
+                    docker swarm 部署界面 ui portainer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_9_docker-compose_deploy_app.html">
+            
+                    
+                        <b>1.4.9.</b>
+                    
+                    docker swarm 通过 docker compose 部署应用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                <a href="../../Docker-Swarm/docker_swarm_10_maintenance_mode.html">
+            
+                    
+                        <b>1.4.10.</b>
+                    
+                    docker swarm 维护模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.5.</b>
+                    
+                    Docker
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                        <b>1.5.1.</b>
+                    
+                    CICD
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1.1" data-path="docker_makefile_CI_Pipeline.html">
+            
+                <a href="docker_makefile_CI_Pipeline.html">
+            
+                    
+                        <b>1.5.1.1.</b>
+                    
+                    docker   makefile  ci pipeline
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.2" data-path="docker_GitHub_Action_builds_image.html">
+            
+                <a href="docker_GitHub_Action_builds_image.html">
+            
+                    
+                        <b>1.5.1.2.</b>
+                    
+                    github action 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.3" data-path="docker_deploy_enterprise-level_harbor.html">
+            
+                <a href="docker_deploy_enterprise-level_harbor.html">
+            
+                    
+                        <b>1.5.1.3.</b>
+                    
+                    自托管构建 如何使用 harbor 搭建企业级镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.4" data-path="docker_Tekton_builds_image.html">
+            
+                <a href="docker_Tekton_builds_image.html">
+            
+                    
+                        <b>1.5.1.4.</b>
+                    
+                    自托管构建 如何使用 tekton 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.1.5" data-path="docker_GitLab_CI_builds_image.html">
+            
+                <a href="docker_GitLab_CI_builds_image.html">
+            
+                    
+                        <b>1.5.1.5.</b>
+                    
+                    如何使用 gitlab ci 构建镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Command/">
+            
+                <a href="../Command/">
+            
+                    
+                        <b>1.5.2.</b>
+                    
+                    Command
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="../Command/docker_command_inspect.html">
+            
+                <a href="../Command/docker_command_inspect.html">
+            
+                    
+                        <b>1.5.2.1.</b>
+                    
+                    docker inspect   format
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../Dockerfile/">
+            
+                <a href="../Dockerfile/">
+            
+                    
+                        <b>1.5.3.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../Image/">
+            
+                <a href="../Image/">
+            
+                    
+                        <b>1.5.4.</b>
+                    
+                    Image
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../Image/build_images_with_buildah.html">
+            
+                <a href="../Image/build_images_with_buildah.html">
+            
+                    
+                        <b>1.5.4.1.</b>
+                    
+                    构建镜像开源工具 buildah
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../Image/docker_Build_multi-platform_image.html">
+            
+                <a href="../Image/docker_Build_multi-platform_image.html">
+            
+                    
+                        <b>1.5.4.2.</b>
+                    
+                    如何为不同语言快速构建多平台镜像
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../Image/docker_Image_volume_reduced.html">
+            
+                <a href="../Image/docker_Image_volume_reduced.html">
+            
+                    
+                        <b>1.5.4.3.</b>
+                    
+                    如何将镜像体积缩减 90
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.4" data-path="../Image/docker_image_1_library.html">
+            
+                <a href="../Image/docker_image_1_library.html">
+            
+                    
+                        <b>1.5.4.4.</b>
+                    
+                    docker 镜像源
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.5" data-path="../Image/docker_image_2_manage.html">
+            
+                <a href="../Image/docker_image_2_manage.html">
+            
+                    
+                        <b>1.5.4.5.</b>
+                    
+                    docker 镜像管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../Install/">
+            
+                <a href="../Install/">
+            
+                    
+                        <b>1.5.5.</b>
+                    
+                    Install
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.5.1" data-path="../Install/docker_1_install.html">
+            
+                <a href="../Install/docker_1_install.html">
+            
+                    
+                        <b>1.5.5.1.</b>
+                    
+                    docker 安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../Issue/">
+            
+                <a href="../Issue/">
+            
+                    
+                        <b>1.5.6.</b>
+                    
+                    Issue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../Logging/">
+            
+                <a href="../Logging/">
+            
+                    
+                        <b>1.5.7.</b>
+                    
+                    Logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../Manage/">
+            
+                <a href="../Manage/">
+            
+                    
+                        <b>1.5.8.</b>
+                    
+                    Manage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.8.1" data-path="../Manage/docker_clean.html">
+            
+                <a href="../Manage/docker_clean.html">
+            
+                    
+                        <b>1.5.8.1.</b>
+                    
+                    docker 资源清理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8.2" data-path="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                <a href="../Manage/docker_container_isolation_and_restrictions.html">
+            
+                    
+                        <b>1.5.8.2.</b>
+                    
+                    docker 容器隔离与限制
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../Monitor/">
+            
+                <a href="../Monitor/">
+            
+                    
+                        <b>1.5.9.</b>
+                    
+                    Monitor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../Network/">
+            
+                <a href="../Network/">
+            
+                    
+                        <b>1.5.10.</b>
+                    
+                    Network
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.10.1" data-path="../Network/docker_analyze_the_packet_loss.html">
+            
+                <a href="../Network/docker_analyze_the_packet_loss.html">
+            
+                    
+                        <b>1.5.10.1.</b>
+                    
+                    docker 容器应用总是丢包如何分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10.2" data-path="../Network/docker_config_DNS.html">
+            
+                <a href="../Network/docker_config_DNS.html">
+            
+                    
+                        <b>1.5.10.2.</b>
+                    
+                    docker 配置 dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../Registry/">
+            
+                <a href="../Registry/">
+            
+                    
+                        <b>1.5.11.</b>
+                    
+                    Registry
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.11.1" data-path="../Registry/harbor_get_started_guide.html">
+            
+                <a href="../Registry/harbor_get_started_guide.html">
+            
+                    
+                        <b>1.5.11.1.</b>
+                    
+                    harbor部署入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.2" data-path="../Registry/podman_deploy_private_registry.html">
+            
+                <a href="../Registry/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.5.11.2.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.3" data-path="../Registry/docker_registry_1_deploy.html">
+            
+                <a href="../Registry/docker_registry_1_deploy.html">
+            
+                    
+                        <b>1.5.11.3.</b>
+                    
+                    docker registry 仓库搭建并配置证书
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.4" data-path="../Registry/docker_registry_2_deploy_UI.html">
+            
+                <a href="../Registry/docker_registry_2_deploy_UI.html">
+            
+                    
+                        <b>1.5.11.4.</b>
+                    
+                    docker 部署 registry ui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11.5" data-path="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                <a href="../Registry/centos_7.9_deploy_harbor_practice.html">
+            
+                    
+                        <b>1.5.11.5.</b>
+                    
+                    centos 7 9 harbor 部署镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../Security/">
+            
+                <a href="../Security/">
+            
+                    
+                        <b>1.5.12.</b>
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../Storage/">
+            
+                <a href="../Storage/">
+            
+                    
+                        <b>1.5.13.</b>
+                    
+                    Storage
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.13.1" data-path="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                <a href="../Storage/docker_storage_1_docker_Device_Mapper_introduce.html">
+            
+                    
+                        <b>1.5.13.1.</b>
+                    
+                    docker device mapper 简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.2" data-path="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                <a href="../Storage/docker_storage_2_docker_drive_devicemapper_config.html">
+            
+                    
+                        <b>1.5.13.2.</b>
+                    
+                    docker  storage 驱动 devicemapper 配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.3" data-path="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                <a href="../Storage/docker_storage_3_docker_thin_provisioning.html">
+            
+                    
+                        <b>1.5.13.3.</b>
+                    
+                    docker thin provisioning 实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.4" data-path="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                <a href="../Storage/docker_storage_4_docker_devicemapper_scale.html">
+            
+                    
+                        <b>1.5.13.4.</b>
+                    
+                    docker devicemapper 扩容
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13.5" data-path="../Storage/docker_storage_5_nfs_volume.html">
+            
+                <a href="../Storage/docker_storage_5_nfs_volume.html">
+            
+                    
+                        <b>1.5.13.5.</b>
+                    
+                    docker nfs volume 创建与使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../原理/">
+            
+                <a href="../原理/">
+            
+                    
+                        <b>1.5.14.</b>
+                    
+                    原理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.14.1" data-path="../原理/docker_Container_technology_overview.html">
+            
+                <a href="../原理/docker_Container_technology_overview.html">
+            
+                    
+                        <b>1.5.14.1.</b>
+                    
+                    容器技术概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14.2" data-path="../原理/Container_architecture_overview.html">
+            
+                <a href="../原理/Container_architecture_overview.html">
+            
+                    
+                        <b>1.5.14.2.</b>
+                    
+                    容器架构概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../docker_1_start.html">
+            
+                <a href="../docker_1_start.html">
+            
+                    
+                        <b>1.5.15.</b>
+                    
+                    入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../Podman/">
+            
+                <a href="../../Podman/">
+            
+                    
+                        <b>1.6.</b>
+                    
+                    Podman
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Podman/podman_deploy_private_registry.html">
+            
+                <a href="../../Podman/podman_deploy_private_registry.html">
+            
+                    
+                        <b>1.6.1.</b>
+                    
+                    podman 部署私有镜像仓库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../Podman/podman_start.html">
+            
+                <a href="../../Podman/podman_start.html">
+            
+                    
+                        <b>1.6.2.</b>
+                    
+                    podman 快速入门
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >CICD</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#docker-cicd-overiview"><b></b>Docker CI/CD Overiview</a></li><ul><li><span class="title-icon "></span><a href="#1-&#x524D;&#x8A00;"><b></b>1. &#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#2-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF1F;"><b></b>2. &#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF1F;</a></li><li><span class="title-icon "></span><a href="#3-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#xFF1F;"><b></b>3. &#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#xFF1F;</a></li><li><span class="title-icon "></span><a href="#4-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#xFF1F;"><b></b>4. &#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#xFF1F;</a></li><li><span class="title-icon "></span><a href="#5-&#x4EC0;&#x4E48;&#x662F;-docker&#xFF1F;"><b></b>5. &#x4EC0;&#x4E48;&#x662F; Docker&#xFF1F;</a></li><li><span class="title-icon "></span><a href="#6-docker-&#x5982;&#x4F55;&#x5728;-cicd-&#x4E2D;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#xFF1F;"><b></b>6. Docker &#x5982;&#x4F55;&#x5728; CI/CD &#x4E2D;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#xFF1F;</a></li><li><span class="title-icon "></span><a href="#7-docker-pipeline-&#x9636;&#x6BB5;"><b></b>7. Docker Pipeline &#x9636;&#x6BB5;</a></li></ul></ul></div><a href="#docker-cicd-overiview" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="docker-cicd-overiview"><a name="docker-cicd-overiview" class="anchor-navigation-ex-anchor" href="#docker-cicd-overiview"><i class="fa fa-link" aria-hidden="true"></i></a>Docker CI/CD Overiview</h1>
+<h2 id="1-&#x524D;&#x8A00;"><a name="1-&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#1-&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x524D;&#x8A00;</h2>
+<p>&#x6839;&#x636E;<a href="https://www.jetbrains.com/lp/devecosystem-2021/" target="_blank">2020 &#x5E74; Jetbrains &#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x8C03;&#x67E5;</a>&#xFF0C;44% &#x7684;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x73B0;&#x5728;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x67D0;&#x79CD;&#x5F62;&#x5F0F;&#x7684; Docker &#x5BB9;&#x5668;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x548C;&#x90E8;&#x7F72;&#x3002;</p>
+<p>Docker &#x5DF2;&#x6210;&#x4E3A;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x548C;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#x7684;&#x65E9;&#x671F;&#x91C7;&#x7528;&#x8005;&#x3002;&#x901A;&#x8FC7;&#x5229;&#x7528;&#x4E0E; GIT &#x7B49;&#x6E90;&#x4EE3;&#x7801;&#x63A7;&#x5236;&#x673A;&#x5236;&#x7684;&#x6B63;&#x786E;&#x96C6;&#x6210;&#xFF0C;<a href="https://www.jenkins.io/" target="_blank">Jenkins</a> &#x53EF;&#x4EE5;&#x5728;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x6BCF;&#x6B21;&#x63D0;&#x4EA4;&#x4EE3;&#x7801;&#x65F6;&#x542F;&#x52A8;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x3002;&#x6B64;&#x8FC7;&#x7A0B;&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Docker &#x6620;&#x50CF;&#xFF0C;&#x8BE5;&#x6620;&#x50CF;&#x53EF;&#x5728;&#x6574;&#x4E2A;&#x73AF;&#x5883;&#x4E2D;&#x7ACB;&#x5373;&#x53EF;&#x7528;&#x3002;&#x4F7F;&#x7528; Docker &#x955C;&#x50CF;&#xFF0C;&#x56E2;&#x961F;&#x53EF;&#x4EE5;&#x5FEB;&#x901F;&#x6784;&#x5EFA;&#x3001;&#x5171;&#x4EAB;&#x548C;&#x90E8;&#x7F72;&#x4ED6;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p>&#x76EE;&#x7684;&#xFF1A;&#x6839;&#x636E;&#x5F00;&#x53D1;/IT &#x9700;&#x6C42;&#xFF0C;&#x4F7F;&#x7528;&#x81EA;&#x52A9;&#x670D;&#x52A1;&#x81EA;&#x52A8;&#x5316;&#x5DE5;&#x5177;&#x81EA;&#x52A8;&#x914D;&#x7F6E;&#x73AF;&#x5883;/&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x3002;</p>
+<p>&#x7EC4;&#x7EC7;&#x9762;&#x4E34;&#x7684;&#x6311;&#x6218;&#xFF1A;</p>
+<p>&#x73AF;&#x5883;&#x4E0D;&#x53EF;&#x7528;
+&#x7F3A;&#x4E4F;&#x73AF;&#x5883;&#x914D;&#x7F6E;&#x6280;&#x80FD;
+&#x73AF;&#x5883;&#x914D;&#x7F6E;&#x7684;&#x524D;&#x7F6E;&#x65F6;&#x95F4;&#x957F;</p>
+<h2 id="2-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF1F;"><a name="2-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF1F;" class="anchor-navigation-ex-anchor" href="#2-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>2. &#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x96C6;&#x6210;&#xFF1F;</h2>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x5F00;&#x53D1;&#x5B9E;&#x8DF5;&#xFF0C;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x6BCF;&#x5929;&#x591A;&#x6B21;&#x5C06;&#x4EE3;&#x7801;&#x96C6;&#x6210;&#x5230;&#x5171;&#x4EAB;&#x5B58;&#x50A8;&#x5E93;&#x4E2D;&#xFF0C;&#x652F;&#x6301;&#x5C06;&#x65B0;&#x529F;&#x80FD;&#x4E0E;&#x73B0;&#x6709;&#x4EE3;&#x7801;&#x96C6;&#x6210;&#x3002;&#x6B64;&#x96C6;&#x6210;&#x4EE3;&#x7801;&#x8FD8;&#x786E;&#x4FDD;&#x8FD0;&#x884C;&#x65F6;&#x73AF;&#x5883;&#x4E2D;&#x6CA1;&#x6709;&#x9519;&#x8BEF;&#xFF0C;&#x4F7F;&#x6211;&#x4EEC;&#x80FD;&#x591F;&#x68C0;&#x67E5;&#x5B83;&#x5BF9;&#x5176;&#x4ED6;&#x66F4;&#x6539;&#x7684;&#x53CD;&#x5E94;&#x3002;</p>
+<p>&#x7528;&#x4E8E;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x7684;&#x6700;&#x6D41;&#x884C;&#x5DE5;&#x5177;&#x662F;&#x201C;Jenkins&#x201D;&#xFF0C;&#x800C; GIT &#x7528;&#x4E8E;&#x6E90;&#x4EE3;&#x7801;&#x63A7;&#x5236;&#x5B58;&#x50A8;&#x5E93;&#x3002;Jenkins &#x53EF;&#x4EE5;&#x4ECE; GIT &#x5B58;&#x50A8;&#x5E93;&#x4E2D;&#x63D0;&#x53D6;&#x6700;&#x65B0;&#x7684;&#x4EE3;&#x7801;&#x4FEE;&#x8BA2;&#x7248;&#x5E76;&#x751F;&#x6210;&#x53EF;&#x4EE5;&#x90E8;&#x7F72;&#x5230;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6784;&#x5EFA;&#x3002;</p>
+<h2 id="3-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#xFF1F;"><a name="3-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#xFF1F;" class="anchor-navigation-ex-anchor" href="#3-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>3. &#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#xFF1F;</h2>
+<p>&#x6301;&#x7EED;&#x4EA4;&#x4ED8;&#x662F;&#x5728;&#x4EFB;&#x4F55;&#x7ED9;&#x5B9A;&#x65F6;&#x95F4;&#x5C06;&#x8F6F;&#x4EF6;&#x90E8;&#x7F72;&#x5230;&#x4EFB;&#x4F55;&#x73AF;&#x5883;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x5305;&#x62EC;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x3001;&#x914D;&#x7F6E;&#x548C;&#x73AF;&#x5883;&#x66F4;&#x6539;&#xFF08;&#x5982;&#x679C;&#x6709;&#xFF09;&#x3002;</p>
+<h2 id="4-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#xFF1F;"><a name="4-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#xFF1F;" class="anchor-navigation-ex-anchor" href="#4-&#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>4. &#x4EC0;&#x4E48;&#x662F;&#x6301;&#x7EED;&#x90E8;&#x7F72;&#xFF1F;</h2>
+<p>&#x6301;&#x7EED;&#x90E8;&#x7F72;&#x662F;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x5728;&#x77ED;&#x5468;&#x671F;&#x5185;&#x53D1;&#x5E03;&#x8F6F;&#x4EF6;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x3002;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x6240;&#x505A;&#x7684;&#x4EFB;&#x4F55;&#x66F4;&#x6539;&#x90FD;&#x4F1A;&#x4E00;&#x76F4;&#x90E8;&#x7F72;&#x5230;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x3002;</p>
+<h2 id="5-&#x4EC0;&#x4E48;&#x662F;-docker&#xFF1F;"><a name="5-&#x4EC0;&#x4E48;&#x662F;-docker&#xFF1F;" class="anchor-navigation-ex-anchor" href="#5-&#x4EC0;&#x4E48;&#x662F;-docker&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>5. &#x4EC0;&#x4E48;&#x662F; Docker&#xFF1F;</h2>
+<p>Docker &#x662F;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x5316;&#x5E73;&#x53F0;&#xFF0C;&#x5B83;&#x5C06;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53CA;&#x5176;&#x6240;&#x6709;&#x4F9D;&#x8D56;&#x9879;&#x4EE5; Container &#x7684;&#x5F62;&#x5F0F;&#x6253;&#x5305;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5728;&#x4EFB;&#x4F55;&#x73AF;&#x5883;&#x4E2D;&#x90FD;&#x80FD;&#x65E0;&#x7F1D;&#x8FD0;&#x884C;&#x3002;</p>
+<h2 id="6-docker-&#x5982;&#x4F55;&#x5728;-cicd-&#x4E2D;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#xFF1F;"><a name="6-docker-&#x5982;&#x4F55;&#x5728;-cicd-&#x4E2D;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#xFF1F;" class="anchor-navigation-ex-anchor" href="#6-docker-&#x5982;&#x4F55;&#x5728;-cicd-&#x4E2D;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>6. Docker &#x5982;&#x4F55;&#x5728; CI/CD &#x4E2D;&#x63D0;&#x4F9B;&#x5E2E;&#x52A9;&#xFF1F;</h2>
+<p>Docker &#x5E2E;&#x52A9;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x5728;&#x4EFB;&#x4F55;&#x73AF;&#x5883;&#x4E2D;&#x6784;&#x5EFA;&#x4ED6;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x5E76;&#x6D4B;&#x8BD5;&#x4ED6;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4EE5;&#x4FBF;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x53D1;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;&#x65E9;&#x671F;&#x6355;&#x83B7;&#x9519;&#x8BEF;&#x3002;Docker &#x6709;&#x52A9;&#x4E8E;&#x7B80;&#x5316;&#x6D41;&#x7A0B;&#xFF0C;&#x8282;&#x7701;&#x6784;&#x5EFA;&#x65F6;&#x95F4;&#xFF0C;&#x5E76;&#x5141;&#x8BB8;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x5E76;&#x884C;&#x8FD0;&#x884C;&#x6D4B;&#x8BD5;&#x3002;</p>
+<p>Docker &#x53EF;&#x4EE5;&#x4E0E; GitHub &#x7B49;&#x6E90;&#x4EE3;&#x7801;&#x63A7;&#x5236;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#x548C; Jenkins &#x7B49;&#x96C6;&#x6210;&#x5DE5;&#x5177;&#x96C6;&#x6210;&#x3002;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x5C06;&#x4EE3;&#x7801;&#x63D0;&#x4EA4;&#x5230; GitHub&#xFF0C;&#x4F7F;&#x7528; Jenkins &#x521B;&#x5EFA;&#x6620;&#x50CF;&#x6D4B;&#x8BD5;&#x81EA;&#x52A8;&#x89E6;&#x53D1;&#x6784;&#x5EFA;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x53EF;&#x4EE5;&#x5C06;&#x6B64;&#x955C;&#x50CF;&#x6DFB;&#x52A0;&#x5230; Docker &#x6CE8;&#x518C;&#x8868;&#x4E2D;&#xFF0C;&#x4EE5;&#x5904;&#x7406;&#x4E0D;&#x540C;&#x73AF;&#x5883;&#x7C7B;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x4E00;&#x81F4;&#x3002;</p>
+<h2 id="7-docker-pipeline-&#x9636;&#x6BB5;"><a name="7-docker-pipeline-&#x9636;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#7-docker-pipeline-&#x9636;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>7. Docker Pipeline &#x9636;&#x6BB5;</h2>
+<ul>
+<li><code>Build</code>&#xFF1A;&#x6B64;&#x9636;&#x6BB5;&#x7684; Docker &#x5BB9;&#x5668;&#x5C06;&#x5177;&#x6709;&#x6784;&#x5EFA;&#x6240;&#x9700;&#x7684;&#x6240;&#x6709;&#x5DE5;&#x5177;&#xFF0C;&#x4F8B;&#x5982; SDK&#xFF0C;&#x5B83;&#x8FD8;&#x53EF;&#x4EE5;&#x7F13;&#x5B58;&#x6211;&#x4EEC;&#x5E94;&#x7528;&#x6240;&#x9700;&#x7684;&#x4F9D;&#x8D56;&#x9879;&#x3002;</li>
+<li><code>Test</code>&#xFF1A; Docker &#x5728;&#x96C6;&#x6210;&#x548C;&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x65B9;&#x9762;&#x975E;&#x5E38;&#x6709;&#x5E2E;&#x52A9;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x5F00;&#x59CB;&#x96C6;&#x6210;&#x6216;&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6240;&#x9700;&#x7684;&#x6570;&#x636E;&#x5E93;&#x3001;&#x8EAB;&#x4EFD;&#x7B49;&#x670D;&#x52A1;&#x7684;&#x5BB9;&#x5668;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x8FD8;&#x4E3A;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x5E76;&#x884C;&#x5316;&#x6D4B;&#x8BD5;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x5C1D;&#x8BD5;&#x521B;&#x5EFA;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x4E24;&#x4E2A;&#x5B9E;&#x4F8B;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#x65F6;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x7AEF;&#x53E3;&#x51B2;&#x7A81;&#x7B49;&#x95EE;&#x9898;&#x3002;&#x5B83;&#x975E;&#x5E38;&#x5177;&#x6709;&#x6210;&#x672C;&#x6548;&#x76CA;&#x5E76;&#x51CF;&#x5C11;&#x4E86;&#x73AF;&#x5883;&#x7BA1;&#x7406;&#x6240;&#x9700;&#x7684;&#x5DE5;&#x4F5C;&#x91CF;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x9700;&#x8981;&#x4FDD;&#x6301;&#x76F8;&#x5173;&#x670D;&#x52A1;&#x59CB;&#x7EC8;&#x8FD0;&#x884C;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x52A0;&#x8F7D;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#xFF0C;&#x4EE5;&#x4FBF;&#x6211;&#x4EEC;&#x7684;&#x96C6;&#x6210;/&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#xFF0C;&#x8FD9;&#x8282;&#x7701;&#x4E86;&#x5927;&#x91CF;&#x65F6;&#x95F4;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x5728;&#x6D4B;&#x8BD5;&#x8BBE;&#x7F6E;&#x4E2D;&#x52A0;&#x8F7D;&#x6570;&#x636E;&#x3002;</li>
+<li><code>Deliver</code>&#xFF1A;&#x5728;&#x8FD9;&#x4E2A;&#x9636;&#x6BB5;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E; docker &#x955C;&#x50CF;&#x4EE5;&#x62E5;&#x6709;&#x6253;&#x5305;&#x548C;&#x4EA4;&#x4ED8;&#x6240;&#x9700;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728; docker &#x5BB9;&#x5668;&#x4E2D;&#x4F7F;&#x7528; docker &#x6765;&#x5C06;&#x6211;&#x4EEC;&#x7684;&#x5DE5;&#x4EF6;&#x6253;&#x5305;&#x4E3A; docker &#x955C;&#x50CF;&#x3002;</li>
+</ul>
+<p>todo:</p>
+<ul>
+<li><a href="https://circleci.com/blog/build-cicd-piplines-using-docker/" target="_blank">How to build a CI/CD pipeline with Docker</a></li>
+<li><a href="https://docs.gitlab.com/ee/ci/docker/using_docker_images.html" target="_blank">Run your CI/CD jobs in Docker containers</a></li>
+<li><a href="https://medium.com/kodeyoga/docker-for-your-ci-cd-pipeline-cfb4556792e5" target="_blank">Docker for your CI CD Pipeline</a></li>
+</ul>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; ghostwritten &#x6D59;ICP&#x5907;2020032454&#x53F7; 2022 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2022-12-23 16:26:47
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Docker">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="docker_makefile_CI_Pipeline.html" class="navigation navigation-next " aria-label="Next page: docker   makefile  ci pipeline">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"CICD","level":"1.5.1","depth":2,"next":{"title":"docker   makefile  ci pipeline","level":"1.5.1.1","depth":3,"path":"Docker/CICD/docker_makefile_CI_Pipeline.md","ref":"Docker/CICD/docker_makefile_CI_Pipeline.md","articles":[]},"previous":{"title":"Docker","level":"1.5","depth":1,"path":"Docker/README.md","ref":"Docker/README.md","articles":[{"title":"CICD","level":"1.5.1","depth":2,"path":"Docker/CICD/README.md","ref":"Docker/CICD/README.md","articles":[{"title":"docker   makefile  ci pipeline","level":"1.5.1.1","depth":3,"path":"Docker/CICD/docker_makefile_CI_Pipeline.md","ref":"Docker/CICD/docker_makefile_CI_Pipeline.md","articles":[]},{"title":"github action 构建镜像","level":"1.5.1.2","depth":3,"path":"Docker/CICD/docker_GitHub_Action_builds_image.md","ref":"Docker/CICD/docker_GitHub_Action_builds_image.md","articles":[]},{"title":"自托管构建 如何使用 harbor 搭建企业级镜像仓库","level":"1.5.1.3","depth":3,"path":"Docker/CICD/docker_deploy_enterprise-level_harbor.md","ref":"Docker/CICD/docker_deploy_enterprise-level_harbor.md","articles":[]},{"title":"自托管构建 如何使用 tekton 构建镜像","level":"1.5.1.4","depth":3,"path":"Docker/CICD/docker_Tekton_builds_image.md","ref":"Docker/CICD/docker_Tekton_builds_image.md","articles":[]},{"title":"如何使用 gitlab ci 构建镜像","level":"1.5.1.5","depth":3,"path":"Docker/CICD/docker_GitLab_CI_builds_image.md","ref":"Docker/CICD/docker_GitLab_CI_builds_image.md","articles":[]}]},{"title":"Command","level":"1.5.2","depth":2,"path":"Docker/Command/README.md","ref":"Docker/Command/README.md","articles":[{"title":"docker inspect   format","level":"1.5.2.1","depth":3,"path":"Docker/Command/docker_command_inspect.md","ref":"Docker/Command/docker_command_inspect.md","articles":[]}]},{"title":"Dockerfile","level":"1.5.3","depth":2,"path":"Docker/Dockerfile/README.md","ref":"Docker/Dockerfile/README.md","articles":[]},{"title":"Image","level":"1.5.4","depth":2,"path":"Docker/Image/README.md","ref":"Docker/Image/README.md","articles":[{"title":"构建镜像开源工具 buildah","level":"1.5.4.1","depth":3,"path":"Docker/Image/build_images_with_buildah.md","ref":"Docker/Image/build_images_with_buildah.md","articles":[]},{"title":"如何为不同语言快速构建多平台镜像","level":"1.5.4.2","depth":3,"path":"Docker/Image/docker_Build_multi-platform_image.md","ref":"Docker/Image/docker_Build_multi-platform_image.md","articles":[]},{"title":"如何将镜像体积缩减 90","level":"1.5.4.3","depth":3,"path":"Docker/Image/docker_Image_volume_reduced.md","ref":"Docker/Image/docker_Image_volume_reduced.md","articles":[]},{"title":"docker 镜像源","level":"1.5.4.4","depth":3,"path":"Docker/Image/docker_image_1_library.md","ref":"Docker/Image/docker_image_1_library.md","articles":[]},{"title":"docker 镜像管理","level":"1.5.4.5","depth":3,"path":"Docker/Image/docker_image_2_manage.md","ref":"Docker/Image/docker_image_2_manage.md","articles":[]}]},{"title":"Install","level":"1.5.5","depth":2,"path":"Docker/Install/README.md","ref":"Docker/Install/README.md","articles":[{"title":"docker 安装","level":"1.5.5.1","depth":3,"path":"Docker/Install/docker_1_install.md","ref":"Docker/Install/docker_1_install.md","articles":[]}]},{"title":"Issue","level":"1.5.6","depth":2,"path":"Docker/Issue/README.md","ref":"Docker/Issue/README.md","articles":[]},{"title":"Logging","level":"1.5.7","depth":2,"path":"Docker/Logging/README.md","ref":"Docker/Logging/README.md","articles":[]},{"title":"Manage","level":"1.5.8","depth":2,"path":"Docker/Manage/README.md","ref":"Docker/Manage/README.md","articles":[{"title":"docker 资源清理","level":"1.5.8.1","depth":3,"path":"Docker/Manage/docker_clean.md","ref":"Docker/Manage/docker_clean.md","articles":[]},{"title":"docker 容器隔离与限制","level":"1.5.8.2","depth":3,"path":"Docker/Manage/docker_container_isolation_and_restrictions.md","ref":"Docker/Manage/docker_container_isolation_and_restrictions.md","articles":[]}]},{"title":"Monitor","level":"1.5.9","depth":2,"path":"Docker/Monitor/README.md","ref":"Docker/Monitor/README.md","articles":[]},{"title":"Network","level":"1.5.10","depth":2,"path":"Docker/Network/README.md","ref":"Docker/Network/README.md","articles":[{"title":"docker 容器应用总是丢包如何分析","level":"1.5.10.1","depth":3,"path":"Docker/Network/docker_analyze_the_packet_loss.md","ref":"Docker/Network/docker_analyze_the_packet_loss.md","articles":[]},{"title":"docker 配置 dns","level":"1.5.10.2","depth":3,"path":"Docker/Network/docker_config_DNS.md","ref":"Docker/Network/docker_config_DNS.md","articles":[]}]},{"title":"Registry","level":"1.5.11","depth":2,"path":"Docker/Registry/README.md","ref":"Docker/Registry/README.md","articles":[{"title":"harbor部署入门指南","level":"1.5.11.1","depth":3,"path":"Docker/Registry/harbor_get_started_guide.md","ref":"Docker/Registry/harbor_get_started_guide.md","articles":[]},{"title":"podman 部署私有镜像仓库","level":"1.5.11.2","depth":3,"path":"Docker/Registry/podman_deploy_private_registry.md","ref":"Docker/Registry/podman_deploy_private_registry.md","articles":[]},{"title":"docker registry 仓库搭建并配置证书","level":"1.5.11.3","depth":3,"path":"Docker/Registry/docker_registry_1_deploy.md","ref":"Docker/Registry/docker_registry_1_deploy.md","articles":[]},{"title":"docker 部署 registry ui","level":"1.5.11.4","depth":3,"path":"Docker/Registry/docker_registry_2_deploy_UI.md","ref":"Docker/Registry/docker_registry_2_deploy_UI.md","articles":[]},{"title":"centos 7 9 harbor 部署镜像仓库","level":"1.5.11.5","depth":3,"path":"Docker/Registry/centos_7.9_deploy_harbor_practice.md","ref":"Docker/Registry/centos_7.9_deploy_harbor_practice.md","articles":[]}]},{"title":"Security","level":"1.5.12","depth":2,"path":"Docker/Security/README.md","ref":"Docker/Security/README.md","articles":[]},{"title":"Storage","level":"1.5.13","depth":2,"path":"Docker/Storage/README.md","ref":"Docker/Storage/README.md","articles":[{"title":"docker device mapper 简介","level":"1.5.13.1","depth":3,"path":"Docker/Storage/docker_storage_1_docker_Device_Mapper_introduce.md","ref":"Docker/Storage/docker_storage_1_docker_Device_Mapper_introduce.md","articles":[]},{"title":"docker  storage 驱动 devicemapper 配置","level":"1.5.13.2","depth":3,"path":"Docker/Storage/docker_storage_2_docker_drive_devicemapper_config.md","ref":"Docker/Storage/docker_storage_2_docker_drive_devicemapper_config.md","articles":[]},{"title":"docker thin provisioning 实践","level":"1.5.13.3","depth":3,"path":"Docker/Storage/docker_storage_3_docker_thin_provisioning.md","ref":"Docker/Storage/docker_storage_3_docker_thin_provisioning.md","articles":[]},{"title":"docker devicemapper 扩容","level":"1.5.13.4","depth":3,"path":"Docker/Storage/docker_storage_4_docker_devicemapper_scale.md","ref":"Docker/Storage/docker_storage_4_docker_devicemapper_scale.md","articles":[]},{"title":"docker nfs volume 创建与使用","level":"1.5.13.5","depth":3,"path":"Docker/Storage/docker_storage_5_nfs_volume.md","ref":"Docker/Storage/docker_storage_5_nfs_volume.md","articles":[]}]},{"title":"原理","level":"1.5.14","depth":2,"path":"Docker/原理/README.md","ref":"Docker/原理/README.md","articles":[{"title":"容器技术概述","level":"1.5.14.1","depth":3,"path":"Docker/原理/docker_Container_technology_overview.md","ref":"Docker/原理/docker_Container_technology_overview.md","articles":[]},{"title":"容器架构概述","level":"1.5.14.2","depth":3,"path":"Docker/原理/Container_architecture_overview.md","ref":"Docker/原理/Container_architecture_overview.md","articles":[]}]},{"title":"入门","level":"1.5.15","depth":2,"path":"Docker/docker_1_start.md","ref":"Docker/docker_1_start.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["3-ba","accordion","advanced-emoji","anchor-navigation-ex","baidu-tongji","code","change_girls","custom-favicon","donate","expandable-chapters-small","edit-link","flexible-alerts","github-buttons","github","insert-logo","musicxml","prism","prism-themes","pageview-count","-highlight","-search","-lunr","rss","search-plus","splitter","-sharing","sharing-plus","sidebar-style","theme-default","tags","tbfed-pagefooter"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"sidebar-style":{"author":"zongxun","title":"《Docker Docs》"},"tbfed-pagefooter":{"copyright":"Copyright &copy ghostwritten 浙ICP备2020032454号 2022","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prism-themes/themes/prism-holi-theme.css"],"lang":{"shell":"bash"}},"github":{"url":"https://github.com/Ghostwritten"},"baidu-tongji":{"url":"https://hm.baidu.com/hm.js","token":"55e7dfe47f4dc1c018d4042fdfa62565"},"splitter":{},"change_girls":{"time":10,"urls":["https://pic2.zhimg.com/80/v2-82f9192cb78a38307f969f9e19244ba9_1440w.jpg","https://pic4.zhimg.com/80/v2-a8207582fe89a64450bd262deb5ef943_1440w.jpg","https://pic4.zhimg.com/80/v2-d8f1fb514b611e1a40d9465e79314387_1440w.jpg","https://pic2.zhimg.com/80/v2-50aee9aa49821ffafe91e79dd9936325_1440w.jpg","https://pic1.zhimg.com/80/v2-11e46e2888a7b949bba549b3b700c680_1440w.jpg","https://pic3.zhimg.com/80/v2-3d4dbc9f8af54dd418835827795d4b32_1440w.jpg","https://pic3.zhimg.com/80/v2-4ca4130ddee79d65d4336d433624fe1a_1440w.jpg","https://pic2.zhimg.com/80/v2-c012b5b799a9d6b41af5363f22adaed9_1440w.jpg","https://pic4.zhimg.com/80/v2-893518c7a30970e6aed26a3c835eb187_1440w.jpg","https://pic3.zhimg.com/80/v2-91d75c25aace41ec767d2114e13c2056_1440w.jpg","https://pic2.zhimg.com/80/v2-b90c58131f223afd9d81b70913cabd75_1440w.jpg","https://pic2.zhimg.com/80/v2-9e82ae1993458d826e2b978c37436ad5_1440w.jpg","https://pic2.zhimg.com/80/v2-3643794f777aba6676d19856a9463a51_1440w.jpg"]},"accordion":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"code":{"copyButtons":true},"donate":{"alipay":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/aplipay.png?raw=true","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"https://github.com/Ghostwritten/docker-docs/blob/gh-pages/assets/imgs/wechat.png?raw=true","wechatText":"微信打赏"},"fontsettings":{"theme":"white","family":"sans","size":2},"rss":{"categories":["python"],"title":"Docker Docs","description":"This is the best book ever.","author":"Zong Xun","feed_url":"http://smoothies.com.cn/rss","site_url":"https://smoothies.com.cn/docker-docs/","managingEditor":"writer@smoothies.com.cn (Zong Xun)","webMaster":"webmaster@smoothies.com.cn (Zong Xun)"},"musicxml":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"favicon":"assets/imgs/1_girl.ico","pageview-count":{},"prism-themes":{},"github-buttons":{"buttons":[{"user":"Ghostwritten","repo":"docker-docs","type":"star","count":true,"size":"small"}]},"custom-favicon":{},"tags":{"placement":"top"},"3-ba":{"configuration":"auto","token":"9ffc0dce8d7079aceab6b0bc18eb626b"},"expandable-chapters-small":{},"flexible-alerts":{"danger":{"className":"danger","icon":"fa fa-ban","label":"Danger"},"note":{"className":"info","icon":"fa fa-info-circle","label":"Note"},"style":"callout","tip":{"className":"tip","icon":"fa fa-lightbulb-o","label":"Tip"},"warning":{"className":"warning","icon":"fa fa-exclamation-triangle","label":"Warning"}},"advanced-emoji":{"embedEmojis":false},"sharing":{"qq":false,"all":["facebook","google","twitter","weibo","instapaper"],"douban":false,"facebook":true,"weibo":false,"twitter":true,"pocket":false,"google":false,"qzone":false},"edit-link":{"label":"Edit","base":"https://github.com/Ghostwritten/docker-docs/edit/master/"},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"insert-logo":{"style":"background: none; max-height: 120px; min-height: 120px","url":"https://pic1.zhimg.com/80/v2-4b2cfc61824c35b4d577c4e5d5dc1134_1440w.jpg"},"search-plus":{}},"theme":"default","author":"宗勋 - zongxun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Docker Docs","language":"zh-hans","links":{"sharing":{"all":null,"facebook":null,"google":null,"twitter":null,"weibo":null},"sidebar":{"Docker":"https://smoothies.com.cn/docker-docs/Overview.html","Blog":"https://smoothies.com.cn","Kubernetes":"https://smoothies.com.cn/kubernetes-docs/Overview.html","Go":"https://smoothies.com.cn/go-docs/Overview.html","Prometheus":"https://smoothies.com.cn/prometheus-docs/Overview.html","Command":"https://smoothies.com.cn/linux-command-docs/Overview.html","Shell":"https://smoothies.com.cn/shell-docs/Overview.html","Linux":"https://smoothies.com.cn/linux-docs/","Gitbook":"https://smoothies.com.cn/gitbook-docs/Overview.html","Python":"https://smoothies.com.cn/python-docs/Overview.html","Exam":"https://ghostwritten.gitbook.io/kubernetes-exam-in-action/"}},"gitbook":"*","description":"这是一本关于 [Docker](https://www.docker.com/) 的书籍"},"file":{"path":"Docker/CICD/README.md","mtime":"2022-12-23T08:26:47.995Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-02-22T09:17:25.614Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-accordion/accordionSelector.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-baidu-tongji/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-change_girls/girls.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/osmd.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/musicxml.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-musicxml/promise.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-rss/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sidebar-style/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
