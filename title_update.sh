@@ -73,13 +73,13 @@ sed -r -i 's/summary/目录/g' SUMMARY.md
 
 }
 
-push_master(){
+push_main(){
 
 gitbook build 
 
 git add .
 git commit -m "${update}"
-git push origin master
+git push origin main
 
 }
 push_gh-pages(){
@@ -89,14 +89,14 @@ git init
 git remote add origin https://${repo}
 git add . 
 git commit -m "${update} For Github Pages"
-git branch -M master
-git push --force --quiet "https://${TOKEN}@${repo}" master:gh-pages
+git branch -M main
+git push --force --quiet "https://${TOKEN}@${repo}" main:gh-pages
 
 }
 
 delete_README
 add_README
-push_master
+push_main
 push_gh-pages
 
 
